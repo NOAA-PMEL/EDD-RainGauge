@@ -111,14 +111,17 @@ typedef struct _SampleData_s {
  *
  */
 typedef struct _CurrentData_s {
-  uint32_t Counts[5][60];   /** Count data for sixty seconds, 5 deep */
+  //uint32_t Counts[5][60];   /** Count data for sixty seconds, 5 deep */
+  uint32_t Counts[300];     /** Count data for 5 minutes (300 seconds) */
   uint16_t Year[5];         /** Year value, 5 deep */
   uint8_t Mon[5];           /** Month value, 5 deep */
   uint8_t Day[5];           /** Day value, 5 deep */
   uint8_t Hour[5];          /** Hour value, 5 deep */
   uint8_t Min[5];           /** Minute value, 5 deep */
+  uint16_t StartIdx[5];      /** Second Start Index for each minute */
+  uint16_t EndIdx[5];        /** Second End Index for each minute */
   uint8_t min;              /** Minutes index */
-  uint8_t sec;              /** Seconds index */
+  uint16_t sec;              /** Seconds index */
   uint8_t numSamples;       /** Number of samples since last conversion */
   uint8_t lastSampleRecorded;   /** Last sample to be converted */
 }CurrentData_t;

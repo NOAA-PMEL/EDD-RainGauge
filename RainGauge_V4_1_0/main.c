@@ -270,93 +270,252 @@ int main(void) {
  *
  *  @return Void
  */
-void STATE_MinuteTimerRoutine(void)
-{
-  float vol[60] = {0.0};
-  float Mean = 0.0;
-  float STD = 0.0;
-  float Min = 0.0;
-  float Max = 0.0;
+//void STATE_MinuteTimerRoutine(void)
+//{
+//  float vol[60] = {0.0};
+//  float Mean = 0.0;
+//  float STD = 0.0;
+//  float Min = 0.0;
+//  float Max = 0.0;
+//
+//  int8_t StartIdx = 0;
+//  uint8_t numSamples = 0;
+//  uint8_t idx = 0;
+//  
+//  uint8_t minIdx = MinuteData.min;
+//    
+//  /* Calculate the Statistical Data */
+//  /* Find the start index of the temp data */
+//  if(MinuteData.numSamples > (4))
+//  {
+//    numSamples = 5;
+//  } else {
+//    numSamples = MinuteData.numSamples;
+//  }
+//
+//  /* Check for index wrap-around */
+//  if((minIdx - numSamples) >= 0)
+//  {
+//    StartIdx = minIdx - numSamples;
+//  } else {
+//    StartIdx = (5 + minIdx - numSamples);
+//  }
+//
+//  /* Update index of last sampled */
+//  MinuteData.lastSampleRecorded = StartIdx;
+//  
+//  /* Prep all the data to save in the buffers */
+//  for(uint8_t i=0;i<numSamples;i++)
+//  {
+//    MinuteData.numSamples--;
+//    if((StartIdx + i) > 4)
+//    {
+//      idx = StartIdx + i - 5;
+//    } else {
+//      idx = StartIdx + i;
+//    }
+//    
+//    /* Convert array to volumes */
+//    for(uint8_t j=0;j<60;j++)
+//    {
+//      vol[j] = CalculateVolume(MinuteData.Counts[idx][j],1);
+//      
+//      /* Clear the Buffer for next go-round */
+//      MinuteData.Counts[idx][j] = 0;
+//    }
+//    
+//    /* Calculate Stats */
+//    STATS_CalculateMean(&vol[0], 60, &Mean);
+//    STATS_ComputeSTD(&vol[0],60,Mean,&STD);
+//    STATS_FindMin(&vol[0],60,&Min);
+//    STATS_FindMax(&vol[0],60,&Max);
+//
+//     /* Stuff the buffers */
+//    BufferF_Put_Circular(&HourData.Mean, Mean);
+//    BufferF_Put_Circular(&HourData.STD, STD);
+//    BufferF_Put_Circular(&HourData.Min, Min);
+//    BufferF_Put_Circular(&HourData.Max, Max);
+//    Buffer16_Put_Circular(&HourData.Year, MinuteData.Year[idx]);
+//    Buffer8_Put_Circular(&HourData.Month, MinuteData.Mon[idx]);
+//    Buffer8_Put_Circular(&HourData.Day, MinuteData.Day[idx]);
+//    Buffer8_Put_Circular(&HourData.Hour, MinuteData.Hour[idx]);
+//    Buffer8_Put_Circular(&HourData.Minute, MinuteData.Min[idx]);
+//
+//    
+//  }
+// 
+//  /* Send a . to indicate minute elapse, and then CR/NL */
+//#ifdef DEBUG
+//  UART_WriteChar('.',UART_A1);
+//  __delay_cycles(5000);
+//  UART_WriteChar('\r',UART_A1);
+//  __delay_cycles(5000);
+//  UART_WriteChar('\n',UART_A1);
+//#endif
+//}
 
-  int8_t StartIdx = 0;
-  uint8_t numSamples = 0;
-  uint8_t idx = 0;
+
+//void STATE_MinuteTimerRoutine(void) {
+//  uint16_t StartIdx = 0;
+//  uint16_t EndIdx = 0;
+//  uint16_t length = 0;
+////  int8_t idx = 0;
+//  
+//  
+//  float vol[60] = {0.0};
+//  float Mean = 0.0;
+//  float STD = 0.0;
+//  float Min = 0.0;
+//  float Max = 0.0;
+//
+//  
+//  uint8_t numSamples = 0;
+//  
+//  uint8_t MinIdx = MinuteData.min;
+//  
+//  /* Calculate the Statistical Data */
+//  /* Find the start index of the temp data */
+//  if(MinuteData.numSamples > (4))
+//  {
+//    numSamples = 5;
+//  } else {
+//    numSamples = MinuteData.numSamples;
+//  }
+//
+//
+//  if(MinIdx >= numSamples) {
+//    MinIdx = MinIdx - numSamples;
+//  } else {
+//    MinIdx = 5 - (numSamples - MinIdx);
+////    MinIdx = MinIdx % 5;
+//    
+//  }
+//
+//  
+//  /* Prep all the data to save in the buffers */
+//  for(uint8_t i=0;i<numSamples;i++)
+//  {
+//    MinuteData.numSamples--;
+//    StartIdx = MinuteData.StartIdx[MinIdx];
+//    EndIdx = MinuteData.EndIdx[MinIdx];
+//    
+//    if(StartIdx <= EndIdx) {
+//      length = EndIdx - StartIdx;
+//    } else {
+//      length = (300 - StartIdx);
+//      length += EndIdx;
+//    }
+//    
+//    /* Convert array to volumes */
+//    for(uint8_t j=0;j<length;j++)
+//    {
+//      /* Calculate the volume at that second */
+//      vol[j] = CalculateVolume(MinuteData.Counts[StartIdx],1);
+//      
+//      /* Clear the Buffer for next go-round */
+//      MinuteData.Counts[StartIdx] = 0;
+//      
+//      /* Update the index reading with */
+//      StartIdx = ++StartIdx % 300;
+//    }
+//    
+//    /* Calculate Stats */
+//    STATS_CalculateMean(&vol[0], length, &Mean);
+//    STATS_ComputeSTD(&vol[0],length,Mean,&STD);
+//    STATS_FindMin(&vol[0],length,&Min);
+//    STATS_FindMax(&vol[0],length,&Max);
+//
+//     /* Stuff the buffers */
+//    BufferF_Put_Circular(&HourData.Mean, Mean);
+//    BufferF_Put_Circular(&HourData.STD, STD);
+//    BufferF_Put_Circular(&HourData.Min, Min);
+//    BufferF_Put_Circular(&HourData.Max, Max);
+//    Buffer16_Put_Circular(&HourData.Year, MinuteData.Year[MinIdx]);
+//    Buffer8_Put_Circular(&HourData.Month, MinuteData.Mon[MinIdx]);
+//    Buffer8_Put_Circular(&HourData.Day, MinuteData.Day[MinIdx]);
+//    Buffer8_Put_Circular(&HourData.Hour, MinuteData.Hour[MinIdx]);
+//    Buffer8_Put_Circular(&HourData.Minute, MinuteData.Min[MinIdx]);
+//
+//    
+//  }
+// 
+//  /* Send a . to indicate minute elapse, and then CR/NL */
+//#ifdef DEBUG
+//  UART_WriteChar('.',UART_A1);
+//  __delay_cycles(5000);
+//  UART_WriteChar('\r',UART_A1);
+//  __delay_cycles(5000);
+//  UART_WriteChar('\n',UART_A1);
+//#endif
+//    
+//  
+//}
+//          
+void STATE_MinuteTimerRoutine(void) {
+
+  uint16_t Sec_StartIdx = 0;
+  uint16_t Sec_EndIdx = 0;
+  uint16_t Sec_Length = 0;
+//  uint8_t Min_StartIdx = 0;
+//  uint8_t Min_EndIdx = 0;
+  uint8_t Min_Length = 0;
+  uint8_t Min_Idx = 0;
+  float vol[60] = {0};
+  float Mean = 0;
+  float STD = 0;
+  float Min = 0;
+  float Max = 0;
   
-  uint8_t minIdx = MinuteData.min;
+  /* Find the number of minute data buffers to be processed */
+  Min_Length = MinuteData.numSamples;
+  MinuteData.numSamples = 0;
+ 
+  if(Min_Length <= MinuteData.min) {
+    Min_Idx = MinuteData.min - Min_Length;
+  } else {
+    Min_Idx = 5 - (Min_Length - MinuteData.min);
+  }
+  
+  /* Calculate the minute stats data for each minute buffer */
+  for(uint8_t i=0;i<Min_Length;i++) {
+    Sec_StartIdx = MinuteData.StartIdx[Min_Idx];
+    Sec_EndIdx = MinuteData.EndIdx[Min_Idx];
     
-  /* Calculate the Statistical Data */
-  /* Find the start index of the temp data */
-  if(MinuteData.numSamples > (4))
-  {
-    numSamples = 5;
-  } else {
-    numSamples = MinuteData.numSamples;
-  }
-
-  /* Check for index wrap-around */
-  if((minIdx - numSamples) >= 0)
-  {
-    StartIdx = minIdx - numSamples;
-  } else {
-    StartIdx = (5 + minIdx - numSamples);
-  }
-
-  /* Update index of last sampled */
-  MinuteData.lastSampleRecorded = StartIdx;
-  
-  /* Prep all the data to save in the buffers */
-  for(uint8_t i=0;i<numSamples;i++)
-  {
-    MinuteData.numSamples--;
-    if((StartIdx + i) > 4)
-    {
-      idx = StartIdx + i - 5;
+    if(Sec_EndIdx >= Sec_StartIdx) {
+      Sec_Length = Sec_EndIdx - Sec_StartIdx;
     } else {
-      idx = StartIdx + i;
+      Sec_Length = 301 - (Sec_StartIdx - Sec_EndIdx);
     }
     
-    /* Convert array to volumes */
-    for(uint8_t j=0;j<60;j++)
-    {
-      vol[j] = CalculateVolume(MinuteData.Counts[idx][j],1);
+    for(uint8_t j=0;j<=Sec_Length;j++) {
+      vol[j] = CalculateVolume(MinuteData.Counts[Sec_StartIdx],1);
+      MinuteData.Counts[Sec_StartIdx] = 0;
       
-      /* Clear the Buffer for next go-round */
-      MinuteData.Counts[idx][j] = 0;
+      Sec_StartIdx++;
+      Sec_StartIdx = Sec_StartIdx % 300;
     }
+    
     
     /* Calculate Stats */
-    STATS_CalculateMean(&vol[0], 60, &Mean);
-    STATS_ComputeSTD(&vol[0],60,Mean,&STD);
-    STATS_FindMin(&vol[0],60,&Min);
-    STATS_FindMax(&vol[0],60,&Max);
+    STATS_CalculateMean(&vol[0], Sec_Length, &Mean);
+    STATS_ComputeSTD(&vol[0],Sec_Length,Mean,&STD);
+    STATS_FindMin(&vol[0],Sec_Length,&Min);
+    STATS_FindMax(&vol[0],Sec_Length,&Max);
 
      /* Stuff the buffers */
     BufferF_Put_Circular(&HourData.Mean, Mean);
     BufferF_Put_Circular(&HourData.STD, STD);
     BufferF_Put_Circular(&HourData.Min, Min);
     BufferF_Put_Circular(&HourData.Max, Max);
-    Buffer16_Put_Circular(&HourData.Year, MinuteData.Year[idx]);
-    Buffer8_Put_Circular(&HourData.Month, MinuteData.Mon[idx]);
-    Buffer8_Put_Circular(&HourData.Day, MinuteData.Day[idx]);
-    Buffer8_Put_Circular(&HourData.Hour, MinuteData.Hour[idx]);
-    Buffer8_Put_Circular(&HourData.Minute, MinuteData.Min[idx]);
-
-    
+    Buffer16_Put_Circular(&HourData.Year, MinuteData.Year[Min_Idx]);
+    Buffer8_Put_Circular(&HourData.Month, MinuteData.Mon[Min_Idx]);
+    Buffer8_Put_Circular(&HourData.Day, MinuteData.Day[Min_Idx]);
+    Buffer8_Put_Circular(&HourData.Hour, MinuteData.Hour[Min_Idx]);
+    Buffer8_Put_Circular(&HourData.Minute, MinuteData.Min[Min_Idx]);
   }
- 
-  /* Send a . to indicate minute elapse, and then CR/NL */
-#ifdef DEBUG
-  UART_WriteChar('.',UART_A1);
-  __delay_cycles(5000);
-  UART_WriteChar('\r',UART_A1);
-  __delay_cycles(5000);
-  UART_WriteChar('\n',UART_A1);
-#endif
+  
 }
 
-
-                             
-                              
 /** @brief Enters Transmit State
  *
  *  Preps the data for transmission and sends over the UART
@@ -564,7 +723,7 @@ void STATE_TransmitReport(SampleData_t *Data)
 
   /* Set the index up*/
   currentIdx = HourData.Hour.write;
-  currentIdx = currentIdx % 60 + 1;
+  currentIdx = currentIdx % 60;
   stopIdx = currentIdx;
   if(stopIdx < 0) {
     stopIdx += 60;
@@ -620,22 +779,27 @@ void STATE_TransmitCurrentTime(void)
 void ClearBuffers(void)
 {
   /* Clear Minute Data Buffers */
+  
+
+  
   for(uint8_t i=0;i<5;i++) {
     MinuteData.Day[i] = 0;
     MinuteData.Hour[i] = 0;
     MinuteData.Min[i] = 0;
     MinuteData.Mon[i] = 0;
     MinuteData.Year[i] = 0;
-    
-    for(uint8_t j=0;j<60;j++) {
-      MinuteData.Counts[i][j] = 0;
-    }
-    
+    MinuteData.StartIdx[i] = 0;
+    MinuteData.EndIdx[i] = 0;
   }
   MinuteData.min = 0;
   MinuteData.sec = 0;
   MinuteData.numSamples = 0;
   MinuteData.lastSampleRecorded = 0;
+ 
+  
+  for(uint16_t i=0;i<300;i++) {
+    MinuteData.Counts[i] = 0;
+  }
   
   /* Clear Hour Data Buffers */
   Buffer16_Clear(&HourData.Year);
@@ -914,141 +1078,8 @@ void populatehour(void) {
     
   }
   
-//  HourData.Minute.buffer[0] = 0x00;
-//  HourData.Minute.buffer[1] = 0x01;
-//  HourData.Minute.buffer[2] = 0x02;
-//  HourData.Minute.buffer[3] = 0x03;
-//  HourData.Minute.buffer[4] = 0x04;
-//  HourData.Minute.buffer[5] = 0x05;
-//  HourData.Minute.buffer[6] = 0x06;
-//  HourData.Minute.buffer[7] = 0x07;
-//  HourData.Minute.buffer[8] = 0x08;
-//  HourData.Minute.buffer[9] = 0x09;
-//  HourData.Minute.buffer[10] = 0x10;
-//  HourData.Minute.buffer[11] = 0x11;
-//  HourData.Minute.buffer[12] = 0x12;
-//  HourData.Minute.buffer[13] = 0x13;
-//  HourData.Minute.buffer[14] = 0x14;
-//  HourData.Minute.buffer[15] = 0x15;
-//  HourData.Minute.buffer[16] = 0x16;
-//  HourData.Minute.buffer[17] = 0x17;
-//  HourData.Minute.buffer[18] = 0x18;
-//  HourData.Minute.buffer[19] = 0x19;
-//  HourData.Minute.buffer[20] = 0x20;
-//  HourData.Minute.buffer[21] = 0x21;
-//  HourData.Minute.buffer[22] = 0x22;
-//  HourData.Minute.buffer[23] = 0x23;
-//  HourData.Minute.buffer[24] = 0x24;
-//  HourData.Minute.buffer[25] = 0x25;
-//  HourData.Minute.buffer[26] = 0x26;
-//  HourData.Minute.buffer[27] = 0x27;
-//  HourData.Minute.buffer[28] = 0x28;
-//  HourData.Minute.buffer[29] = 0x29;
-//  HourData.Minute.buffer[30] = 0x30;
-//  HourData.Minute.buffer[31] = 0x31;
-//  HourData.Minute.buffer[32] = 0x32;
-//  HourData.Minute.buffer[33] = 0x33;
-//  HourData.Minute.buffer[34] = 0x34;
-//  HourData.Minute.buffer[35] = 0x35;
-//  HourData.Minute.buffer[36] = 0x36;
-//  HourData.Minute.buffer[37] = 0x37;
-//  HourData.Minute.buffer[38] = 0x38;
-//  HourData.Minute.buffer[39] = 0x39;
-//  HourData.Minute.buffer[40] = 0x40;
-//  HourData.Minute.buffer[41] = 0x41;
-//  HourData.Minute.buffer[42] = 0x42;
-//  HourData.Minute.buffer[43] = 0x43;
-//  HourData.Minute.buffer[44] = 0x44;
-//  HourData.Minute.buffer[45] = 0x45;
-//  HourData.Minute.buffer[46] = 0x46;
-//  HourData.Minute.buffer[47] = 0x47;
-//  HourData.Minute.buffer[48] = 0x48;
-//  HourData.Minute.buffer[49] = 0x49;
-//  HourData.Minute.buffer[50] = 0x50;
-//  HourData.Minute.buffer[51] = 0x51;
-//  HourData.Minute.buffer[52] = 0x52;
-//  HourData.Minute.buffer[53] = 0x53;
-//  HourData.Minute.buffer[54] = 0x54;
-//  HourData.Minute.buffer[55] = 0x55;
-//  HourData.Minute.buffer[56] = 0x56;
-//  HourData.Minute.buffer[57] = 0x57;
-//  HourData.Minute.buffer[58] = 0x58;
-//  HourData.Minute.buffer[59] = 0x59;
-//  
-//  
-//  HourData.Mean.buffer[0] = 0;
-//  HourData.Mean.buffer[1] = 1;
-//  HourData.Mean.buffer[2] = 2;
-//  HourData.Mean.buffer[3] = 3;
-//  HourData.Mean.buffer[4] = 4;
-//  HourData.Mean.buffer[5] = 5;
-//  HourData.Mean.buffer[6] = 6;
-//  HourData.Mean.buffer[7] = 7;
-//  HourData.Mean.buffer[8] = 8;
-//  HourData.Mean.buffer[9] = 9;
-//  HourData.Mean.buffer[10] = 10;
-//  HourData.Mean.buffer[11] = 11;
-//  HourData.Mean.buffer[12] = 12;
-//  HourData.Mean.buffer[13] = 13;
-//  HourData.Mean.buffer[14] = 14;
-//  HourData.Mean.buffer[15] = 15;
-//  HourData.Mean.buffer[16] = 16;
-//  HourData.Mean.buffer[17] = 17;
-//  HourData.Mean.buffer[18] = 18;
-//  HourData.Mean.buffer[19] = 19;
-//  HourData.Mean.buffer[20] = 20;
-//  HourData.Mean.buffer[21] = 21;
-//  HourData.Mean.buffer[22] = 22;
-//  HourData.Mean.buffer[23] = 23;
-//  HourData.Mean.buffer[24] = 24;
-//  HourData.Mean.buffer[25] = 25;
-//  HourData.Mean.buffer[26] = 26;
-//  HourData.Mean.buffer[27] = 27;
-//  HourData.Mean.buffer[28] = 28;
-//  HourData.Mean.buffer[29] = 29;
-//  HourData.Mean.buffer[30] = 30;
-//  HourData.Mean.buffer[31] = 31;
-//  HourData.Mean.buffer[32] = 32;
-//  HourData.Mean.buffer[33] = 33;
-//  HourData.Mean.buffer[34] = 34;
-//  HourData.Mean.buffer[35] = 35;
-//  HourData.Mean.buffer[36] = 36;
-//  HourData.Mean.buffer[37] = 37;
-//  HourData.Mean.buffer[38] = 38;
-//  HourData.Mean.buffer[39] = 39;
-//  HourData.Mean.buffer[40] = 40;
-//  HourData.Mean.buffer[41] = 41;
-//  HourData.Mean.buffer[42] = 42;
-//  HourData.Mean.buffer[43] = 43;
-//  HourData.Mean.buffer[44] = 44;
-//  HourData.Mean.buffer[45] = 45;
-//  HourData.Mean.buffer[46] = 46;
-//  HourData.Mean.buffer[47] = 47;
-//  HourData.Mean.buffer[48] = 48;
-//  HourData.Mean.buffer[49] = 49;
-//  HourData.Mean.buffer[50] = 50;
-//  HourData.Mean.buffer[51] = 51;
-//  HourData.Mean.buffer[52] = 52;
-//  HourData.Mean.buffer[53] = 53;
-//  HourData.Mean.buffer[54] = 54;
-//  HourData.Mean.buffer[55] = 55;
-//  HourData.Mean.buffer[56] = 56;
-//  HourData.Mean.buffer[57] = 57;
-//  HourData.Mean.buffer[58] = 58;
-//  HourData.Mean.buffer[59] = 59;
-  
-//  HourData.Day.write = 0;
-//  HourData.Hour.write = 0;
-//  HourData.Max.write = 0;
-//  HourData.Mean.write = 0;
-//  HourData.Min.write = 0;
-//  HourData.Minute.write = 0;
-//  HourData.Month.write = 0;
-//  HourData.STD.write = 0;
-//  HourData.Year.write = 0;
-  
   RTCHOUR=0;
   RTCMIN=0x59;
-  RTCSEC=0x55;
+  RTCSEC=0x58;
   
 }

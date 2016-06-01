@@ -531,112 +531,6 @@ static void RTC_UpdateCurrent(void) {
     return;
 }
 
-#pragma vector=RTC_VECTOR
-__interrupt void RTC_ISR(void)
-{
-  switch(__even_in_range(RTCIV, RTCIV_RT1PSIFG))
-  {
-    case RTCIV_NONE:
-      break;
-    case RTCIV_RTCOFIFG:    /* Oscillator Failure   */
-      break;
-    case RTCIV_RTCRDYIFG:   /* Second Timer         */
-      if(SystemState != MinuteTimerRoutine) {
-        MinuteData.sec++;
-        if( (0xFFFFFFFF - SumOfCount) > SensorCounter)
-        {
-          SumOfCount += SensorCounter;
-         
-        }
-        else
-        {
-          SumOfCount = 0xFFFFFFFF;
-        }
-        
-        /* Update Counters    */
-        SensorCounter = 0;
-        
-        SecondCounter++;
-        ConsoleTimeoutCounter++;
-      }
-#ifdef DEBUG
-      GPIO_TogglePin(DEBUG_PORT,DEBUG_PIN);
-      
-#endif
-      break;
-      
-    /*  Minute Timer */
-    case RTCIV_RTCTEVIFG:   /* RTC Interval Timer Flag  */
-      /* Minute timer  */
-      uint8_t min_temp;
-      min_temp = MinuteData.min;
-      __no_operation();
-      MinuteData.min++;
-      if(MinuteData.min > 4)
-      {
-        MinuteData.min = 0;
-      }
-      MinuteData.sec = 0;
-      
-//      MinuteData.sec++;
-      /* Compute Second Information */
-      /* Minute Interrupt precedes Second Interrupt */
-      if( (0xFFFFFFFF - SumOfCount) > SensorCounter)
-      {
-        SumOfCount += SensorCounter;
-       
-      }
-      else
-      {
-        SumOfCount = 0xFFFFFFFF;
-      }
-      
-      /* Update Counters    */
-      SensorCounter = 0;
-      
-      SecondCounter++;
-      ConsoleTimeoutCounter++;
-      
-      
-      
-
-      /* Change RTC values if flagged */
-//      if(SystemState == Sample)
-//      {
-//        /* Set to Run Minute Routine */
-        SystemState = MinuteTimerRoutine;
-//      }
-//      /* Grab the date/time */
-      MinuteData.Year[min_temp] = RTCYEAR;
-      MinuteData.Mon[min_temp] = RTCMON;
-      MinuteData.Day[min_temp] = RTCDAY;
-      MinuteData.Hour[min_temp] = RTCHOUR;
-      MinuteData.Min[min_temp] = RTCMIN;
-      
-      
-      /* Clear the Seconds counter and increment the minute in the temp data buffer */
-
-
-      /* Increment the number of temp samples collected counter */
-      MinuteData.numSamples++;
-      
-      /* Exit from Low Power Mode */
-      __low_power_mode_off_on_exit();
-      break;
-    case RTCIV_RTCAIFG:     /* RTC User Alarm   */
-      __no_operation();
-      break;
-    case RTCIV_RT0PSIFG:    /* RTC Prescaler 0  */
-      break;
-    case RTCIV_RT1PSIFG:    /* RTC Prescalser 1 */
-      break;
-    default:
-      break;   
-  }
-}
-
-
-
 static uint8_t RTC_ConvertTwoHexToDec(uint8_t val){
   uint8_t low = 0;
   uint8_t high = 0;
@@ -708,3 +602,120 @@ static uint16_t RTC_ConvertDecToFourHex(uint16_t val)
   
   return thousands + hundreds + tens + ones;
 }
+
+
+
+
+#pragma vector=RTC_VECTOR
+__interrupt void RTC_ISR(void)
+{
+  switch(__even_in_range(RTCIV, RTCIV_RT1PSIFG))
+  {
+    case RTCIV_NONE:
+      break;
+    case RTCIV_RTCOFIFG:    /* Oscillator Failure   */
+      break;
+    case RTCIV_RTCRDYIFG:   /* Second Timer         */
+      if(SystemState != MinuteTimerRoutine) {
+        /* Increment the second count & roll-over if needed */
+        MinuteData.sec++;
+        if(MinuteData.sec >= 300) {
+          MinuteData.sec = 0;
+        }
+        
+        /* Calculate the instantaneous Data */
+        if( (0xFFFFFFFF - SumOfCount) > SensorCounter)
+        {
+          SumOfCount += SensorCounter;
+         
+        }
+        else
+        {
+          SumOfCount = 0xFFFFFFFF;
+        }
+        
+        /* Update Counters    */
+        SensorCounter = 0;
+        
+        SecondCounter++;
+        ConsoleTimeoutCounter++;
+      }
+#ifdef DEBUG
+      GPIO_TogglePin(DEBUG_PORT,DEBUG_PIN);
+      
+#endif
+      break;
+      
+    /*  Minute Timer */
+    case RTCIV_RTCTEVIFG:   /* RTC Interval Timer Flag  */
+      /* Minute timer  */
+    
+      /* Update the Minute Data values */
+      MinuteData.EndIdx[MinuteData.min]= MinuteData.sec++;
+      if(MinuteData.sec >= 300) {
+        MinuteData.sec = 0;
+      }
+
+      /* Compute Second Information */
+      /* Minute Interrupt precedes Second Interrupt */
+      if( (0xFFFFFFFF - SumOfCount) > SensorCounter)
+      {
+        SumOfCount += SensorCounter;
+       
+      }
+      else
+      {
+        SumOfCount = 0xFFFFFFFF;
+      }
+      
+      /* Update Counters    */
+      SensorCounter = 0;
+      
+      SecondCounter++;
+      ConsoleTimeoutCounter++;
+      
+      
+      
+
+      /* Change RTC values if flagged */
+//      if(SystemState == Sample)
+//      {
+//        /* Set to Run Minute Routine */
+        SystemState = MinuteTimerRoutine;
+//      }
+//      /* Grab the date/time */
+      MinuteData.Year[MinuteData.min] = RTCYEAR;
+      MinuteData.Mon[MinuteData.min] = RTCMON;
+      MinuteData.Day[MinuteData.min] = RTCDAY;
+      MinuteData.Hour[MinuteData.min] = RTCHOUR;
+      MinuteData.Min[MinuteData.min] = RTCMIN;
+      
+      MinuteData.min++;
+      if(MinuteData.min > 4)
+      {
+        MinuteData.min = 0;
+      }
+      MinuteData.StartIdx[MinuteData.min] = MinuteData.sec;
+      /* Clear the Seconds counter and increment the minute in the temp data buffer */
+
+
+      /* Increment the number of temp samples collected counter */
+      MinuteData.numSamples++;
+      
+      /* Exit from Low Power Mode */
+      __low_power_mode_off_on_exit();
+      break;
+    case RTCIV_RTCAIFG:     /* RTC User Alarm   */
+      __no_operation();
+      break;
+    case RTCIV_RT0PSIFG:    /* RTC Prescaler 0  */
+      break;
+    case RTCIV_RT1PSIFG:    /* RTC Prescalser 1 */
+      break;
+    default:
+      break;   
+  }
+}
+
+
+
