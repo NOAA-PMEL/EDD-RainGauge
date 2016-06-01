@@ -269,195 +269,12 @@ int main(void) {
  *  @param seconds Number of seconds of integration
  *
  *  @return Void
- */
-//void STATE_MinuteTimerRoutine(void)
-//{
-//  float vol[60] = {0.0};
-//  float Mean = 0.0;
-//  float STD = 0.0;
-//  float Min = 0.0;
-//  float Max = 0.0;
-//
-//  int8_t StartIdx = 0;
-//  uint8_t numSamples = 0;
-//  uint8_t idx = 0;
-//  
-//  uint8_t minIdx = MinuteData.min;
-//    
-//  /* Calculate the Statistical Data */
-//  /* Find the start index of the temp data */
-//  if(MinuteData.numSamples > (4))
-//  {
-//    numSamples = 5;
-//  } else {
-//    numSamples = MinuteData.numSamples;
-//  }
-//
-//  /* Check for index wrap-around */
-//  if((minIdx - numSamples) >= 0)
-//  {
-//    StartIdx = minIdx - numSamples;
-//  } else {
-//    StartIdx = (5 + minIdx - numSamples);
-//  }
-//
-//  /* Update index of last sampled */
-//  MinuteData.lastSampleRecorded = StartIdx;
-//  
-//  /* Prep all the data to save in the buffers */
-//  for(uint8_t i=0;i<numSamples;i++)
-//  {
-//    MinuteData.numSamples--;
-//    if((StartIdx + i) > 4)
-//    {
-//      idx = StartIdx + i - 5;
-//    } else {
-//      idx = StartIdx + i;
-//    }
-//    
-//    /* Convert array to volumes */
-//    for(uint8_t j=0;j<60;j++)
-//    {
-//      vol[j] = CalculateVolume(MinuteData.Counts[idx][j],1);
-//      
-//      /* Clear the Buffer for next go-round */
-//      MinuteData.Counts[idx][j] = 0;
-//    }
-//    
-//    /* Calculate Stats */
-//    STATS_CalculateMean(&vol[0], 60, &Mean);
-//    STATS_ComputeSTD(&vol[0],60,Mean,&STD);
-//    STATS_FindMin(&vol[0],60,&Min);
-//    STATS_FindMax(&vol[0],60,&Max);
-//
-//     /* Stuff the buffers */
-//    BufferF_Put_Circular(&HourData.Mean, Mean);
-//    BufferF_Put_Circular(&HourData.STD, STD);
-//    BufferF_Put_Circular(&HourData.Min, Min);
-//    BufferF_Put_Circular(&HourData.Max, Max);
-//    Buffer16_Put_Circular(&HourData.Year, MinuteData.Year[idx]);
-//    Buffer8_Put_Circular(&HourData.Month, MinuteData.Mon[idx]);
-//    Buffer8_Put_Circular(&HourData.Day, MinuteData.Day[idx]);
-//    Buffer8_Put_Circular(&HourData.Hour, MinuteData.Hour[idx]);
-//    Buffer8_Put_Circular(&HourData.Minute, MinuteData.Min[idx]);
-//
-//    
-//  }
-// 
-//  /* Send a . to indicate minute elapse, and then CR/NL */
-//#ifdef DEBUG
-//  UART_WriteChar('.',UART_A1);
-//  __delay_cycles(5000);
-//  UART_WriteChar('\r',UART_A1);
-//  __delay_cycles(5000);
-//  UART_WriteChar('\n',UART_A1);
-//#endif
-//}
-
-
-//void STATE_MinuteTimerRoutine(void) {
-//  uint16_t StartIdx = 0;
-//  uint16_t EndIdx = 0;
-//  uint16_t length = 0;
-////  int8_t idx = 0;
-//  
-//  
-//  float vol[60] = {0.0};
-//  float Mean = 0.0;
-//  float STD = 0.0;
-//  float Min = 0.0;
-//  float Max = 0.0;
-//
-//  
-//  uint8_t numSamples = 0;
-//  
-//  uint8_t MinIdx = MinuteData.min;
-//  
-//  /* Calculate the Statistical Data */
-//  /* Find the start index of the temp data */
-//  if(MinuteData.numSamples > (4))
-//  {
-//    numSamples = 5;
-//  } else {
-//    numSamples = MinuteData.numSamples;
-//  }
-//
-//
-//  if(MinIdx >= numSamples) {
-//    MinIdx = MinIdx - numSamples;
-//  } else {
-//    MinIdx = 5 - (numSamples - MinIdx);
-////    MinIdx = MinIdx % 5;
-//    
-//  }
-//
-//  
-//  /* Prep all the data to save in the buffers */
-//  for(uint8_t i=0;i<numSamples;i++)
-//  {
-//    MinuteData.numSamples--;
-//    StartIdx = MinuteData.StartIdx[MinIdx];
-//    EndIdx = MinuteData.EndIdx[MinIdx];
-//    
-//    if(StartIdx <= EndIdx) {
-//      length = EndIdx - StartIdx;
-//    } else {
-//      length = (300 - StartIdx);
-//      length += EndIdx;
-//    }
-//    
-//    /* Convert array to volumes */
-//    for(uint8_t j=0;j<length;j++)
-//    {
-//      /* Calculate the volume at that second */
-//      vol[j] = CalculateVolume(MinuteData.Counts[StartIdx],1);
-//      
-//      /* Clear the Buffer for next go-round */
-//      MinuteData.Counts[StartIdx] = 0;
-//      
-//      /* Update the index reading with */
-//      StartIdx = ++StartIdx % 300;
-//    }
-//    
-//    /* Calculate Stats */
-//    STATS_CalculateMean(&vol[0], length, &Mean);
-//    STATS_ComputeSTD(&vol[0],length,Mean,&STD);
-//    STATS_FindMin(&vol[0],length,&Min);
-//    STATS_FindMax(&vol[0],length,&Max);
-//
-//     /* Stuff the buffers */
-//    BufferF_Put_Circular(&HourData.Mean, Mean);
-//    BufferF_Put_Circular(&HourData.STD, STD);
-//    BufferF_Put_Circular(&HourData.Min, Min);
-//    BufferF_Put_Circular(&HourData.Max, Max);
-//    Buffer16_Put_Circular(&HourData.Year, MinuteData.Year[MinIdx]);
-//    Buffer8_Put_Circular(&HourData.Month, MinuteData.Mon[MinIdx]);
-//    Buffer8_Put_Circular(&HourData.Day, MinuteData.Day[MinIdx]);
-//    Buffer8_Put_Circular(&HourData.Hour, MinuteData.Hour[MinIdx]);
-//    Buffer8_Put_Circular(&HourData.Minute, MinuteData.Min[MinIdx]);
-//
-//    
-//  }
-// 
-//  /* Send a . to indicate minute elapse, and then CR/NL */
-//#ifdef DEBUG
-//  UART_WriteChar('.',UART_A1);
-//  __delay_cycles(5000);
-//  UART_WriteChar('\r',UART_A1);
-//  __delay_cycles(5000);
-//  UART_WriteChar('\n',UART_A1);
-//#endif
-//    
-//  
-//}
-//          
+ */       
 void STATE_MinuteTimerRoutine(void) {
 
   uint16_t Sec_StartIdx = 0;
   uint16_t Sec_EndIdx = 0;
   uint16_t Sec_Length = 0;
-//  uint8_t Min_StartIdx = 0;
-//  uint8_t Min_EndIdx = 0;
   uint8_t Min_Length = 0;
   uint8_t Min_Idx = 0;
   float vol[60] = {0};
@@ -608,7 +425,7 @@ void STATE_TransmitIridium(SampleData_t *Data)
   uint8_t last = 0xFF;
   
   /* Set the index up*/
-  currentIdx = HourData.Hour.write;
+  currentIdx = HourData.Hour.write + 1;
   currentIdx = currentIdx % 60;
   stopIdx = currentIdx;
   if(stopIdx < 0) {
@@ -637,7 +454,6 @@ void STATE_TransmitIridium(SampleData_t *Data)
     idx = idx % 60;
   } while(idx != stopIdx);
   
-//  sprintf(line,"RAIN %04x%02x%02x,%02x:00:00\r\n",year,mon,day,last);
   sprintf(line,"RAIN %02x/%02x/%04x,%02x:00:00,00:01:00\r\n",mon,day,year,last);
   memcpy(line_u,line,128);
   UART_Write(&line_u[0],LENGTH_OF(line_u),UART_A1);
@@ -722,7 +538,7 @@ void STATE_TransmitReport(SampleData_t *Data)
   uint8_t line_u[128] = {0};
 
   /* Set the index up*/
-  currentIdx = HourData.Hour.write;
+  currentIdx = HourData.Hour.write + 1;
   currentIdx = currentIdx % 60;
   stopIdx = currentIdx;
   if(stopIdx < 0) {
@@ -802,15 +618,27 @@ void ClearBuffers(void)
   }
   
   /* Clear Hour Data Buffers */
-  Buffer16_Clear(&HourData.Year);
-  Buffer8_Clear(&HourData.Month);
-  Buffer8_Clear(&HourData.Day);
-  Buffer8_Clear(&HourData.Hour);
-  Buffer8_Clear(&HourData.Minute);
-  BufferF_Clear(&HourData.Mean);
-  BufferF_Clear(&HourData.STD);
-  BufferF_Clear(&HourData.Min);
-  BufferF_Clear(&HourData.Max);
+  
+  for(uint8_t i=0;i<60;i++) {
+    Buffer16_Put(&HourData.Year,0x0000);
+    Buffer8_Put(&HourData.Month,0x00);
+    Buffer8_Put(&HourData.Day,0x00);
+    Buffer8_Put(&HourData.Hour,0x00);
+    Buffer8_Put(&HourData.Minute,0x00);
+    BufferF_Put(&HourData.Mean,0.00);
+    BufferF_Put(&HourData.STD,0.00);
+    BufferF_Put(&HourData.Min,0.00);
+    BufferF_Put(&HourData.Max,0.00);
+  }
+//  Buffer16_Clear(&HourData.Year);
+//  Buffer8_Clear(&HourData.Month);
+//  Buffer8_Clear(&HourData.Day);
+//  Buffer8_Clear(&HourData.Hour);
+//  Buffer8_Clear(&HourData.Minute);
+//  BufferF_Clear(&HourData.Mean);
+//  BufferF_Clear(&HourData.STD);
+//  BufferF_Clear(&HourData.Min);
+//  BufferF_Clear(&HourData.Max);
 }
 
 /** @brief Calculates the Volume 
