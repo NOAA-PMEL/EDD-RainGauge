@@ -618,27 +618,20 @@ void ClearBuffers(void)
   }
   
   /* Clear Hour Data Buffers */
+//  uint16_t val16 = 0;
+//  uint8_t val8 = 0;
+//  float valf = 0;
   
-  for(uint8_t i=0;i<60;i++) {
-    Buffer16_Put(&HourData.Year,0x0000);
-    Buffer8_Put(&HourData.Month,0x00);
-    Buffer8_Put(&HourData.Day,0x00);
-    Buffer8_Put(&HourData.Hour,0x00);
-    Buffer8_Put(&HourData.Minute,0x00);
-    BufferF_Put(&HourData.Mean,0.00);
-    BufferF_Put(&HourData.STD,0.00);
-    BufferF_Put(&HourData.Min,0.00);
-    BufferF_Put(&HourData.Max,0.00);
-  }
-//  Buffer16_Clear(&HourData.Year);
-//  Buffer8_Clear(&HourData.Month);
-//  Buffer8_Clear(&HourData.Day);
-//  Buffer8_Clear(&HourData.Hour);
-//  Buffer8_Clear(&HourData.Minute);
-//  BufferF_Clear(&HourData.Mean);
-//  BufferF_Clear(&HourData.STD);
-//  BufferF_Clear(&HourData.Min);
-//  BufferF_Clear(&HourData.Max);
+
+  Buffer16_Clear(&HourData.Year);
+  Buffer8_Clear(&HourData.Month);
+  Buffer8_Clear(&HourData.Day);
+  Buffer8_Clear(&HourData.Hour);
+  Buffer8_Clear(&HourData.Minute);
+  BufferF_Clear(&HourData.Mean);
+  BufferF_Clear(&HourData.STD);
+  BufferF_Clear(&HourData.Min);
+  BufferF_Clear(&HourData.Max);
 }
 
 /** @brief Calculates the Volume 
