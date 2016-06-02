@@ -90,9 +90,9 @@ int8_t BufferF_Clear(CircularBufferF_s *buf)
 		buf->buffer[i] = NAN;
 	}
     
-//    buf->read = 0;
-//	buf->write = 0;
-//    buf->size = 0;
+    buf->read = 1;
+	buf->write = 0;
+    buf->size = 0;
 
 	return 0;
 }

@@ -463,9 +463,6 @@ void STATE_TransmitIridium(SampleData_t *Data)
   uint8_t endline[] = "\r\n";
   
   /* Set the index up*/
-//  currentIdx = HourData.Hour.write + 1;
-//  currentIdx = current
-//  stopIdx = currentIdx;
   idx = currentIdx;
   do
   {
@@ -594,10 +591,13 @@ void STATE_TransmitCurrentTime(void)
 
 void ClearBuffers(void)
 {
+  uint8_t rtcnext = RTCSEC;
+  
+  
+  /* Temporarily Disable GPIO Interrupt */
+//  GPIO_DetachInputInterrupt(SensorPort, SensorPin);
+  
   /* Clear Minute Data Buffers */
-  
-
-  
   for(uint8_t i=0;i<5;i++) {
     MinuteData.Day[i] = 0;
     MinuteData.Hour[i] = 0;
@@ -632,6 +632,12 @@ void ClearBuffers(void)
   BufferF_Clear(&HourData.STD);
   BufferF_Clear(&HourData.Min);
   BufferF_Clear(&HourData.Max);
+  
+ 
+  
+//  while(RTCSEC == rtcnext);
+//  GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
+//  P3IFG &= ~BIT0;
 }
 
 /** @brief Calculates the Volume 
@@ -888,14 +894,15 @@ void STATE_CheckRxBuffer(void)
 void populatehour(void) {
   
   for(uint8_t i=0;i<60;i++) {
-    Buffer16_Put(&HourData.Year,2016);
-    Buffer8_Put(&HourData.Month,5);
-    Buffer8_Put(&HourData.Day,31);
-    Buffer8_Put(&HourData.Hour,0);
-    Buffer8_Put(&HourData.Minute,i);
-    BufferF_Put(&HourData.Mean,(float)i);
-    BufferF_Put(&HourData.Min,0.5);
-    BufferF_Put(&HourData.Max,600.2);
+    Buffer16_Put_Circular(&HourData.Year,2016);
+    Buffer8_Put_Circular(&HourData.Month,5);
+    Buffer8_Put_Circular(&HourData.Day,31);
+    Buffer8_Put_Circular(&HourData.Hour,0);
+    Buffer8_Put_Circular(&HourData.Minute,i);
+    BufferF_Put_Circular(&HourData.Mean,(float)i);
+    BufferF_Put_Circular(&HourData.STD,123.2);
+    BufferF_Put_Circular(&HourData.Min,0.5);
+    BufferF_Put_Circular(&HourData.Max,600.2);
     
   }
   

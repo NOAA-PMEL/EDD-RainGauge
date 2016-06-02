@@ -81,14 +81,16 @@ int8_t Buffer8_Clear(CircularBuffer8_s *buf)
 {
 	uint16_t i = 0;
 
-//	buf->read = 0;
-//	buf->write = 0;
-//    buf->size = 0;
+
 
 	for(i=0;i<BUFFER8_SIZE;i++)
 	{
 		buf->buffer[i] = 0;
 	}
+    
+    buf->read = 1;
+	buf->write = 0;
+    buf->size = 0;
 
 	return 0;
 }
