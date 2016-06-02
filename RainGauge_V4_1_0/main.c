@@ -157,7 +157,7 @@ int main(void) {
   ClearBuffers();
   
    /* TESTING ONLY!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-  populatehour();
+  //populatehour();
   
   /* Configure the UART */
   UART_Init(UART_A1,UART_BAUD_9600,CLK_32768,UART_CLK_SMCLK);
