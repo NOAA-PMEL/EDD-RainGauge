@@ -75,7 +75,9 @@ void SETUP_Clock(void);
 void SETUP_GPIO(void);
 void ClearBuffers(void);
 float CalculateVolume(uint32_t count, uint32_t seconds);
-
+void WD_Init(void);
+void WD_Start(void);
+void WD_Kick(void);
 void populatehour(void);
 
 #ifdef DEBUG
@@ -127,8 +129,9 @@ int main(void) {
 
   /* Configure MPU */
   __low_level_init();				// Setup FRAM
-  WDTCTL = WDTPW | WDTHOLD;	
-
+  WDTCTL = WDTPW | WDTHOLD;	        /* Pause the Watchdog */
+  
+  WD_Init();
   /* Debug Conditions */
 #ifdef DEBUG
   BufferTest();
@@ -175,12 +178,14 @@ int main(void) {
   SensorCounter = 0;
   SecondCounter = 0;
   RTC.TimeAtCommand = SecondCounter;
-   
+  
+  WD_Start();
   /* Main loop */
   for(;;)
   {
     uint32_t temp_SumOfCount = 0;
     uint32_t temp_SecondsCounter = 0;
+    uint8_t secNow = 0;
     float volume = 0.0;
     
     if(ClearBufferFlag == true)
@@ -192,7 +197,26 @@ int main(void) {
     switch(SystemState)
     {
       case Sample:
-        __bis_SR_register(LPM3_bits | GIE); /* Set LPM and wait for timer interrupt */
+        /* Reassert Input Pin Interrupt */
+        secNow = RTCSEC;
+        GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
+        while(RTCSEC == secNow)
+        {
+          MinuteData.Counts[MinuteData.sec] = 0;
+        }
+        
+        /* Kick the watchdog before entering LPM */
+        WD_Kick();
+        
+        /* Set LPM and wait for timer interrupt */
+        __bis_SR_register(LPM3_bits | GIE); 
+        
+        /* Kick the watchdog on coming out of LPM*/
+        WD_Kick();
+        
+        /* Desert Input Pin Interrupt */
+        GPIO_DetachInputInterrupt(SensorPort,SensorPin);
+        MinuteData.Counts[MinuteData.sec] = 0;
         while(BufferC_IsEmpty(&UartData) == BUFFER_C_NOT_EMPTY)
         {
           STATE_CheckRxBuffer();
@@ -200,6 +224,8 @@ int main(void) {
         break;
       case Console:
         CONSOLE_Main();
+        /* Kick the watchdog on exit of console */
+        WD_Kick();
         if(SystemState != MinuteTimerRoutine)
         {
           SystemState = Sample;
@@ -595,8 +621,8 @@ void ClearBuffers(void)
   
   
   /* Temporarily Disable GPIO Interrupt */
-//  GPIO_DetachInputInterrupt(SensorPort, SensorPin);
-  
+  GPIO_DetachInputInterrupt(SensorPort, SensorPin);
+ 
   /* Clear Minute Data Buffers */
   for(uint8_t i=0;i<5;i++) {
     MinuteData.Day[i] = 0;
@@ -910,4 +936,18 @@ void populatehour(void) {
   RTCMIN=0x59;
   RTCSEC=0x58;
   
+}
+
+
+void WD_Init(void) {
+  WDTCTL = WDTPW | WDTHOLD | WDTSSEL__ACLK | WDTIS_2 | WDTCNTCL;
+  
+  return;
+}
+void WD_Start(void) {
+  WDTCTL = WDTPW | WDTSSEL__ACLK | WDTIS_2 | WDTCNTCL;
+//  WDTCTL &= ~(WDTHOLD);
+}
+void WD_Kick(void) {
+  WDTCTL = WDTPW | WDTSSEL__ACLK | WDTIS_2 | WDTCNTCL;
 }
