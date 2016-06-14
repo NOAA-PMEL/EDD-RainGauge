@@ -38,7 +38,12 @@ void CONSOLE_Main(void)
   uint8_t DisplayFlag = false;
   uint32_t NextSecondTimer = 0;
   uint8_t IntroFlag = true;
-
+  uint8_t BadConsoleCommand = false;
+//  char debugStr[128];
+//  sprintf(debugStr,"%d\r\n",ConsoleCounter);
+//  /* Display some debug stuff */
+//  UART_Write(&debugStr[0],LENGTH_OF(debugStr),UART_A1);
+  
   InputValue_t ConsoleState;
   
   /* Set the console state */
@@ -47,7 +52,8 @@ void CONSOLE_Main(void)
   /* Clear the buffer */
   BufferC_Clear(&ConsoleData);
   
-
+  /* Clear the console counter */
+  ConsoleCounter = 0;
   
   /* clear the counter */
   ConsoleTimeoutCounter = 0;
@@ -58,14 +64,24 @@ void CONSOLE_Main(void)
     
     if(IntroFlag == true) {
       /* Write the intro */
+      BufferC_Clear(&ConsoleData);
+      UART_WriteChar('\r',UART_A1);
       UART_Write(&Intro[0],LENGTH_OF(Intro),UART_A1);
       IntroFlag = false;
+      BadConsoleCommand = false;
+      ConsoleCounter = 0;
+      ConsoleState = ConsoleWait;
     }
     
     
-    /* If ther is UART data, retreive it and parse it */
-    if(BufferC_HasNewline(&ConsoleData) == BUFFER_C_HAS_NEWLINE)
-    {
+    
+    if(ConsoleCounter > 2) {
+      IntroFlag = true;
+      ConsoleState = ConsoleRestart;
+    } else {
+      /* If ther is UART data, retreive it and parse it */
+      if(BufferC_HasNewline(&ConsoleData) == BUFFER_C_HAS_NEWLINE)
+      {
       RTC.TimeAtCommand = SecondCounter;
       ConsoleTimeoutCounter = 0;
       StartOfStringCalled = false;
@@ -88,12 +104,14 @@ void CONSOLE_Main(void)
                 ConsoleState = ConstantsInput;
               }
               StartOfStringCalled = true;
+              BadConsoleCommand = false;
               break;
             case 'T':
             case 't':
               startChar = i;
               ConsoleState = DateTimeInput;
               StartOfStringCalled = true;
+              BadConsoleCommand = false;
               break;
               
             case 'S':
@@ -101,9 +119,11 @@ void CONSOLE_Main(void)
               startChar = i;
               ConsoleState = SerialInput;
               StartOfStringCalled = true;
+              BadConsoleCommand = false;
               break;
             case ' ':
               spaceChar = i;
+              BadConsoleCommand = false;
               break;
             case '\r':
             case '\n':
@@ -113,10 +133,17 @@ void CONSOLE_Main(void)
               DisplayFlag = true;
               ConsoleState = ConsoleWait;
               break;
+            case 0x03:
+              i = ctr;
+              IntroFlag = true;
+              ConsoleState = ConsoleRestart;
+              break;
             case 0x18:        /* Ctrl-X to exit the console */
               ConsoleTimeoutCounter = CONSOLE_TIMEOUT;
               break;
             default:
+              ConsoleState = ConsoleRestart;
+              BadConsoleCommand = true;
               break;
           }
         } else {
@@ -133,6 +160,10 @@ void CONSOLE_Main(void)
             DisplayFlag = true;
             ConsoleState = ConsoleWait;
             break;
+          case 0x03:
+            i=ctr;
+            IntroFlag = true;
+            break;
           case 0x18:        /* Ctrl-X to exit the console */
             ConsoleTimeoutCounter = CONSOLE_TIMEOUT;
             break;
@@ -142,29 +173,38 @@ void CONSOLE_Main(void)
         }
       }
     }
+    }
     
-    switch(ConsoleState)
-    {
-      case ConstantsInput:
-        DisplayFlag = CONSOLE_ConstantInput(&startChar,&spaceChar,&endChar,&InputStr[0],LENGTH_OF(InputStr));
-        ConsoleState = ConsoleWait;
-        IntroFlag = true;
-        break;
-      case DateTimeInput:
-        DisplayFlag = CONSOLE_TimeInput(&startChar,&spaceChar,&endChar,&InputStr[0],LENGTH_OF(InputStr));
-        ConsoleState = ConsoleWait;
-        IntroFlag = true;
-        break;
-      case SerialInput:
-        DisplayFlag = CONSOLE_SerialInput(&startChar, &spaceChar,&endChar,&InputStr[0],LENGTH_OF(InputStr));
-        ConsoleState = ConsoleWait;
-        IntroFlag = true;
-        break;
-      case ConsoleWait:
-      default:
-        IntroFlag = false;
-        break;
-      
+    if(BadConsoleCommand == true) {
+      IntroFlag = true;
+    } else {
+      switch(ConsoleState)
+      {
+        case ConstantsInput:
+          DisplayFlag = CONSOLE_ConstantInput(&startChar,&spaceChar,&endChar,&InputStr[0],LENGTH_OF(InputStr));
+          ConsoleState = ConsoleWait;
+          IntroFlag = true;
+          break;
+        case DateTimeInput:
+          DisplayFlag = CONSOLE_TimeInput(&startChar,&spaceChar,&endChar,&InputStr[0],LENGTH_OF(InputStr));
+          ConsoleState = ConsoleWait;
+          IntroFlag = true;
+          break;
+        case SerialInput:
+          DisplayFlag = CONSOLE_SerialInput(&startChar, &spaceChar,&endChar,&InputStr[0],LENGTH_OF(InputStr));
+          ConsoleState = ConsoleWait;
+          IntroFlag = true;
+          break;
+        case ConsoleRestart:
+          IntroFlag = true;
+          ConsoleCounter = 0;
+          break;
+        case ConsoleWait:
+        default:
+          IntroFlag = false;
+          break;
+        
+      }
     }
     
     /* If display is requested, show the coefficient values & current time */

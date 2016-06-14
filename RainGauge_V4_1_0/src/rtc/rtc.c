@@ -48,6 +48,15 @@ void RTC_Init(void)
   
   RTCAMIN = 0x01;                         /* Set 1 Minute Alarm */
   RTCAMIN |= 0x80;                        /* Enable Alaarm      */
+
+  /* Set Calibration Freq to 512 */
+  RTCCTL3 =  0x01;
+
+  if(RTCCALSVAL == 1) {
+    RTCCTL2 = RTCCALS | RTCOFFSET;
+  } else {
+    RTCCTL2 = RTCOFFSET;
+  }
   
   RTCCTL01 &= ~(RTCHOLD);                 /* Start RTC          */
 }
@@ -674,16 +683,12 @@ __interrupt void RTC_ISR(void)
       SecondCounter++;
       ConsoleTimeoutCounter++;
       
-      
-      
-
-      /* Change RTC values if flagged */
-//      if(SystemState == Sample)
-//      {
-//        /* Set to Run Minute Routine */
+      /* Set to Run Minute Routine */
+      if(SystemState != Console ) {
         SystemState = MinuteTimerRoutine;
-//      }
-//      /* Grab the date/time */
+      }
+
+      /* Grab the date/time */
       MinuteData.Year[MinuteData.min] = RTCYEAR;
       MinuteData.Mon[MinuteData.min] = RTCMON;
       MinuteData.Day[MinuteData.min] = RTCDAY;

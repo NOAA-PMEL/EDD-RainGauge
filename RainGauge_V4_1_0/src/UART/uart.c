@@ -674,23 +674,55 @@ __interrupt void USCI_A1_ISR(void)
               case Sample:
               case Offset:
                 inputVal = UCA1RXBUF;
-                //UCA1TXBUF = inputVal;
-                if(inputVal == 0x08)
+                switch(inputVal)
                 {
-                  BufferC_Backspace(&UartData);
-                } else {
-                  BufferC_Put(&UartData,inputVal);
-                }
-                __low_power_mode_off_on_exit();
+                  case 0x08:
+                    BufferC_Backspace(&UartData);
+                    break;
+                  case 0x03:
+                    ConsoleCounter++;
+                    if(ConsoleCounter > 2) {
+                      SystemState = Console;
+                      __low_power_mode_off_on_exit();
+                      __delay_cycles(10);
+                    }
+                    break;
+                  case 0x0A:
+                  case 0x0D:
+                    __low_power_mode_off_on_exit();
+                    __delay_cycles(10);
+                    break;
+                  case 0x18:
+                    BufferC_Clear(&UartData);
+                    SystemState = Sample;
+                    ConsoleCounter = 0;
+                    break;
+                  default:
+                    BufferC_Put(&UartData,inputVal);
+                    
+                    break;
+                  
+                }               
                 break;
               case Console:
                 inputVal = UCA1RXBUF;
                 UCA1TXBUF = inputVal;
-                if(inputVal == 0x08)
-                {
-                  BufferC_Backspace(&ConsoleData);
-                } else {
-                  BufferC_Put(&ConsoleData,inputVal);
+                
+                switch(inputVal) {
+                  case 0x03:
+                    ConsoleCounter++;
+                    __low_power_mode_off_on_exit();
+                    break;
+                  case 0x08:
+                    BufferC_Backspace(&ConsoleData);
+                    break;
+                  case 0x18:
+                    SystemState = Sample;
+                    BufferC_Put(&ConsoleData,inputVal);
+                    break;
+                  default:
+                    BufferC_Put(&ConsoleData,inputVal);
+                    break;
                 }
                 break;
               default:
@@ -707,5 +739,56 @@ __interrupt void USCI_A1_ISR(void)
 			break;
 	}
 }
+
+//#pragma vector=USCI_A1_VECTOR
+//__interrupt void USCI_A1_ISR(void)
+//{
+//  char inputVal = 0;
+//	switch(__even_in_range(UCA1IV, USCI_UART_UCTXCPTIFG))
+//	{
+//		case USCI_NONE:
+//			break;
+//		case USCI_UART_UCRXIFG:     
+//        
+//			
+//                inputVal = UCA1RXBUF;
+//                if(SystemState == Console) {
+//                  UCA1TXBUF = inputVal;
+//                }
+//                
+//                switch(inputVal)
+//                {
+//                  case 0x08:
+//                    BufferC_Backspace(&UartData);
+//                    break;
+//                  case 0x03:
+//                    ConsoleCounter++;
+//                    if(ConsoleCounter > 2) {
+//                      SystemState = Console;
+//                      __low_power_mode_off_on_exit();
+//                    }
+//                    break;
+//                  case 0x0A:
+//                    __low_power_mode_off_on_exit();
+//                    break;
+//                  default:
+//                    BufferC_Put(&UartData,inputVal);
+//                    break;
+//                  
+//                }
+//
+//                
+//                break;
+//            break;
+//		case USCI_UART_UCTXIFG:
+//			break;
+//		case USCI_UART_UCSTTIFG:
+//			break;
+//		case USCI_UART_UCTXCPTIFG:
+//			break;
+//		default:
+//			break;
+//	}
+//}
 
 #endif

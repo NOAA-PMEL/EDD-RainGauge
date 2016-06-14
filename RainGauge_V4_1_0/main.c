@@ -58,7 +58,7 @@
 */
 
 
-#define VERSION     ("4.1.3")
+#define VERSION     ("4.1.4")
 /*****************************  Includes  *********************************/
 #include "./inc/includes.h"
 
@@ -166,8 +166,8 @@ int main(void) {
   UART_Init(UART_A1,UART_BAUD_9600,CLK_32768,UART_CLK_SMCLK);
  
   /* Initialize the timers */
-  TIMER_A1_Init();
-  TIMER_A0_Init();
+  //TIMER_A1_Init();
+  //TIMER_A0_Init();
 
   /* Enable the interrupts */
   __bis_SR_register(GIE);
@@ -194,42 +194,54 @@ int main(void) {
       ClearBufferFlag = false;
     }
     
+    /* Reassert Input Pin Interrupt */
+    secNow = RTCSEC;
+    GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
+    while(RTCSEC == secNow)
+    {
+      MinuteData.Counts[MinuteData.sec] = 0;
+    }
+    
+    /* Kick the watchdog before entering LPM */
+    WD_Kick();
+    
+    /* Set LPM and wait for timer interrupt */
+    //__bis_SR_register(LPM3_bits | GIE); 
+    if(BufferC_IsEmpty(&UartData)==BUFFER_C_IS_EMPTY) {
+      __low_power_mode_3();
+    }
+    
+    __delay_cycles(10);
+    
+    /* Kick the watchdog on coming out of LPM*/
+    WD_Kick();
+    
+    /* Deassert Input Pin Interrupt */
+    GPIO_DetachInputInterrupt(SensorPort,SensorPin);
+    MinuteData.Counts[MinuteData.sec] = 0;
+
+    if(SystemState != Console) {
+      do{
+        WD_Kick();
+        STATE_CheckRxBuffer();
+      }while(BufferC_IsEmpty(&UartData) == BUFFER_C_NOT_EMPTY);
+      /* Kick the watchdog */
+      WD_Kick();
+    }
+    
+    /* Check System State */
     switch(SystemState)
     {
       case Sample:
-        /* Reassert Input Pin Interrupt */
-        secNow = RTCSEC;
-        GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
-        while(RTCSEC == secNow)
-        {
-          MinuteData.Counts[MinuteData.sec] = 0;
-        }
-        
-        /* Kick the watchdog before entering LPM */
-        WD_Kick();
-        
-        /* Set LPM and wait for timer interrupt */
-        __bis_SR_register(LPM3_bits | GIE); 
-        
-        /* Kick the watchdog on coming out of LPM*/
-        WD_Kick();
-        
-        /* Desert Input Pin Interrupt */
-        GPIO_DetachInputInterrupt(SensorPort,SensorPin);
-        MinuteData.Counts[MinuteData.sec] = 0;
-        while(BufferC_IsEmpty(&UartData) == BUFFER_C_NOT_EMPTY)
-        {
-          STATE_CheckRxBuffer();
-        }
+        __delay_cycles(100);
         break;
       case Console:
         CONSOLE_Main();
         /* Kick the watchdog on exit of console */
         WD_Kick();
-        if(SystemState != MinuteTimerRoutine)
-        {
-          SystemState = Sample;
-        }
+        
+        BufferC_Clear(&UartData);
+        SystemState = Sample;
         SumOfCount = 0;
         SecondCounter = 0;
         ConsoleCounter = 0;
@@ -246,6 +258,8 @@ int main(void) {
         temp_SumOfCount = SumOfCount;
         SumOfCount = 0;
         SecondCounter = 0;
+        /* Kick the watchdog*/
+        WD_Kick();
         switch(TxSubState)
         {
           case Counts:
@@ -276,7 +290,6 @@ int main(void) {
         SystemState = Sample;
         break;
       case Offset:
-        
         SystemState = Sample;
         break;
       default:
@@ -784,6 +797,12 @@ void SETUP_GPIO(void)
   /* Unlock GPIO */
   PM5CTL0 &= ~LOCKLPM5;		/* Needs to be done after config GPIO & Pins! */
   
+  /* Setup RTC Output Pin */
+  GPIO_ClearPin(1,0);
+  GPIO_SetPinAsOutput(1,0);
+  P1SEL1 |= BIT0;
+  P1SEL0 &= ~BIT0;
+  
    /* Set interrupts */
   P3IFG &= ~BIT0;
 
@@ -818,9 +837,7 @@ void STATE_CheckRxBuffer(void)
 {
   char value;
   char string[32] = {0};
-  //uint8_t stringValid = false;
-  
-  SystemState = Sample;
+
   
   while(BufferC_IsEmpty(&UartData) == BUFFER_C_NOT_EMPTY)
   {
@@ -862,13 +879,14 @@ void STATE_CheckRxBuffer(void)
           SystemState = Transmit; 
           TxSubState = CurrentTime;
           break;
-        case 0x03:
-          if(++ConsoleCounter >= 3)
-          {
-            SystemState = Console;
-          }
-
-          break;
+//        case 0x03:
+////        ConsoleCounter++;
+//          if(ConsoleCounter++ > 2)
+//          {
+//            SystemState = Console;
+//          }
+//
+//          break;
         default:
             break;
     }          

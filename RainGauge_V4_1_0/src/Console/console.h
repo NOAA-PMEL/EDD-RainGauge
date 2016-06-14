@@ -43,6 +43,7 @@
 typedef enum InputValue
 {
   ConsoleWait,          /** Normal Console State  */
+  ConsoleRestart,       /** Restart Console State */
   ConstantsInput,       /** Waiting for constant value input */
   DateTimeInput,        /** Waiting for DateTime input */
   SerialInput
