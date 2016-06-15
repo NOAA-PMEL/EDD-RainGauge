@@ -98,11 +98,6 @@ int8_t BufferC_Clear(CircularBufferC_s *buf)
 	{
 		buf->buffer[i] = 0;
 	}
-    
-//    buf->read = 1;
-//	buf->write = 0;
-//    buf->size = 0;
-
 	return 0;
 }
 

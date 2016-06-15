@@ -79,6 +79,7 @@ void WD_Init(void);
 void WD_Start(void);
 void WD_Kick(void);
 void populatehour(void);
+void populateminute(void);
 
 #ifdef DEBUG
 void BufferTest(void);
@@ -122,7 +123,7 @@ CurrentData_t MinuteData;
 SystemState_t SystemState;
 TransSubState_t TxSubState;
 
-
+char splash[] = "Startup";
 
 /*******************************  MAIN  **********************************/
 int main(void) {
@@ -158,20 +159,13 @@ int main(void) {
 
   /* Clear the buffers */
   ClearBuffers();
-  
-   /* TESTING ONLY!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-  //populatehour();
-  
+    
   /* Configure the UART */
   UART_Init(UART_A1,UART_BAUD_9600,CLK_32768,UART_CLK_SMCLK);
  
-  /* Initialize the timers */
-  //TIMER_A1_Init();
-  //TIMER_A0_Init();
-
   /* Enable the interrupts */
   __bis_SR_register(GIE);
-  __no_operation();                         // For debugger
+  __no_operation();                        
 
   /* Set the startup State */
   SystemState = Sample;
@@ -179,7 +173,15 @@ int main(void) {
   SecondCounter = 0;
   RTC.TimeAtCommand = SecondCounter;
   
+  /* Populate the Hour Data for Debug */
+//  populatehour();
+  
+//  populateminute();
+//  populateminute();
+  
+  /* Start the Watchdog */
   WD_Start();
+//  UART_Write(&splash[0],LENGTH_OF(splash),UART_A1);
   /* Main loop */
   for(;;)
   {
@@ -206,7 +208,6 @@ int main(void) {
     WD_Kick();
     
     /* Set LPM and wait for timer interrupt */
-    //__bis_SR_register(LPM3_bits | GIE); 
     if(BufferC_IsEmpty(&UartData)==BUFFER_C_IS_EMPTY) {
       __low_power_mode_3();
     }
@@ -220,7 +221,8 @@ int main(void) {
     GPIO_DetachInputInterrupt(SensorPort,SensorPin);
     MinuteData.Counts[MinuteData.sec] = 0;
 
-    if(SystemState != Console) {
+//    if(SystemState != Console) {
+    if((SystemState != Console) && (SystemState != MinuteTimerRoutine)) {
       do{
         WD_Kick();
         STATE_CheckRxBuffer();
@@ -464,7 +466,7 @@ void STATE_TransmitIridium(SampleData_t *Data)
   uint8_t last = 0xFF;
   
   /* Set the index up*/
-  currentIdx = HourData.Hour.write + 1;
+  currentIdx = HourData.Hour.write;
   currentIdx = currentIdx % 60;
   stopIdx = currentIdx;
   if(stopIdx < 0) {
@@ -574,7 +576,7 @@ void STATE_TransmitReport(SampleData_t *Data)
   uint8_t line_u[128] = {0};
 
   /* Set the index up*/
-  currentIdx = HourData.Hour.write + 1;
+  currentIdx = HourData.Hour.write;
   currentIdx = currentIdx % 60;
   stopIdx = currentIdx;
   if(stopIdx < 0) {
@@ -618,8 +620,6 @@ void STATE_TransmitCurrentTime(void)
 {
   char OutputStr[64] = {0};
   uint8_t OutputStr_u[64] = {0};
-  
-  //sprintf(OutputStr, "%04x,%02x,%02x,%02x:%02x:%02x\r\n",RTCYEAR,RTCMON,RTCDAY,RTCHOUR,RTCMIN,RTCSEC);
   sprintf(OutputStr, "%04x,%02x,%02x,%02x:%02x:%02x\r\n",RTC.Year,RTC.Mon,RTC.Day,RTC.Hour,RTC.Min,RTC.Sec);
   memcpy(OutputStr_u,OutputStr,64);
   UART_Write(&OutputStr_u[0],LENGTH_OF(OutputStr_u),UART_A1);
@@ -657,11 +657,6 @@ void ClearBuffers(void)
   }
   
   /* Clear Hour Data Buffers */
-//  uint16_t val16 = 0;
-//  uint8_t val8 = 0;
-//  float valf = 0;
-  
-
   Buffer16_Clear(&HourData.Year);
   Buffer8_Clear(&HourData.Month);
   Buffer8_Clear(&HourData.Day);
@@ -672,11 +667,6 @@ void ClearBuffers(void)
   BufferF_Clear(&HourData.Min);
   BufferF_Clear(&HourData.Max);
   
- 
-  
-//  while(RTCSEC == rtcnext);
-//  GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
-//  P3IFG &= ~BIT0;
 }
 
 /** @brief Calculates the Volume 
@@ -742,8 +732,8 @@ void SETUP_Clock(void)
   /* SMCLK running on DCOCLK, 4MHz    */
   /* MCLK running on DCOCLK, 1MHz       */
   /* LFXT Driver on low power           */
-  CSCTL0_H = CSKEY >> 8;		// Unlock registers
-  CSCTL1 = DCOFSEL_6;			// Set DCO to 8Mhz
+  CSCTL0_H = CSKEY >> 8;		/* Unlock registers */
+  CSCTL1 = DCOFSEL_6;			/* Set DCO to 8Mhz */
   CSCTL2 = SELA__LFXTCLK | SELS__DCOCLK | SELM__DCOCLK;
   CSCTL3 = DIVA__1 | DIVS__2 | DIVM__1;	
   CSCTL4 =   LFXTDRIVE_0 | VLOOFF;
@@ -839,7 +829,7 @@ void STATE_CheckRxBuffer(void)
   char string[32] = {0};
 
   
-  while(BufferC_IsEmpty(&UartData) == BUFFER_C_NOT_EMPTY)
+  while((BufferC_IsEmpty(&UartData) == BUFFER_C_NOT_EMPTY) && (SystemState != Offset))
   {
     BufferC_Get(&UartData,&value);
     switch(value)
@@ -879,14 +869,6 @@ void STATE_CheckRxBuffer(void)
           SystemState = Transmit; 
           TxSubState = CurrentTime;
           break;
-//        case 0x03:
-////        ConsoleCounter++;
-//          if(ConsoleCounter++ > 2)
-//          {
-//            SystemState = Console;
-//          }
-//
-//          break;
         default:
             break;
     }          
@@ -894,9 +876,9 @@ void STATE_CheckRxBuffer(void)
   
   if(SystemState == Offset)
   {
-    while(BufferC_HasNewline(&UartData) != BUFFER_C_HAS_NEWLINE) // || ADD TIMEOUT!
-    {
-    }
+//    while(BufferC_HasNewline(&UartData) != BUFFER_C_HAS_NEWLINE)
+//    {
+//    }
     
     uint8_t idx = 0;
     uint8_t cnt = 0;
@@ -937,7 +919,7 @@ void STATE_CheckRxBuffer(void)
 
 void populatehour(void) {
   
-  for(uint8_t i=0;i<60;i++) {
+  for(uint8_t i=0;i<58;i++) {
     Buffer16_Put_Circular(&HourData.Year,2016);
     Buffer8_Put_Circular(&HourData.Month,5);
     Buffer8_Put_Circular(&HourData.Day,31);
@@ -951,9 +933,21 @@ void populatehour(void) {
   }
   
   RTCHOUR=0;
-  RTCMIN=0x59;
-  RTCSEC=0x58;
+  RTCMIN=0x47;
+  RTCSEC=0x30;
   
+}
+
+void populateminute(void) {
+  Buffer16_Put_Circular(&HourData.Year,2016);
+  Buffer8_Put_Circular(&HourData.Month,6);
+  Buffer8_Put_Circular(&HourData.Day,15);
+  Buffer8_Put_Circular(&HourData.Hour,0);
+  Buffer8_Put_Circular(&HourData.Minute,77);
+  BufferF_Put_Circular(&HourData.Mean,(float)RTCSEC);
+  BufferF_Put_Circular(&HourData.STD,123.2);
+  BufferF_Put_Circular(&HourData.Min,0.5);
+  BufferF_Put_Circular(&HourData.Max,600.2);
 }
 
 
@@ -964,7 +958,6 @@ void WD_Init(void) {
 }
 void WD_Start(void) {
   WDTCTL = WDTPW | WDTSSEL__ACLK | WDTIS_2 | WDTCNTCL;
-//  WDTCTL &= ~(WDTHOLD);
 }
 void WD_Kick(void) {
   WDTCTL = WDTPW | WDTSSEL__ACLK | WDTIS_2 | WDTCNTCL;

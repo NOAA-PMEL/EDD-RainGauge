@@ -328,21 +328,6 @@ uint8_t RTC_Offset(int32_t offset) {
   }
   
   Mon = idx;
-//  for(uint8_t i=1;i<13;i++) {
-//    
-//      NumDaysInMonth = GetDaysInMonth(Mon,Year);
-//      
-//      if(JulianDay > NumDaysInMonth)
-//      {
-//          JulianDay -= NumDaysInMonth;
-//          Mon++;
-//          
-//      } else {
-//          Day = (uint8_t) JulianDay;
-//          i=13;
-//      }
-//      
-//  }
   
   if(Mon > 12) {
     Mon = Mon % 12;
@@ -684,7 +669,8 @@ __interrupt void RTC_ISR(void)
       ConsoleTimeoutCounter++;
       
       /* Set to Run Minute Routine */
-      if(SystemState != Console ) {
+//      if(SystemState != Console ) {
+      if(SystemState == Sample) {
         SystemState = MinuteTimerRoutine;
       }
 
@@ -706,6 +692,8 @@ __interrupt void RTC_ISR(void)
 
       /* Increment the number of temp samples collected counter */
       MinuteData.numSamples++;
+      
+      
       
       /* Exit from Low Power Mode */
       __low_power_mode_off_on_exit();

@@ -39,11 +39,6 @@ void CONSOLE_Main(void)
   uint32_t NextSecondTimer = 0;
   uint8_t IntroFlag = true;
   uint8_t BadConsoleCommand = false;
-//  char debugStr[128];
-//  sprintf(debugStr,"%d\r\n",ConsoleCounter);
-//  /* Display some debug stuff */
-//  UART_Write(&debugStr[0],LENGTH_OF(debugStr),UART_A1);
-  
   InputValue_t ConsoleState;
   
   /* Set the console state */
@@ -82,48 +77,75 @@ void CONSOLE_Main(void)
       /* If ther is UART data, retreive it and parse it */
       if(BufferC_HasNewline(&ConsoleData) == BUFFER_C_HAS_NEWLINE)
       {
-      RTC.TimeAtCommand = SecondCounter;
-      ConsoleTimeoutCounter = 0;
-      StartOfStringCalled = false;
-      ctr = 0;
-      while(BufferC_IsEmpty(&ConsoleData) == BUFFER_C_NOT_EMPTY){
-        BufferC_Get(&ConsoleData,&InputStr[ctr]);
-        ctr++;
-      }
-      for(uint8_t i=0;i<ctr;i++)
-      {
-        if(StartOfStringCalled == false)
+        RTC.TimeAtCommand = SecondCounter;
+        ConsoleTimeoutCounter = 0;
+        StartOfStringCalled = false;
+        ctr = 0;
+        while(BufferC_IsEmpty(&ConsoleData) == BUFFER_C_NOT_EMPTY){
+          BufferC_Get(&ConsoleData,&InputStr[ctr]);
+          ctr++;
+        }
+        for(uint8_t i=0;i<ctr;i++)
         {
-          switch(InputStr[i])
+          if(StartOfStringCalled == false)
           {
-            case 'A':
-            case 'a':
-              if(ConsoleState == ConsoleWait)
-              {
+            switch(InputStr[i])
+            {
+              case 'A':
+              case 'a':
+                if(ConsoleState == ConsoleWait)
+                {
+                  startChar = i;
+                  ConsoleState = ConstantsInput;
+                }
+                StartOfStringCalled = true;
+                BadConsoleCommand = false;
+                break;
+              case 'T':
+              case 't':
                 startChar = i;
-                ConsoleState = ConstantsInput;
-              }
-              StartOfStringCalled = true;
-              BadConsoleCommand = false;
-              break;
-            case 'T':
-            case 't':
-              startChar = i;
-              ConsoleState = DateTimeInput;
-              StartOfStringCalled = true;
-              BadConsoleCommand = false;
-              break;
-              
-            case 'S':
-            case 's':
-              startChar = i;
-              ConsoleState = SerialInput;
-              StartOfStringCalled = true;
-              BadConsoleCommand = false;
-              break;
-            case ' ':
+                ConsoleState = DateTimeInput;
+                StartOfStringCalled = true;
+                BadConsoleCommand = false;
+                break;
+                
+              case 'S':
+              case 's':
+                startChar = i;
+                ConsoleState = SerialInput;
+                StartOfStringCalled = true;
+                BadConsoleCommand = false;
+                break;
+              case ' ':
+                spaceChar = i;
+                BadConsoleCommand = false;
+                break;
+              case '\r':
+              case '\n':
+                endChar = i;
+                break;
+              case '?':         /* Look at current values */
+                DisplayFlag = true;
+                ConsoleState = ConsoleWait;
+                break;
+              case 0x03:
+                i = ctr;
+                IntroFlag = true;
+                ConsoleState = ConsoleRestart;
+                break;
+              case 0x18:        /* Ctrl-X to exit the console */
+                ConsoleTimeoutCounter = CONSOLE_TIMEOUT;
+                break;
+              default:
+                ConsoleState = ConsoleRestart;
+                BadConsoleCommand = true;
+                break;
+            }
+          } else {
+            switch (InputStr[i])
+            {
+              case ' ':
               spaceChar = i;
-              BadConsoleCommand = false;
               break;
             case '\r':
             case '\n':
@@ -134,45 +156,18 @@ void CONSOLE_Main(void)
               ConsoleState = ConsoleWait;
               break;
             case 0x03:
-              i = ctr;
+              i=ctr;
               IntroFlag = true;
-              ConsoleState = ConsoleRestart;
               break;
             case 0x18:        /* Ctrl-X to exit the console */
               ConsoleTimeoutCounter = CONSOLE_TIMEOUT;
               break;
             default:
-              ConsoleState = ConsoleRestart;
-              BadConsoleCommand = true;
               break;
-          }
-        } else {
-          switch (InputStr[i])
-          {
-            case ' ':
-            spaceChar = i;
-            break;
-          case '\r':
-          case '\n':
-            endChar = i;
-            break;
-          case '?':         /* Look at current values */
-            DisplayFlag = true;
-            ConsoleState = ConsoleWait;
-            break;
-          case 0x03:
-            i=ctr;
-            IntroFlag = true;
-            break;
-          case 0x18:        /* Ctrl-X to exit the console */
-            ConsoleTimeoutCounter = CONSOLE_TIMEOUT;
-            break;
-          default:
-            break;
+            }
           }
         }
       }
-    }
     }
     
     if(BadConsoleCommand == true) {
@@ -346,7 +341,6 @@ static uint8_t CONSOLE_ConstantInput(uint8_t *startChar,uint8_t *spaceChar, uint
           default:
             /* If bad value, alert the user and return */
             UART_WriteNACK(UART_A1);
-            //UART_Write(&InvalidMsg[0],LENGTH_OF(InvalidMsg),UART_A1);
             DispFlag = false;
             return DispFlag;
             break;
@@ -371,7 +365,6 @@ static uint8_t CONSOLE_ConstantInput(uint8_t *startChar,uint8_t *spaceChar, uint
         break;
       default:
         UART_WriteNACK(UART_A1);
-        //UART_Write(&InvalidMsg[0],LENGTH_OF(InvalidMsg),UART_A1);
         break;
     }
     
@@ -422,7 +415,6 @@ static uint8_t CONSOLE_ConstantInput(uint8_t *startChar,uint8_t *spaceChar, uint
 static uint8_t CONSOLE_TimeInput(uint8_t *startChar,uint8_t *spaceChar,uint8_t *endChar,char *InputStr,uint8_t length)
 {
   
-//  uint8_t InvalidMsg[] = "\r\nInvalid Input\r\n";
   uint8_t DispFlag = false;
   uint8_t startIdx = 0;
   uint8_t ValidMessageFlag = false;
@@ -443,7 +435,6 @@ static uint8_t CONSOLE_TimeInput(uint8_t *startChar,uint8_t *spaceChar,uint8_t *
   if(ValidMessageFlag == false)
   {
     UART_WriteNACK(UART_A1);
-    //UART_Write(&InvalidMsg[0],LENGTH_OF(InvalidMsg),UART_A1);
     DispFlag = false;
   }
   else
@@ -498,7 +489,6 @@ static uint8_t CONSOLE_SerialInput(uint8_t *startChar,uint8_t *spaceChar,uint8_t
     {
       serialNumber[i] = InputStr[*spaceChar+1+i];
     }
-//    memcpy(&serialNumber,InputStr[*spaceChar+1],ValLength);
     DispFlag = false;
   }
   

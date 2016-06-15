@@ -67,7 +67,6 @@ uint8_t UART_Init(uint8_t UartPort,uint32_t Baudrate,uint32_t ClkFreq, uint8_t C
 			P2SEL0 &= ~(UART_A1_TX | UART_A1_RX);
 			break;
 		default:
-			// add logging
 			break;
 	}
 
@@ -470,7 +469,6 @@ static uint8_t UCBRSLookup( uint32_t clkFreq, uint32_t baudRate, uint16_t *UCBRx
               *UCBRx = 52;
               ucbrf = UCBRF_1;
               ucbrs = 0x49;
-              //ucbrs = 0;
               break;
             case UART_BAUD_19200:
               osval = 1;
@@ -515,7 +513,6 @@ static uint8_t UCBRSLookup( uint32_t clkFreq, uint32_t baudRate, uint16_t *UCBRx
 			}
 			break;
 		default:
-			// Log error
 			break;
 	}
 
@@ -699,9 +696,7 @@ __interrupt void USCI_A1_ISR(void)
                     break;
                   default:
                     BufferC_Put(&UartData,inputVal);
-                    
                     break;
-                  
                 }               
                 break;
               case Console:
@@ -740,55 +735,5 @@ __interrupt void USCI_A1_ISR(void)
 	}
 }
 
-//#pragma vector=USCI_A1_VECTOR
-//__interrupt void USCI_A1_ISR(void)
-//{
-//  char inputVal = 0;
-//	switch(__even_in_range(UCA1IV, USCI_UART_UCTXCPTIFG))
-//	{
-//		case USCI_NONE:
-//			break;
-//		case USCI_UART_UCRXIFG:     
-//        
-//			
-//                inputVal = UCA1RXBUF;
-//                if(SystemState == Console) {
-//                  UCA1TXBUF = inputVal;
-//                }
-//                
-//                switch(inputVal)
-//                {
-//                  case 0x08:
-//                    BufferC_Backspace(&UartData);
-//                    break;
-//                  case 0x03:
-//                    ConsoleCounter++;
-//                    if(ConsoleCounter > 2) {
-//                      SystemState = Console;
-//                      __low_power_mode_off_on_exit();
-//                    }
-//                    break;
-//                  case 0x0A:
-//                    __low_power_mode_off_on_exit();
-//                    break;
-//                  default:
-//                    BufferC_Put(&UartData,inputVal);
-//                    break;
-//                  
-//                }
-//
-//                
-//                break;
-//            break;
-//		case USCI_UART_UCTXIFG:
-//			break;
-//		case USCI_UART_UCSTTIFG:
-//			break;
-//		case USCI_UART_UCTXCPTIFG:
-//			break;
-//		default:
-//			break;
-//	}
-//}
 
 #endif
