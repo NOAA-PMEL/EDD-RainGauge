@@ -175,6 +175,7 @@ extern float intercept;
 extern float dmMin;
 extern float dmMax;
 extern uint8_t ClearBufferFlag;
+extern uint8_t MinuteFlag;
 
 /* Structures */
 extern SystemState_t SystemState;

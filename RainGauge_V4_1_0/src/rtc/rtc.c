@@ -693,7 +693,8 @@ __interrupt void RTC_ISR(void)
       /* Increment the number of temp samples collected counter */
       MinuteData.numSamples++;
       
-      
+      /* Set the minute flag */
+      MinuteFlag = true;
       
       /* Exit from Low Power Mode */
       __low_power_mode_off_on_exit();

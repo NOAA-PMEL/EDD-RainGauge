@@ -123,6 +123,8 @@ CurrentData_t MinuteData;
 SystemState_t SystemState;
 TransSubState_t TxSubState;
 
+/* Flags */
+uint8_t MinuteFlag;
 char splash[] = "Startup";
 
 /*******************************  MAIN  **********************************/
@@ -169,6 +171,7 @@ int main(void) {
 
   /* Set the startup State */
   SystemState = Sample;
+  MinuteFlag = false;
   SensorCounter = 0;
   SecondCounter = 0;
   RTC.TimeAtCommand = SecondCounter;
@@ -197,7 +200,7 @@ int main(void) {
     }
     
     /* Reassert Input Pin Interrupt */
-    secNow = RTCSEC;
+    
 //    GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
 //    while(RTCSEC == secNow)
 //    {
@@ -207,6 +210,9 @@ int main(void) {
     /* Kick the watchdog before entering LPM */
     WD_Kick();
     
+    if(MinuteFlag == true) {
+      SystemState = MinuteTimerRoutine;
+    }
     /* Set LPM and wait for timer interrupt */
 //    if(BufferC_IsEmpty(&UartData)==BUFFER_C_IS_EMPTY) {
 //    if(BufferC_HasNewline(&UartData)!=BUFFER_C_HAS_NEWLINE){
@@ -220,6 +226,7 @@ int main(void) {
     
     /* Deassert Input Pin Interrupt */
     GPIO_DetachInputInterrupt(SensorPort,SensorPin);
+    /* Clear Current Second Data so it doesn't report bad value */
     MinuteData.Counts[MinuteData.sec] = 0;
 
 //    if(SystemState != Console) {
@@ -231,6 +238,7 @@ int main(void) {
       /* Kick the watchdog */
 //      WD_Kick();
     }
+    
     
     /* Check System State */
     switch(SystemState)
@@ -256,10 +264,12 @@ int main(void) {
         /* Set back to sampling state */
         SystemState = Sample;
         GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
+        secNow = RTCSEC;
         while(RTCSEC == secNow)
         {
           MinuteData.Counts[MinuteData.sec] = 0;
         }
+        MinuteFlag = false;
         break;
       case Transmit:
         temp_SecondsCounter = SecondCounter + 1;
@@ -298,10 +308,20 @@ int main(void) {
         SumOfCount = 0;
         SystemState = Sample;
         GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
+        secNow = RTCSEC;
+        while(RTCSEC == secNow)
+        {
+          MinuteData.Counts[MinuteData.sec] = 0;
+        }
         break;
       case Offset:
         SystemState = Sample;
         GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
+        secNow = RTCSEC;
+        while(RTCSEC == secNow)
+        {
+          MinuteData.Counts[MinuteData.sec] = 0;
+        }
         break;
       case Sample:
       default:
