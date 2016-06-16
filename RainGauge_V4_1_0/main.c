@@ -58,7 +58,7 @@
 */
 
 
-#define VERSION     ("4.1.4")
+#define VERSION     ("4.1.5")
 /*****************************  Includes  *********************************/
 #include "./inc/includes.h"
 
@@ -198,21 +198,22 @@ int main(void) {
     
     /* Reassert Input Pin Interrupt */
     secNow = RTCSEC;
-    GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
-    while(RTCSEC == secNow)
-    {
-      MinuteData.Counts[MinuteData.sec] = 0;
-    }
-    
+//    GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
+//    while(RTCSEC == secNow)
+//    {
+//      MinuteData.Counts[MinuteData.sec] = 0;
+//    }
+    MinuteData.Counts[MinuteData.sec] = 0;
     /* Kick the watchdog before entering LPM */
     WD_Kick();
     
     /* Set LPM and wait for timer interrupt */
-    if(BufferC_IsEmpty(&UartData)==BUFFER_C_IS_EMPTY) {
+//    if(BufferC_IsEmpty(&UartData)==BUFFER_C_IS_EMPTY) {
+//    if(BufferC_HasNewline(&UartData)!=BUFFER_C_HAS_NEWLINE){
+    if(SystemState == Sample) {
+      BufferC_Clear(&UartData);
       __low_power_mode_3();
     }
-    
-    __delay_cycles(10);
     
     /* Kick the watchdog on coming out of LPM*/
     WD_Kick();
@@ -228,15 +229,15 @@ int main(void) {
         STATE_CheckRxBuffer();
       }while(BufferC_IsEmpty(&UartData) == BUFFER_C_NOT_EMPTY);
       /* Kick the watchdog */
-      WD_Kick();
+//      WD_Kick();
     }
     
     /* Check System State */
     switch(SystemState)
     {
-      case Sample:
-        __delay_cycles(100);
-        break;
+      
+//        __delay_cycles(100);
+//        break;
       case Console:
         CONSOLE_Main();
         /* Kick the watchdog on exit of console */
@@ -247,12 +248,18 @@ int main(void) {
         SumOfCount = 0;
         SecondCounter = 0;
         ConsoleCounter = 0;
+        GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
         break;
       case MinuteTimerRoutine:
         /* Grab the date/time */
         STATE_MinuteTimerRoutine();
         /* Set back to sampling state */
         SystemState = Sample;
+        GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
+        while(RTCSEC == secNow)
+        {
+          MinuteData.Counts[MinuteData.sec] = 0;
+        }
         break;
       case Transmit:
         temp_SecondsCounter = SecondCounter + 1;
@@ -290,10 +297,13 @@ int main(void) {
         SecondCounter = 0;
         SumOfCount = 0;
         SystemState = Sample;
+        GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
         break;
       case Offset:
         SystemState = Sample;
+        GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
         break;
+      case Sample:
       default:
         break;
     }
@@ -834,6 +844,9 @@ void STATE_CheckRxBuffer(void)
     BufferC_Get(&UartData,&value);
     switch(value)
     {
+        case 0x18:
+          BufferC_Clear(&UartData);
+          break;
         case 'D':
           SystemState = Transmit;
           TxSubState = Volume;
@@ -870,6 +883,7 @@ void STATE_CheckRxBuffer(void)
           TxSubState = CurrentTime;
           break;
         default:
+          SystemState = Sample;
             break;
     }          
   }
