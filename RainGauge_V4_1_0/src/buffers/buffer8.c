@@ -48,20 +48,6 @@ int8_t Buffer8_Put_Circular(CircularBuffer8_s *buf, uint8_t value)
     
     buf->buffer[buf->write] = value;
     buf->write = NextWrite;
-    
-//	if(NextWrite == buf->read)
-//	{
-//     buf->write = buf->read;
-//		 buf->read = NextRead;   
-//	}      
-//	
-//	buf->buffer[buf->write] = value;
-//	buf->write = NextWrite;      
-//    
-//    if(buf->read >= ACTUAL_BUFFER8_SIZE)
-//    {
-//      buf->read = 0;
-//    }
 	
 	return 0;
 }

@@ -669,7 +669,6 @@ __interrupt void RTC_ISR(void)
       ConsoleTimeoutCounter++;
       
       /* Set to Run Minute Routine */
-//      if(SystemState != Console ) {
       if(SystemState == Sample) {
         SystemState = MinuteTimerRoutine;
       }

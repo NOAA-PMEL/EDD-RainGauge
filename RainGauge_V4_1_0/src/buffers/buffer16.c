@@ -49,23 +49,6 @@ int8_t Buffer16_Put_Circular(CircularBuffer16_s *buf, uint16_t value)
     
     buf->buffer[buf->write] = value;
     buf->write = NextWrite;
-    
-//	uint8_t NextWrite = (buf->write + 1) % (ACTUAL_BUFFER16_SIZE);                                                                          
-//	uint8_t NextRead = (buf->read + 1) % (ACTUAL_BUFFER16_SIZE);
-//    
-//	if(NextWrite == buf->read)
-//	{
-//     buf->write = buf->read;
-//		 buf->read = NextRead;   
-//	}      
-//	
-//	buf->buffer[buf->write] = value;
-//	buf->write = NextWrite;      
-//    
-//    if(buf->read >= ACTUAL_BUFFER16_SIZE)
-//    {
-//      buf->read = 0;
-//    }
 	
 	return 0;
 }

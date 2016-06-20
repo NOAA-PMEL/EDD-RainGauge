@@ -176,15 +176,9 @@ int main(void) {
   SecondCounter = 0;
   RTC.TimeAtCommand = SecondCounter;
   
-  /* Populate the Hour Data for Debug */
-//  populatehour();
-  
-//  populateminute();
-//  populateminute();
-  
   /* Start the Watchdog */
   WD_Start();
-//  UART_Write(&splash[0],LENGTH_OF(splash),UART_A1);
+
   /* Main loop */
   for(;;)
   {
@@ -200,12 +194,6 @@ int main(void) {
     }
     
     /* Reassert Input Pin Interrupt */
-    
-//    GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
-//    while(RTCSEC == secNow)
-//    {
-//      MinuteData.Counts[MinuteData.sec] = 0;
-//    }
     MinuteData.Counts[MinuteData.sec] = 0;
     /* Kick the watchdog before entering LPM */
     WD_Kick();
@@ -214,8 +202,6 @@ int main(void) {
       SystemState = MinuteTimerRoutine;
     }
     /* Set LPM and wait for timer interrupt */
-//    if(BufferC_IsEmpty(&UartData)==BUFFER_C_IS_EMPTY) {
-//    if(BufferC_HasNewline(&UartData)!=BUFFER_C_HAS_NEWLINE){
     if(SystemState == Sample) {
       BufferC_Clear(&UartData);
       __low_power_mode_3();
@@ -229,23 +215,18 @@ int main(void) {
     /* Clear Current Second Data so it doesn't report bad value */
     MinuteData.Counts[MinuteData.sec] = 0;
 
-//    if(SystemState != Console) {
+    /* Check the state and decode the buffer if needed */
     if((SystemState != Console) && (SystemState != MinuteTimerRoutine)) {
       do{
         WD_Kick();
         STATE_CheckRxBuffer();
       }while(BufferC_IsEmpty(&UartData) == BUFFER_C_NOT_EMPTY);
-      /* Kick the watchdog */
-//      WD_Kick();
     }
     
     
     /* Check System State */
     switch(SystemState)
     {
-      
-//        __delay_cycles(100);
-//        break;
       case Console:
         CONSOLE_Main();
         /* Kick the watchdog on exit of console */

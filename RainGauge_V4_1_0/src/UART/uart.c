@@ -682,16 +682,13 @@ __interrupt void USCI_A1_ISR(void)
                     if(ConsoleCounter > 2) {
                       SystemState = Console;
                       __low_power_mode_off_on_exit();
-//                      __delay_cycles(10);
                     }
                     break;
                   case 0x0A:
                   case 0x0D:
                     __low_power_mode_off_on_exit();
-//                    __delay_cycles(10);
                     break;
                   case 0x18:
-//                    BufferC_Clear(&UartData);
                     BufferC_Put(&UartData,inputVal);
                     SystemState = Sample;
                     ConsoleCounter = 0;
