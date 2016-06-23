@@ -610,28 +610,33 @@ __interrupt void RTC_ISR(void)
     case RTCIV_RTCOFIFG:    /* Oscillator Failure   */
       break;
     case RTCIV_RTCRDYIFG:   /* Second Timer         */
+    
+
+      
       if(SystemState != MinuteTimerRoutine) {
         /* Increment the second count & roll-over if needed */
         MinuteData.sec++;
         if(MinuteData.sec >= 300) {
           MinuteData.sec = 0;
         }
-        
-        /* Calculate the instantaneous Data */
-        if( (0xFFFFFFFF - SumOfCount) > SensorCounter)
-        {
-          SumOfCount += SensorCounter;
-         
-        }
-        else
-        {
-          SumOfCount = 0xFFFFFFFF;
-        }
-        
-        /* Update Counters    */
-        SensorCounter = 0;
-        
+      
         SecondCounter++;
+        /* Increment the individual counter if required to */
+        if(SensorCounter > 400) {
+          SumOfCount += SensorCounter;
+          SensorCounter = 0;
+          
+        } else {
+          SensorCounter = 0;
+        }
+        
+        if(FreqPinActive == true) {
+          SumOfCount = 0;
+          SecondCounter = 0;
+          SensorCounter = 0;
+          FreqPinActive = false;
+        }
+
         ConsoleTimeoutCounter++;
       }
 #ifdef DEBUG

@@ -80,7 +80,7 @@ void WD_Start(void);
 void WD_Kick(void);
 void populatehour(void);
 void populateminute(void);
-
+void RestartCounters(void);
 #ifdef DEBUG
 void BufferTest(void);
 #endif
@@ -125,6 +125,7 @@ TransSubState_t TxSubState;
 
 /* Flags */
 uint8_t MinuteFlag;
+uint8_t FreqPinActive;
 char splash[] = "Startup";
 
 /*******************************  MAIN  **********************************/
@@ -172,6 +173,7 @@ int main(void) {
   /* Set the startup State */
   SystemState = Sample;
   MinuteFlag = false;
+  FreqPinActive = true;
   SensorCounter = 0;
   SecondCounter = 0;
   RTC.TimeAtCommand = SecondCounter;
@@ -184,7 +186,7 @@ int main(void) {
   {
     uint32_t temp_SumOfCount = 0;
     uint32_t temp_SecondsCounter = 0;
-    uint8_t secNow = 0;
+
     float volume = 0.0;
     
     if(ClearBufferFlag == true)
@@ -212,9 +214,10 @@ int main(void) {
     
     /* Deassert Input Pin Interrupt */
     GPIO_DetachInputInterrupt(SensorPort,SensorPin);
+
     /* Clear Current Second Data so it doesn't report bad value */
     MinuteData.Counts[MinuteData.sec] = 0;
-
+    
     /* Check the state and decode the buffer if needed */
     if((SystemState != Console) && (SystemState != MinuteTimerRoutine)) {
       do{
@@ -234,30 +237,33 @@ int main(void) {
         
         BufferC_Clear(&UartData);
         SystemState = Sample;
-        SumOfCount = 0;
-        SecondCounter = 0;
         ConsoleCounter = 0;
         GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
+        FreqPinActive = true;
+        RestartCounters();
         break;
       case MinuteTimerRoutine:
         /* Grab the date/time */
         STATE_MinuteTimerRoutine();
         /* Set back to sampling state */
-        SystemState = Sample;
+        SystemState = Sample;     
+        /* Restart the GPIO Interrupt & clear counters */
         GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
-        secNow = RTCSEC;
-        while(RTCSEC == secNow)
-        {
-          MinuteData.Counts[MinuteData.sec] = 0;
-        }
+        FreqPinActive = true;
+        RestartCounters();
         MinuteFlag = false;
         break;
       case Transmit:
-        temp_SecondsCounter = SecondCounter + 1;
-        while(SecondCounter < temp_SecondsCounter);
-        temp_SumOfCount = SumOfCount;
-        SumOfCount = 0;
-        SecondCounter = 0;
+        if(SecondCounter < 1) {
+          temp_SecondsCounter = SecondCounter + 1;
+          while(SecondCounter < temp_SecondsCounter);
+          FreqPinActive = true;
+        } else {
+          temp_SecondsCounter = SecondCounter;
+          temp_SumOfCount = SumOfCount;
+          FreqPinActive = true;
+        }
+                
         /* Kick the watchdog*/
         WD_Kick();
         switch(TxSubState)
@@ -285,24 +291,18 @@ int main(void) {
             SystemState = Sample;
             break;
         }
-        SecondCounter = 0;
-        SumOfCount = 0;
+        /* Set back to sampling state */
         SystemState = Sample;
+        /* Restart the GPIO Interrupt & clear counters */
         GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
-        secNow = RTCSEC;
-        while(RTCSEC == secNow)
-        {
-          MinuteData.Counts[MinuteData.sec] = 0;
-        }
+        RestartCounters();
         break;
       case Offset:
+        /* Set back to sampling state */
         SystemState = Sample;
+        /* Restart the GPIO Interrupt & clear counters */
         GPIO_AttachInputInterrupt(SensorPort, SensorPin,GPIO_EDGE_LOW_TO_HIGH);
-        secNow = RTCSEC;
-        while(RTCSEC == secNow)
-        {
-          MinuteData.Counts[MinuteData.sec] = 0;
-        }
+        RestartCounters();
         break;
       case Sample:
       default:
@@ -402,10 +402,12 @@ void STATE_Transmit(uint32_t count, uint32_t seconds){
   sprintf(sendString,"@@@%10lu,",count);
   memcpy(sendString_u,sendString,64);
   UART_Write(&sendString_u[0],64,UART_A1);
+  
   /* Write the second part of the load string */
   sprintf(sendString,"%10lu\r\n",seconds);
   memcpy(sendString_u,sendString,64);
   UART_Write(&sendString_u[0],64,UART_A1);
+  
   return;
 }
 
@@ -976,4 +978,16 @@ void WD_Start(void) {
 }
 void WD_Kick(void) {
   WDTCTL = WDTPW | WDTSSEL__ACLK | WDTIS_2 | WDTCNTCL;
+}
+
+
+void RestartCounters(void) {
+  
+MinuteData.Counts[MinuteData.sec] = 0;
+FreqPinActive = true;
+while(FreqPinActive == true){
+  MinuteData.Counts[MinuteData.sec] = 0;
+}
+SecondCounter = 0;
+
 }

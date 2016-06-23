@@ -594,6 +594,7 @@ __interrupt void Port_3 (void)
 			break;			//Vector 0 - No Interrupt
 		case P3IV_P3IFG0:   /* Frequency Count Pin */
           /* Update the individual counter & minute counter */
+
           SensorCounter++;
 
           MinuteData.Counts[MinuteData.sec]++;
