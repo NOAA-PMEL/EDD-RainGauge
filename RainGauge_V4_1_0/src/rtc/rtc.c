@@ -630,15 +630,15 @@ __interrupt void RTC_ISR(void)
           SensorCounter = 0;
         }
         
-        if(FreqPinActive == true) {
+        ConsoleTimeoutCounter++;
+      }
+      
+      if(FreqPinActive == true) {
           SumOfCount = 0;
           SecondCounter = 0;
           SensorCounter = 0;
           FreqPinActive = false;
         }
-
-        ConsoleTimeoutCounter++;
-      }
 #ifdef DEBUG
       GPIO_TogglePin(DEBUG_PORT,DEBUG_PIN);
       
