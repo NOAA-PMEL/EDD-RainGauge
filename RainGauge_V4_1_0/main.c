@@ -508,7 +508,7 @@ void STATE_TransmitIridium(SampleData_t *Data)
     idx = idx % 60;
   } while(idx != stopIdx);
   
-  sprintf(line,"RAIN %02x/%02x/%04x,%02x:00:00,00:01:00,",mon,day,year,last);
+  sprintf(line,"RAIN %02x/%02x/%04x %02x:00:00 00:01:00 ",mon,day,year,last);
   memcpy(line_u,line,128);
   UART_Write(&line_u[0],LENGTH_OF(line_u),UART_A1);
    __delay_cycles(25000);
