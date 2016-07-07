@@ -79,9 +79,9 @@
 
 /* RTC Offset Value */
 #define RTCCALSVAL      (0)
-#define RTCOFFSET       (33)     // RG#1
+//#define RTCOFFSET       (33)     // RG#1
 //#define RTCOFFSET       (33)    // RG#2
-//#define RTCOFFSET       (73)     // RG#3
+#define RTCOFFSET       (73)     // RG#3
 /************************************************************************
 *							STRUCTURES
 ************************************************************************/

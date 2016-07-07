@@ -58,7 +58,7 @@
 */
 
 
-#define VERSION     ("4.1.6")
+#define VERSION     ("4.1.7")
 /*****************************  Includes  *********************************/
 #include "./inc/includes.h"
 
@@ -354,6 +354,16 @@ void STATE_MinuteTimerRoutine(void) {
       Sec_Length = Sec_EndIdx - Sec_StartIdx;
     } else {
       Sec_Length = 301 - (Sec_StartIdx - Sec_EndIdx);
+    }
+    
+    if(Sec_Length > 60) {
+      Sec_Length = 60;
+      
+      if(Sec_EndIdx <= 60) {
+        Sec_StartIdx = 300 - (60 - Sec_EndIdx + 1);
+      } else {
+        Sec_StartIdx = Sec_EndIdx - 60;
+      }
     }
     
     for(uint8_t j=0;j<=Sec_Length;j++) {
