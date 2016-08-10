@@ -163,6 +163,7 @@ uint8_t RTC_Set(char *RTCString)
       case 3:
       case 5:
       case 7:
+      case 8:
       case 10:
       case 12:
         if(Day > 31)
@@ -464,6 +465,7 @@ static uint8_t RTC_ParseString(char *RTCString,uint16_t *Year,uint8_t *Mon,uint8
     case 3:
     case 5:
     case 7:
+    case 8:
     case 10:
     case 12:
       if(t0 > 31 || t0 < 1)
