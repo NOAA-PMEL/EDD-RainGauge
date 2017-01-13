@@ -1,0 +1,219 @@
+\hypertarget{buffer__c_8h}{}\section{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/buffers/buffer\+\_\+c.h File Reference}
+\label{buffer__c_8h}\index{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/buffers/buffer\+\_\+c.\+h@{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/buffers/buffer\+\_\+c.\+h}}
+
+
+Character circular buffer library header file.  
+
+
+{\ttfamily \#include \char`\"{}../../test/msp430fr5969.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+{\ttfamily \#include $<$math.\+h$>$}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct___circular_buffer_c__s}{\+\_\+\+Circular\+Buffer\+C\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Char circular buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{buffer__c_8h_aa8e16da79e76d8da01023db45b57c825}{}\#define {\bfseries B\+U\+F\+F\+E\+R\+\_\+\+C\+\_\+\+S\+I\+Z\+E}~(32)\label{buffer__c_8h_aa8e16da79e76d8da01023db45b57c825}
+
+\item 
+\hypertarget{buffer__c_8h_acb850611c42d2e5e81701a27fd10c246}{}\#define {\bfseries A\+C\+T\+U\+A\+L\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+C\+\_\+\+S\+I\+Z\+E}~(B\+U\+F\+F\+E\+R\+\_\+\+C\+\_\+\+S\+I\+Z\+E + 1)\label{buffer__c_8h_acb850611c42d2e5e81701a27fd10c246}
+
+\item 
+\hypertarget{buffer__c_8h_a363452654ee09b5c656da55f0204834b}{}\#define {\bfseries B\+U\+F\+F\+E\+R\+\_\+\+C\+\_\+\+E\+R\+R\+O\+R\+\_\+\+E\+M\+P\+T\+Y}~(1)\label{buffer__c_8h_a363452654ee09b5c656da55f0204834b}
+
+\item 
+\hypertarget{buffer__c_8h_adb5c163c8d7e06f8d1c29ca526e81f84}{}\#define {\bfseries B\+U\+F\+F\+E\+R\+\_\+\+C\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+U\+L\+L}~(2)\label{buffer__c_8h_adb5c163c8d7e06f8d1c29ca526e81f84}
+
+\item 
+\hypertarget{buffer__c_8h_aea4cb106d9930de664c19cda5f7f5794}{}\#define {\bfseries B\+U\+F\+F\+E\+R\+\_\+\+C\+\_\+\+N\+O\+T\+\_\+\+F\+U\+L\+L}~(0)\label{buffer__c_8h_aea4cb106d9930de664c19cda5f7f5794}
+
+\item 
+\hypertarget{buffer__c_8h_a4e0bc4baa101030776d3780cd781fa5b}{}\#define {\bfseries B\+U\+F\+F\+E\+R\+\_\+\+C\+\_\+\+N\+O\+T\+\_\+\+E\+M\+P\+T\+Y}~(B\+U\+F\+F\+E\+R\+\_\+\+C\+\_\+\+N\+O\+T\+\_\+\+F\+U\+L\+L)\label{buffer__c_8h_a4e0bc4baa101030776d3780cd781fa5b}
+
+\item 
+\hypertarget{buffer__c_8h_ab072afa6a9b3ee64c22b500c8d9a3938}{}\#define {\bfseries B\+U\+F\+F\+E\+R\+\_\+\+C\+\_\+\+I\+S\+\_\+\+E\+M\+P\+T\+Y}~(1)\label{buffer__c_8h_ab072afa6a9b3ee64c22b500c8d9a3938}
+
+\item 
+\hypertarget{buffer__c_8h_a3217e6c52a292e5c8d312ee37da8743d}{}\#define {\bfseries B\+U\+F\+F\+E\+R\+\_\+\+C\+\_\+\+I\+S\+\_\+\+F\+U\+L\+L}~(2)\label{buffer__c_8h_a3217e6c52a292e5c8d312ee37da8743d}
+
+\item 
+\hypertarget{buffer__c_8h_a83b7a8063c78e209c2e8cc4ca3923ea4}{}\#define {\bfseries B\+U\+F\+F\+E\+R\+\_\+\+C\+\_\+\+H\+A\+S\+\_\+\+N\+E\+W\+L\+I\+N\+E}~(5)\label{buffer__c_8h_a83b7a8063c78e209c2e8cc4ca3923ea4}
+
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{struct___circular_buffer_c__s}{\+\_\+\+Circular\+Buffer\+C\+\_\+s} \hyperlink{buffer__c_8h_a0788ddb0f159a77d78a65b00123858cf}{Circular\+Buffer\+C\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Char circular buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int8\+\_\+t \hyperlink{buffer__c_8h_ad61332e76f59d287126d00294b5d0da7}{Buffer\+C\+\_\+\+Put} (\hyperlink{buffer__c_8h_a0788ddb0f159a77d78a65b00123858cf}{Circular\+Buffer\+C\+\_\+s} $\ast$buf, char value)
+\begin{DoxyCompactList}\small\item\em Add char to buffer. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer__c_8h_afc223140be4562b5ad11607701eee4d1}{Buffer\+C\+\_\+\+Get} (\hyperlink{buffer__c_8h_a0788ddb0f159a77d78a65b00123858cf}{Circular\+Buffer\+C\+\_\+s} $\ast$buf, char $\ast$value)
+\begin{DoxyCompactList}\small\item\em Get char from buffer. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer__c_8h_a9007923fde8f143c312d47eb6f8d1cba}{Buffer\+C\+\_\+\+Clear} (\hyperlink{buffer__c_8h_a0788ddb0f159a77d78a65b00123858cf}{Circular\+Buffer\+C\+\_\+s} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Clear the buffer. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer__c_8h_a0f4c05fe6e0660afd9dbd260a9301d96}{Buffer\+C\+\_\+\+Is\+Full} (\hyperlink{buffer__c_8h_a0788ddb0f159a77d78a65b00123858cf}{Circular\+Buffer\+C\+\_\+s} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Tests for full buffer. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer__c_8h_a1431a215929a25e1f359b9378e7bfb85}{Buffer\+C\+\_\+\+Is\+Empty} (\hyperlink{buffer__c_8h_a0788ddb0f159a77d78a65b00123858cf}{Circular\+Buffer\+C\+\_\+s} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Test for empty buffer. \end{DoxyCompactList}\item 
+\hypertarget{buffer__c_8h_a62e170dc933489f2ea0aa5708f971d91}{}int8\+\_\+t {\bfseries Buffer\+C\+\_\+\+Backspace} (\hyperlink{buffer__c_8h_a0788ddb0f159a77d78a65b00123858cf}{Circular\+Buffer\+C\+\_\+s} $\ast$buf)\label{buffer__c_8h_a62e170dc933489f2ea0aa5708f971d91}
+
+\item 
+\hypertarget{buffer__c_8h_a28a7b06ee139f88869bb40fae980a647}{}int8\+\_\+t {\bfseries Buffer\+C\+\_\+\+Has\+Newline} (\hyperlink{buffer__c_8h_a0788ddb0f159a77d78a65b00123858cf}{Circular\+Buffer\+C\+\_\+s} $\ast$buf)\label{buffer__c_8h_a28a7b06ee139f88869bb40fae980a647}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Character circular buffer library header file. 
+
+\begin{DoxyAuthor}{Author}
+Matt Casari, \href{mailto:matthew.casari@noaa.org}{\tt matthew.\+casari@noaa.\+org} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+March 23, 2016 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+0.\+1.\+0
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+National Oceanic and Atmospheric Administration 
+
+Pacific Marine Environmental Lab 
+
+Environmental Development Division
+\end{DoxyCopyright}
+\begin{DoxyNote}{Note}
+
+\end{DoxyNote}
+\begin{DoxyRefDesc}{Bug}
+\item[\hyperlink{bug__bug000006}{Bug}]No known bugs \end{DoxyRefDesc}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{buffer__c_8h_a0788ddb0f159a77d78a65b00123858cf}{}\index{buffer\+\_\+c.\+h@{buffer\+\_\+c.\+h}!Circular\+Buffer\+C\+\_\+s@{Circular\+Buffer\+C\+\_\+s}}
+\index{Circular\+Buffer\+C\+\_\+s@{Circular\+Buffer\+C\+\_\+s}!buffer\+\_\+c.\+h@{buffer\+\_\+c.\+h}}
+\subsubsection[{Circular\+Buffer\+C\+\_\+s}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \+\_\+\+Circular\+Buffer\+C\+\_\+s} {\bf Circular\+Buffer\+C\+\_\+s}}\label{buffer__c_8h_a0788ddb0f159a77d78a65b00123858cf}
+
+
+Char circular buffer. 
+
+This is the circular buffer type that stores characters 
+
+\subsection{Function Documentation}
+\hypertarget{buffer__c_8h_a9007923fde8f143c312d47eb6f8d1cba}{}\index{buffer\+\_\+c.\+h@{buffer\+\_\+c.\+h}!Buffer\+C\+\_\+\+Clear@{Buffer\+C\+\_\+\+Clear}}
+\index{Buffer\+C\+\_\+\+Clear@{Buffer\+C\+\_\+\+Clear}!buffer\+\_\+c.\+h@{buffer\+\_\+c.\+h}}
+\subsubsection[{Buffer\+C\+\_\+\+Clear(\+Circular\+Buffer\+C\+\_\+s $\ast$buf)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer\+C\+\_\+\+Clear (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer\+C\+\_\+s} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}\label{buffer__c_8h_a9007923fde8f143c312d47eb6f8d1cba}
+
+
+Clear the buffer. 
+
+Clear the char buffer
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the char buffer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer__c_8h_afc223140be4562b5ad11607701eee4d1}{}\index{buffer\+\_\+c.\+h@{buffer\+\_\+c.\+h}!Buffer\+C\+\_\+\+Get@{Buffer\+C\+\_\+\+Get}}
+\index{Buffer\+C\+\_\+\+Get@{Buffer\+C\+\_\+\+Get}!buffer\+\_\+c.\+h@{buffer\+\_\+c.\+h}}
+\subsubsection[{Buffer\+C\+\_\+\+Get(\+Circular\+Buffer\+C\+\_\+s $\ast$buf, char $\ast$value)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer\+C\+\_\+\+Get (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer\+C\+\_\+s} $\ast$}]{buf, }
+\item[{char $\ast$}]{value}
+\end{DoxyParamCaption}
+)}\label{buffer__c_8h_afc223140be4562b5ad11607701eee4d1}
+
+
+Get char from buffer. 
+
+Retreives one char from the buffer
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$bug} & pointer to the char buffer \\
+\hline
+{\em $\ast$value} & pointer to the char variable\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer__c_8h_a1431a215929a25e1f359b9378e7bfb85}{}\index{buffer\+\_\+c.\+h@{buffer\+\_\+c.\+h}!Buffer\+C\+\_\+\+Is\+Empty@{Buffer\+C\+\_\+\+Is\+Empty}}
+\index{Buffer\+C\+\_\+\+Is\+Empty@{Buffer\+C\+\_\+\+Is\+Empty}!buffer\+\_\+c.\+h@{buffer\+\_\+c.\+h}}
+\subsubsection[{Buffer\+C\+\_\+\+Is\+Empty(\+Circular\+Buffer\+C\+\_\+s $\ast$buf)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer\+C\+\_\+\+Is\+Empty (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer\+C\+\_\+s} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}\label{buffer__c_8h_a1431a215929a25e1f359b9378e7bfb85}
+
+
+Test for empty buffer. 
+
+Checks the buffer to see if it is empty
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the char buffer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer__c_8h_a0f4c05fe6e0660afd9dbd260a9301d96}{}\index{buffer\+\_\+c.\+h@{buffer\+\_\+c.\+h}!Buffer\+C\+\_\+\+Is\+Full@{Buffer\+C\+\_\+\+Is\+Full}}
+\index{Buffer\+C\+\_\+\+Is\+Full@{Buffer\+C\+\_\+\+Is\+Full}!buffer\+\_\+c.\+h@{buffer\+\_\+c.\+h}}
+\subsubsection[{Buffer\+C\+\_\+\+Is\+Full(\+Circular\+Buffer\+C\+\_\+s $\ast$buf)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer\+C\+\_\+\+Is\+Full (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer\+C\+\_\+s} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}\label{buffer__c_8h_a0f4c05fe6e0660afd9dbd260a9301d96}
+
+
+Tests for full buffer. 
+
+Checks the buffer to see if it is full
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the char buffer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer__c_8h_ad61332e76f59d287126d00294b5d0da7}{}\index{buffer\+\_\+c.\+h@{buffer\+\_\+c.\+h}!Buffer\+C\+\_\+\+Put@{Buffer\+C\+\_\+\+Put}}
+\index{Buffer\+C\+\_\+\+Put@{Buffer\+C\+\_\+\+Put}!buffer\+\_\+c.\+h@{buffer\+\_\+c.\+h}}
+\subsubsection[{Buffer\+C\+\_\+\+Put(\+Circular\+Buffer\+C\+\_\+s $\ast$buf, char value)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer\+C\+\_\+\+Put (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer\+C\+\_\+s} $\ast$}]{buf, }
+\item[{char}]{value}
+\end{DoxyParamCaption}
+)}\label{buffer__c_8h_ad61332e76f59d287126d00294b5d0da7}
+
+
+Add char to buffer. 
+
+Adds a single char to the buffer
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the char buffer \\
+\hline
+{\em value} & char value to add\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}

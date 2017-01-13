@@ -1,0 +1,256 @@
+\hypertarget{buffer__f_8h}{}\section{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/buffers/buffer\+\_\+f.h File Reference}
+\label{buffer__f_8h}\index{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/buffers/buffer\+\_\+f.\+h@{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/buffers/buffer\+\_\+f.\+h}}
+{\ttfamily \#include \char`\"{}../../test/msp430fr5969.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+{\ttfamily \#include $<$math.\+h$>$}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct___circular_buffer_f__s}{\+\_\+\+Circular\+Buffer\+F\+\_\+s}
+\begin{DoxyCompactList}\small\item\em float circular buffer \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{buffer__f_8h_a9005e164bbb0da5042e75f72052f2fd9}{}\#define {\bfseries B\+U\+F\+F\+E\+R\+\_\+\+F\+\_\+\+S\+I\+Z\+E}~(60)\label{buffer__f_8h_a9005e164bbb0da5042e75f72052f2fd9}
+
+\item 
+\hypertarget{buffer__f_8h_a233bf80e16cb2ca81df019ff12ecc359}{}\#define {\bfseries A\+C\+T\+U\+A\+L\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+F\+\_\+\+S\+I\+Z\+E}~(B\+U\+F\+F\+E\+R\+\_\+\+F\+\_\+\+S\+I\+Z\+E + 1)\label{buffer__f_8h_a233bf80e16cb2ca81df019ff12ecc359}
+
+\item 
+\hypertarget{buffer__f_8h_a8c0f000ff766426a29d6cd5c3625b9ba}{}\#define {\bfseries B\+U\+F\+F\+E\+R\+\_\+\+F\+\_\+\+E\+R\+R\+O\+R\+\_\+\+E\+M\+P\+T\+Y}~(1)\label{buffer__f_8h_a8c0f000ff766426a29d6cd5c3625b9ba}
+
+\item 
+\hypertarget{buffer__f_8h_a9adcaa58909111f662a0b5f372bd0b3e}{}\#define {\bfseries B\+U\+F\+F\+E\+R\+\_\+\+F\+\_\+\+E\+R\+R\+O\+R\+\_\+\+F\+U\+L\+L}~(2)\label{buffer__f_8h_a9adcaa58909111f662a0b5f372bd0b3e}
+
+\item 
+\hypertarget{buffer__f_8h_a29c982f322310f022a4254f5dcc99500}{}\#define {\bfseries B\+U\+F\+F\+E\+R\+\_\+\+F\+\_\+\+N\+O\+T\+\_\+\+F\+U\+L\+L}~(0)\label{buffer__f_8h_a29c982f322310f022a4254f5dcc99500}
+
+\item 
+\hypertarget{buffer__f_8h_a4c8e106bf9d50f95f3252a0be33e73d5}{}\#define {\bfseries B\+U\+F\+F\+E\+R\+\_\+\+F\+\_\+\+N\+O\+T\+\_\+\+E\+M\+P\+T\+Y}~(B\+U\+F\+F\+E\+R\+\_\+\+F\+\_\+\+N\+O\+T\+\_\+\+F\+U\+L\+L)\label{buffer__f_8h_a4c8e106bf9d50f95f3252a0be33e73d5}
+
+\item 
+\hypertarget{buffer__f_8h_a8d74bced25f2c307ca45eee1ed8319d3}{}\#define {\bfseries B\+U\+F\+F\+E\+R\+\_\+\+F\+\_\+\+I\+S\+\_\+\+E\+M\+P\+T\+Y}~(1)\label{buffer__f_8h_a8d74bced25f2c307ca45eee1ed8319d3}
+
+\item 
+\hypertarget{buffer__f_8h_a68d8e04e2523ec13494e9e87c5754783}{}\#define {\bfseries B\+U\+F\+F\+E\+R\+\_\+\+F\+\_\+\+I\+S\+\_\+\+F\+U\+L\+L}~(2)\label{buffer__f_8h_a68d8e04e2523ec13494e9e87c5754783}
+
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{struct___circular_buffer_f__s}{\+\_\+\+Circular\+Buffer\+F\+\_\+s} \hyperlink{buffer__f_8h_a5939339eb1c6b1bf1e542b86282347d6}{Circular\+Buffer\+F\+\_\+s}
+\begin{DoxyCompactList}\small\item\em float circular buffer \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int8\+\_\+t \hyperlink{buffer__f_8h_afb218fb5b2fc43a578416dfbf9e854d9}{Buffer\+F\+\_\+\+Put} (\hyperlink{buffer__f_8h_a5939339eb1c6b1bf1e542b86282347d6}{Circular\+Buffer\+F\+\_\+s} $\ast$buf, float value)
+\begin{DoxyCompactList}\small\item\em Add float to buffer. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer__f_8h_a5dcb51b018eb021e8dd3ec6168048683}{Buffer\+F\+\_\+\+Put\+\_\+\+Circular} (\hyperlink{buffer__f_8h_a5939339eb1c6b1bf1e542b86282347d6}{Circular\+Buffer\+F\+\_\+s} $\ast$buf, float value)
+\begin{DoxyCompactList}\small\item\em Add float to buffer and wrap. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer__f_8h_acb7fdda6cad3b456cab5a5911f9097f3}{Buffer\+F\+\_\+\+Get} (\hyperlink{buffer__f_8h_a5939339eb1c6b1bf1e542b86282347d6}{Circular\+Buffer\+F\+\_\+s} $\ast$buf, float $\ast$value)
+\begin{DoxyCompactList}\small\item\em Get float from buffer. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer__f_8h_a063d24554fa876145f50fb72a64c4869}{Buffer\+F\+\_\+\+Get\+Requested} (\hyperlink{buffer__f_8h_a5939339eb1c6b1bf1e542b86282347d6}{Circular\+Buffer\+F\+\_\+s} $\ast$buf, uint8\+\_\+t requested, float $\ast$value)
+\begin{DoxyCompactList}\small\item\em Get float from requested buffer location. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer__f_8h_ab5a4327bd31e054270316ad62445f04d}{Buffer\+F\+\_\+\+Clear} (\hyperlink{buffer__f_8h_a5939339eb1c6b1bf1e542b86282347d6}{Circular\+Buffer\+F\+\_\+s} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Clear the buffer. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer__f_8h_a1eed6a9952e83a2a99c55701834e49dd}{Buffer\+F\+\_\+\+Is\+Full} (\hyperlink{buffer__f_8h_a5939339eb1c6b1bf1e542b86282347d6}{Circular\+Buffer\+F\+\_\+s} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Tests for full buffer. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer__f_8h_a418ad40a5ba2142409e4cfdc55489c77}{Buffer\+F\+\_\+\+Is\+Empty} (\hyperlink{buffer__f_8h_a5939339eb1c6b1bf1e542b86282347d6}{Circular\+Buffer\+F\+\_\+s} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Test for empty buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Matt Casari, \href{mailto:matthew.casari@noaa.org}{\tt matthew.\+casari@noaa.\+org} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+March 23, 2016 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+0.\+1.\+0
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+National Oceanic and Atmospheric Administration 
+
+Pacific Marine Environmental Lab 
+
+Environmental Development Division
+\end{DoxyCopyright}
+\begin{DoxyNote}{Note}
+
+\end{DoxyNote}
+\begin{DoxyRefDesc}{Bug}
+\item[\hyperlink{bug__bug000008}{Bug}]No known bugs \end{DoxyRefDesc}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{buffer__f_8h_a5939339eb1c6b1bf1e542b86282347d6}{}\index{buffer\+\_\+f.\+h@{buffer\+\_\+f.\+h}!Circular\+Buffer\+F\+\_\+s@{Circular\+Buffer\+F\+\_\+s}}
+\index{Circular\+Buffer\+F\+\_\+s@{Circular\+Buffer\+F\+\_\+s}!buffer\+\_\+f.\+h@{buffer\+\_\+f.\+h}}
+\subsubsection[{Circular\+Buffer\+F\+\_\+s}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \+\_\+\+Circular\+Buffer\+F\+\_\+s} {\bf Circular\+Buffer\+F\+\_\+s}}\label{buffer__f_8h_a5939339eb1c6b1bf1e542b86282347d6}
+
+
+float circular buffer 
+
+This is the circular buffer type that stores float values 
+
+\subsection{Function Documentation}
+\hypertarget{buffer__f_8h_ab5a4327bd31e054270316ad62445f04d}{}\index{buffer\+\_\+f.\+h@{buffer\+\_\+f.\+h}!Buffer\+F\+\_\+\+Clear@{Buffer\+F\+\_\+\+Clear}}
+\index{Buffer\+F\+\_\+\+Clear@{Buffer\+F\+\_\+\+Clear}!buffer\+\_\+f.\+h@{buffer\+\_\+f.\+h}}
+\subsubsection[{Buffer\+F\+\_\+\+Clear(\+Circular\+Buffer\+F\+\_\+s $\ast$buf)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer\+F\+\_\+\+Clear (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer\+F\+\_\+s} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}\label{buffer__f_8h_ab5a4327bd31e054270316ad62445f04d}
+
+
+Clear the buffer. 
+
+Clear the float buffer
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the float buffer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer__f_8h_acb7fdda6cad3b456cab5a5911f9097f3}{}\index{buffer\+\_\+f.\+h@{buffer\+\_\+f.\+h}!Buffer\+F\+\_\+\+Get@{Buffer\+F\+\_\+\+Get}}
+\index{Buffer\+F\+\_\+\+Get@{Buffer\+F\+\_\+\+Get}!buffer\+\_\+f.\+h@{buffer\+\_\+f.\+h}}
+\subsubsection[{Buffer\+F\+\_\+\+Get(\+Circular\+Buffer\+F\+\_\+s $\ast$buf, float $\ast$value)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer\+F\+\_\+\+Get (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer\+F\+\_\+s} $\ast$}]{buf, }
+\item[{float $\ast$}]{value}
+\end{DoxyParamCaption}
+)}\label{buffer__f_8h_acb7fdda6cad3b456cab5a5911f9097f3}
+
+
+Get float from buffer. 
+
+Retreives one float value from the buffer
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the float buffer \\
+\hline
+{\em $\ast$value} & pointer to the float variable\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer__f_8h_a063d24554fa876145f50fb72a64c4869}{}\index{buffer\+\_\+f.\+h@{buffer\+\_\+f.\+h}!Buffer\+F\+\_\+\+Get\+Requested@{Buffer\+F\+\_\+\+Get\+Requested}}
+\index{Buffer\+F\+\_\+\+Get\+Requested@{Buffer\+F\+\_\+\+Get\+Requested}!buffer\+\_\+f.\+h@{buffer\+\_\+f.\+h}}
+\subsubsection[{Buffer\+F\+\_\+\+Get\+Requested(\+Circular\+Buffer\+F\+\_\+s $\ast$buf, uint8\+\_\+t requested, float $\ast$value)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer\+F\+\_\+\+Get\+Requested (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer\+F\+\_\+s} $\ast$}]{buf, }
+\item[{uint8\+\_\+t}]{requested, }
+\item[{float $\ast$}]{value}
+\end{DoxyParamCaption}
+)}\label{buffer__f_8h_a063d24554fa876145f50fb72a64c4869}
+
+
+Get float from requested buffer location. 
+
+Retreives one float value from the buffer at the requested buffer location
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the float buffer \\
+\hline
+{\em $\ast$value} & index location of value to retreive\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer__f_8h_a418ad40a5ba2142409e4cfdc55489c77}{}\index{buffer\+\_\+f.\+h@{buffer\+\_\+f.\+h}!Buffer\+F\+\_\+\+Is\+Empty@{Buffer\+F\+\_\+\+Is\+Empty}}
+\index{Buffer\+F\+\_\+\+Is\+Empty@{Buffer\+F\+\_\+\+Is\+Empty}!buffer\+\_\+f.\+h@{buffer\+\_\+f.\+h}}
+\subsubsection[{Buffer\+F\+\_\+\+Is\+Empty(\+Circular\+Buffer\+F\+\_\+s $\ast$buf)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer\+F\+\_\+\+Is\+Empty (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer\+F\+\_\+s} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}\label{buffer__f_8h_a418ad40a5ba2142409e4cfdc55489c77}
+
+
+Test for empty buffer. 
+
+Checks the buffer to see if it is empty
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the float buffer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer__f_8h_a1eed6a9952e83a2a99c55701834e49dd}{}\index{buffer\+\_\+f.\+h@{buffer\+\_\+f.\+h}!Buffer\+F\+\_\+\+Is\+Full@{Buffer\+F\+\_\+\+Is\+Full}}
+\index{Buffer\+F\+\_\+\+Is\+Full@{Buffer\+F\+\_\+\+Is\+Full}!buffer\+\_\+f.\+h@{buffer\+\_\+f.\+h}}
+\subsubsection[{Buffer\+F\+\_\+\+Is\+Full(\+Circular\+Buffer\+F\+\_\+s $\ast$buf)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer\+F\+\_\+\+Is\+Full (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer\+F\+\_\+s} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}\label{buffer__f_8h_a1eed6a9952e83a2a99c55701834e49dd}
+
+
+Tests for full buffer. 
+
+Checks the buffer to see if it is full
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the float buffer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer__f_8h_afb218fb5b2fc43a578416dfbf9e854d9}{}\index{buffer\+\_\+f.\+h@{buffer\+\_\+f.\+h}!Buffer\+F\+\_\+\+Put@{Buffer\+F\+\_\+\+Put}}
+\index{Buffer\+F\+\_\+\+Put@{Buffer\+F\+\_\+\+Put}!buffer\+\_\+f.\+h@{buffer\+\_\+f.\+h}}
+\subsubsection[{Buffer\+F\+\_\+\+Put(\+Circular\+Buffer\+F\+\_\+s $\ast$buf, float value)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer\+F\+\_\+\+Put (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer\+F\+\_\+s} $\ast$}]{buf, }
+\item[{float}]{value}
+\end{DoxyParamCaption}
+)}\label{buffer__f_8h_afb218fb5b2fc43a578416dfbf9e854d9}
+
+
+Add float to buffer. 
+
+Adds a single float value to the buffer
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the float buffer \\
+\hline
+{\em value} & float value to add\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer__f_8h_a5dcb51b018eb021e8dd3ec6168048683}{}\index{buffer\+\_\+f.\+h@{buffer\+\_\+f.\+h}!Buffer\+F\+\_\+\+Put\+\_\+\+Circular@{Buffer\+F\+\_\+\+Put\+\_\+\+Circular}}
+\index{Buffer\+F\+\_\+\+Put\+\_\+\+Circular@{Buffer\+F\+\_\+\+Put\+\_\+\+Circular}!buffer\+\_\+f.\+h@{buffer\+\_\+f.\+h}}
+\subsubsection[{Buffer\+F\+\_\+\+Put\+\_\+\+Circular(\+Circular\+Buffer\+F\+\_\+s $\ast$buf, float value)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer\+F\+\_\+\+Put\+\_\+\+Circular (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer\+F\+\_\+s} $\ast$}]{buf, }
+\item[{float}]{value}
+\end{DoxyParamCaption}
+)}\label{buffer__f_8h_a5dcb51b018eb021e8dd3ec6168048683}
+
+
+Add float to buffer and wrap. 
+
+Adds a single float value to the buffer and overwrite if necessary.
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the float buffer \\
+\hline
+{\em value} & float value to add\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}

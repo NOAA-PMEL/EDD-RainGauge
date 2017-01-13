@@ -1,0 +1,108 @@
+\hypertarget{timer_8c}{}\section{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/\+Timer/timer.c File Reference}
+\label{timer_8c}\index{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/\+Timer/timer.\+c@{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/\+Timer/timer.\+c}}
+
+
+Timer configurations for M\+S\+P430\+F\+R5949.  
+
+
+{\ttfamily \#include \char`\"{}timer.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{timer_8c_acd3efbf40e83d4bf03562f4563a7b0c4}{T\+I\+M\+E\+R\+\_\+\+A0\+\_\+\+Init} (void)
+\begin{DoxyCompactList}\small\item\em Initialize Timer A. \end{DoxyCompactList}\item 
+void \hyperlink{timer_8c_afe442f7ea3eb2c0b07bc018793f18f1d}{T\+I\+M\+E\+R\+\_\+\+A1\+\_\+\+Init} (void)
+\begin{DoxyCompactList}\small\item\em Initialize Timer B. \end{DoxyCompactList}\item 
+void \hyperlink{timer_8c_ad2d490bb763686b28a81cabaff3e3a72}{T\+I\+M\+E\+R\+\_\+\+B\+\_\+\+Milli\+Second} (uint16\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Timer\+B X milli-\/second timer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Timer configurations for M\+S\+P430\+F\+R5949. 
+
+\begin{DoxyAuthor}{Author}
+Matt Casari, \href{mailto:matthew.casari@noaa.org}{\tt matthew.\+casari@noaa.\+org} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+March 23, 2016 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+0.\+1.\+2
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+National Oceanic and Atmospheric Administration 
+
+Pacific Marine Environmental Lab 
+
+Environmental Development Division
+\end{DoxyCopyright}
+\begin{DoxyRefDesc}{Bug}
+\item[\hyperlink{bug__bug000021}{Bug}]No known bugs \end{DoxyRefDesc}
+
+
+\subsection{Function Documentation}
+\hypertarget{timer_8c_acd3efbf40e83d4bf03562f4563a7b0c4}{}\index{timer.\+c@{timer.\+c}!T\+I\+M\+E\+R\+\_\+\+A0\+\_\+\+Init@{T\+I\+M\+E\+R\+\_\+\+A0\+\_\+\+Init}}
+\index{T\+I\+M\+E\+R\+\_\+\+A0\+\_\+\+Init@{T\+I\+M\+E\+R\+\_\+\+A0\+\_\+\+Init}!timer.\+c@{timer.\+c}}
+\subsubsection[{T\+I\+M\+E\+R\+\_\+\+A0\+\_\+\+Init(void)}]{\setlength{\rightskip}{0pt plus 5cm}void T\+I\+M\+E\+R\+\_\+\+A0\+\_\+\+Init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{timer_8c_acd3efbf40e83d4bf03562f4563a7b0c4}
+
+
+Initialize Timer A. 
+
+Initializes Timer A for use (freq set above in T\+I\+M\+E\+R\+A\+\_\+\+F\+R\+E\+Q\+U\+E\+N\+C\+Y)
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{timer_8c_afe442f7ea3eb2c0b07bc018793f18f1d}{}\index{timer.\+c@{timer.\+c}!T\+I\+M\+E\+R\+\_\+\+A1\+\_\+\+Init@{T\+I\+M\+E\+R\+\_\+\+A1\+\_\+\+Init}}
+\index{T\+I\+M\+E\+R\+\_\+\+A1\+\_\+\+Init@{T\+I\+M\+E\+R\+\_\+\+A1\+\_\+\+Init}!timer.\+c@{timer.\+c}}
+\subsubsection[{T\+I\+M\+E\+R\+\_\+\+A1\+\_\+\+Init(void)}]{\setlength{\rightskip}{0pt plus 5cm}void T\+I\+M\+E\+R\+\_\+\+A1\+\_\+\+Init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{timer_8c_afe442f7ea3eb2c0b07bc018793f18f1d}
+
+
+Initialize Timer B. 
+
+Initializes Timer B for use (freq set above in T\+I\+M\+E\+R\+B\+\_\+\+F\+R\+E\+Q\+U\+E\+N\+C\+Y)
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{timer_8c_ad2d490bb763686b28a81cabaff3e3a72}{}\index{timer.\+c@{timer.\+c}!T\+I\+M\+E\+R\+\_\+\+B\+\_\+\+Milli\+Second@{T\+I\+M\+E\+R\+\_\+\+B\+\_\+\+Milli\+Second}}
+\index{T\+I\+M\+E\+R\+\_\+\+B\+\_\+\+Milli\+Second@{T\+I\+M\+E\+R\+\_\+\+B\+\_\+\+Milli\+Second}!timer.\+c@{timer.\+c}}
+\subsubsection[{T\+I\+M\+E\+R\+\_\+\+B\+\_\+\+Milli\+Second(uint16\+\_\+t length)}]{\setlength{\rightskip}{0pt plus 5cm}void T\+I\+M\+E\+R\+\_\+\+B\+\_\+\+Milli\+Second (
+\begin{DoxyParamCaption}
+\item[{uint16\+\_\+t}]{length}
+\end{DoxyParamCaption}
+)}\label{timer_8c_ad2d490bb763686b28a81cabaff3e3a72}
+
+
+Timer\+B X milli-\/second timer. 
+
+Starts a one-\/shot timer for length milli-\/seconds in timer B
+
+
+\begin{DoxyParams}{Parameters}
+{\em length} & Number of milli-\/seconds to set timer B for\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000001}{Todo}]This function is restricts processor until complete, should be rethought \end{DoxyRefDesc}

@@ -1,0 +1,368 @@
+\hypertarget{gpio_8h}{}\section{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/\+G\+P\+I\+O/gpio.h File Reference}
+\label{gpio_8h}\index{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/\+G\+P\+I\+O/gpio.\+h@{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/\+G\+P\+I\+O/gpio.\+h}}
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}../../inc/includes.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../../test/msp430fr5969.\+h\char`\"{}}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{gpio_8h_aaf319176c8f48585e674b5f481b8ad18}{}\#define {\bfseries G\+P\+I\+O\+\_\+\+P\+O\+R\+T\+P1}~(1)\label{gpio_8h_aaf319176c8f48585e674b5f481b8ad18}
+
+\item 
+\hypertarget{gpio_8h_ace3de22a5316abeff64704759f221f4f}{}\#define {\bfseries G\+P\+I\+O\+\_\+\+P\+O\+R\+T\+P2}~(2)\label{gpio_8h_ace3de22a5316abeff64704759f221f4f}
+
+\item 
+\hypertarget{gpio_8h_ae049a5dd411d1349f18e74c2ff67e3f4}{}\#define {\bfseries G\+P\+I\+O\+\_\+\+P\+O\+R\+T\+P3}~(3)\label{gpio_8h_ae049a5dd411d1349f18e74c2ff67e3f4}
+
+\item 
+\hypertarget{gpio_8h_a8dc6d0ee063c449265d8b592b1084ff2}{}\#define {\bfseries G\+P\+I\+O\+\_\+\+P\+O\+R\+T\+P4}~(4)\label{gpio_8h_a8dc6d0ee063c449265d8b592b1084ff2}
+
+\item 
+\hypertarget{gpio_8h_a01a73db8597304cdedef7a38fb57f030}{}\#define {\bfseries G\+P\+I\+O\+\_\+\+O\+K}~(0)\label{gpio_8h_a01a73db8597304cdedef7a38fb57f030}
+
+\item 
+\hypertarget{gpio_8h_a0a16edb0d65e86e88cc4bf74f16f8bd2}{}\#define {\bfseries G\+P\+I\+O\+\_\+\+F\+A\+I\+L}~(1)\label{gpio_8h_a0a16edb0d65e86e88cc4bf74f16f8bd2}
+
+\item 
+\hypertarget{gpio_8h_a27ace0694b61c8cfc5f59461b6278a39}{}\#define {\bfseries G\+P\+I\+O\+\_\+\+P\+O\+R\+T\+\_\+\+F\+A\+I\+L}~(-\/1)\label{gpio_8h_a27ace0694b61c8cfc5f59461b6278a39}
+
+\item 
+\hypertarget{gpio_8h_ac99c822bc82e0ef310052eb0cd31d9a6}{}\#define {\bfseries G\+P\+I\+O\+\_\+\+E\+D\+G\+E\+\_\+\+L\+O\+W\+\_\+\+T\+O\+\_\+\+H\+I\+G\+H}~(0)\label{gpio_8h_ac99c822bc82e0ef310052eb0cd31d9a6}
+
+\item 
+\hypertarget{gpio_8h_af8de3dc01922878fff2463058dc6b9ad}{}\#define {\bfseries G\+P\+I\+O\+\_\+\+E\+D\+G\+E\+\_\+\+H\+I\+G\+H\+\_\+\+T\+O\+\_\+\+L\+O\+W}~(1)\label{gpio_8h_af8de3dc01922878fff2463058dc6b9ad}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \hyperlink{gpio_8h_a1a54660e8e8409322cf2ee36710a5ec4}{G\+P\+I\+O\+\_\+\+Init} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the G\+P\+I\+O. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{gpio_8h_a1be1e288c33a170f1232cb74d51e7217}{G\+P\+I\+O\+\_\+\+Set\+Pin\+As\+Output} (uint8\+\_\+t Port, uint8\+\_\+t Pin)
+\begin{DoxyCompactList}\small\item\em Set Output Pin. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{gpio_8h_a7ba042d383a3a05f7221f9c1479a0094}{G\+P\+I\+O\+\_\+\+Set\+Pin\+As\+Input} (uint8\+\_\+t Port, uint16\+\_\+t Pin)
+\begin{DoxyCompactList}\small\item\em Set Input Pin. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{gpio_8h_abe7a38058cc46a5b4ebf58da6278c525}{G\+P\+I\+O\+\_\+\+Set\+Pin} (uint8\+\_\+t Port, uint8\+\_\+t Pin)
+\begin{DoxyCompactList}\small\item\em Set Pin Output H\+I\+G\+H. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{gpio_8h_a9e8bbd364a408d7f107987c28e0ce79d}{G\+P\+I\+O\+\_\+\+Clear\+Pin} (uint8\+\_\+t Port, uint8\+\_\+t Pin)
+\begin{DoxyCompactList}\small\item\em Set Pin Output L\+O\+W. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{gpio_8h_a2110287011c2c3d8cfd4603197491c8b}{G\+P\+I\+O\+\_\+\+Set\+All\+Port\+Output\+Pins\+Low} (uint8\+\_\+t Port)
+\begin{DoxyCompactList}\small\item\em Set all Port Pins L\+O\+W. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{gpio_8h_a5fe21e41312991852e491361bbcde00a}{G\+P\+I\+O\+\_\+\+Set\+All\+Port\+Output\+Pins\+High} (uint8\+\_\+t Port)
+\begin{DoxyCompactList}\small\item\em Set all Port Pins H\+I\+G\+H. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{gpio_8h_a2f0e241b21921f5d65081c8651965d76}{G\+P\+I\+O\+\_\+\+Read\+Input\+Pin} (uint8\+\_\+t Port, uint8\+\_\+t Pin)
+\begin{DoxyCompactList}\small\item\em Read Input Pin value. \end{DoxyCompactList}\item 
+int32\+\_\+t \hyperlink{gpio_8h_a5178b84f3227dda59afc694dc2549194}{G\+P\+I\+O\+\_\+\+Read\+Input\+Port} (uint8\+\_\+t Port)
+\begin{DoxyCompactList}\small\item\em Read all pins on port. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{gpio_8h_a4b435a618ea38f27484fa60c0757db66}{G\+P\+I\+O\+\_\+\+Toggle\+Pin} (uint8\+\_\+t Port, uint8\+\_\+t Pin)
+\begin{DoxyCompactList}\small\item\em Toggle Output Pin. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{gpio_8h_af865d68a5bb3dbb61611602210a606ee}{G\+P\+I\+O\+\_\+\+Attach\+Input\+Interrupt} (uint8\+\_\+t Port, uint16\+\_\+t Pin, uint8\+\_\+t edge)
+\begin{DoxyCompactList}\small\item\em Create interrupt on Input Pin. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{gpio_8h_a5405e9ec4f36c96c7135e03f4dcf60ea}{G\+P\+I\+O\+\_\+\+Detach\+Input\+Interrupt} (uint8\+\_\+t Port, uint16\+\_\+t Pin)
+\begin{DoxyCompactList}\small\item\em Removes interrupt on input pin. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Matt Casari, \href{mailto:matthew.casari@noaa.org}{\tt matthew.\+casari@noaa.\+org} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Dec 4, 2015 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+National Oceanic and Atmospheric Administration 
+
+Pacific Marine Environmental Lab 
+
+Environmental Development Division
+\end{DoxyCopyright}
+\begin{DoxyNote}{Note}
+
+\end{DoxyNote}
+\begin{DoxyRefDesc}{Bug}
+\item[\hyperlink{bug__bug000016}{Bug}]No known bugs \end{DoxyRefDesc}
+
+
+\subsection{Function Documentation}
+\hypertarget{gpio_8h_af865d68a5bb3dbb61611602210a606ee}{}\index{gpio.\+h@{gpio.\+h}!G\+P\+I\+O\+\_\+\+Attach\+Input\+Interrupt@{G\+P\+I\+O\+\_\+\+Attach\+Input\+Interrupt}}
+\index{G\+P\+I\+O\+\_\+\+Attach\+Input\+Interrupt@{G\+P\+I\+O\+\_\+\+Attach\+Input\+Interrupt}!gpio.\+h@{gpio.\+h}}
+\subsubsection[{G\+P\+I\+O\+\_\+\+Attach\+Input\+Interrupt(uint8\+\_\+t Port, uint16\+\_\+t Pin, uint8\+\_\+t edge)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t G\+P\+I\+O\+\_\+\+Attach\+Input\+Interrupt (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{Port, }
+\item[{uint16\+\_\+t}]{Pin, }
+\item[{uint8\+\_\+t}]{edge}
+\end{DoxyParamCaption}
+)}\label{gpio_8h_af865d68a5bb3dbb61611602210a606ee}
+
+
+Create interrupt on Input Pin. 
+
+Attaches an Interrupt on selected pin
+
+
+\begin{DoxyParams}{Parameters}
+{\em Port} & G\+P\+I\+O Port pin is located on \\
+\hline
+{\em Pin} & G\+P\+I\+O Pin that interrupt is on \\
+\hline
+{\em edge} & Edge trigger interrupt is on (low -\/$>$ high or high -\/$>$ low)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{gpio_8h_a9e8bbd364a408d7f107987c28e0ce79d}{}\index{gpio.\+h@{gpio.\+h}!G\+P\+I\+O\+\_\+\+Clear\+Pin@{G\+P\+I\+O\+\_\+\+Clear\+Pin}}
+\index{G\+P\+I\+O\+\_\+\+Clear\+Pin@{G\+P\+I\+O\+\_\+\+Clear\+Pin}!gpio.\+h@{gpio.\+h}}
+\subsubsection[{G\+P\+I\+O\+\_\+\+Clear\+Pin(uint8\+\_\+t Port, uint8\+\_\+t Pin)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t G\+P\+I\+O\+\_\+\+Clear\+Pin (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{Port, }
+\item[{uint8\+\_\+t}]{Pin}
+\end{DoxyParamCaption}
+)}\label{gpio_8h_a9e8bbd364a408d7f107987c28e0ce79d}
+
+
+Set Pin Output L\+O\+W. 
+
+Sets the selected pin output to L\+O\+W
+
+
+\begin{DoxyParams}{Parameters}
+{\em Port} & G\+P\+I\+O Port pin is located on \\
+\hline
+{\em Pin} & G\+P\+I\+O Pin to set low\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{gpio_8h_a5405e9ec4f36c96c7135e03f4dcf60ea}{}\index{gpio.\+h@{gpio.\+h}!G\+P\+I\+O\+\_\+\+Detach\+Input\+Interrupt@{G\+P\+I\+O\+\_\+\+Detach\+Input\+Interrupt}}
+\index{G\+P\+I\+O\+\_\+\+Detach\+Input\+Interrupt@{G\+P\+I\+O\+\_\+\+Detach\+Input\+Interrupt}!gpio.\+h@{gpio.\+h}}
+\subsubsection[{G\+P\+I\+O\+\_\+\+Detach\+Input\+Interrupt(uint8\+\_\+t Port, uint16\+\_\+t Pin)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t G\+P\+I\+O\+\_\+\+Detach\+Input\+Interrupt (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{Port, }
+\item[{uint16\+\_\+t}]{Pin}
+\end{DoxyParamCaption}
+)}\label{gpio_8h_a5405e9ec4f36c96c7135e03f4dcf60ea}
+
+
+Removes interrupt on input pin. 
+
+Detaches Interrupt previous set on pin
+
+
+\begin{DoxyParams}{Parameters}
+{\em Port} & G\+P\+I\+O Port input pin is located on \\
+\hline
+{\em Pin} & G\+P\+I\+O Pin interrupt is located on\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{gpio_8h_a1a54660e8e8409322cf2ee36710a5ec4}{}\index{gpio.\+h@{gpio.\+h}!G\+P\+I\+O\+\_\+\+Init@{G\+P\+I\+O\+\_\+\+Init}}
+\index{G\+P\+I\+O\+\_\+\+Init@{G\+P\+I\+O\+\_\+\+Init}!gpio.\+h@{gpio.\+h}}
+\subsubsection[{G\+P\+I\+O\+\_\+\+Init(void)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t G\+P\+I\+O\+\_\+\+Init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{gpio_8h_a1a54660e8e8409322cf2ee36710a5ec4}
+
+
+Initialize the G\+P\+I\+O. 
+
+Clears all G\+P\+I\+O and sets to outputs
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+O\+Ks 
+\end{DoxyReturn}
+\hypertarget{gpio_8h_a2f0e241b21921f5d65081c8651965d76}{}\index{gpio.\+h@{gpio.\+h}!G\+P\+I\+O\+\_\+\+Read\+Input\+Pin@{G\+P\+I\+O\+\_\+\+Read\+Input\+Pin}}
+\index{G\+P\+I\+O\+\_\+\+Read\+Input\+Pin@{G\+P\+I\+O\+\_\+\+Read\+Input\+Pin}!gpio.\+h@{gpio.\+h}}
+\subsubsection[{G\+P\+I\+O\+\_\+\+Read\+Input\+Pin(uint8\+\_\+t Port, uint8\+\_\+t Pin)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t G\+P\+I\+O\+\_\+\+Read\+Input\+Pin (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{Port, }
+\item[{uint8\+\_\+t}]{Pin}
+\end{DoxyParamCaption}
+)}\label{gpio_8h_a2f0e241b21921f5d65081c8651965d76}
+
+
+Read Input Pin value. 
+
+Reads the value of the selected input pin
+
+
+\begin{DoxyParams}{Parameters}
+{\em Port} & G\+P\+I\+O Port pin is located on \\
+\hline
+{\em Pin} & G\+P\+I\+O Pin to read\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{gpio_8h_a5178b84f3227dda59afc694dc2549194}{}\index{gpio.\+h@{gpio.\+h}!G\+P\+I\+O\+\_\+\+Read\+Input\+Port@{G\+P\+I\+O\+\_\+\+Read\+Input\+Port}}
+\index{G\+P\+I\+O\+\_\+\+Read\+Input\+Port@{G\+P\+I\+O\+\_\+\+Read\+Input\+Port}!gpio.\+h@{gpio.\+h}}
+\subsubsection[{G\+P\+I\+O\+\_\+\+Read\+Input\+Port(uint8\+\_\+t Port)}]{\setlength{\rightskip}{0pt plus 5cm}int32\+\_\+t G\+P\+I\+O\+\_\+\+Read\+Input\+Port (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{Port}
+\end{DoxyParamCaption}
+)}\label{gpio_8h_a5178b84f3227dda59afc694dc2549194}
+
+
+Read all pins on port. 
+
+Reads all the pins on the selected port
+
+
+\begin{DoxyParams}{Parameters}
+{\em Port} & G\+P\+I\+O Port to Read\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value 
+\end{DoxyReturn}
+\hypertarget{gpio_8h_a5fe21e41312991852e491361bbcde00a}{}\index{gpio.\+h@{gpio.\+h}!G\+P\+I\+O\+\_\+\+Set\+All\+Port\+Output\+Pins\+High@{G\+P\+I\+O\+\_\+\+Set\+All\+Port\+Output\+Pins\+High}}
+\index{G\+P\+I\+O\+\_\+\+Set\+All\+Port\+Output\+Pins\+High@{G\+P\+I\+O\+\_\+\+Set\+All\+Port\+Output\+Pins\+High}!gpio.\+h@{gpio.\+h}}
+\subsubsection[{G\+P\+I\+O\+\_\+\+Set\+All\+Port\+Output\+Pins\+High(uint8\+\_\+t Port)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t G\+P\+I\+O\+\_\+\+Set\+All\+Port\+Output\+Pins\+High (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{Port}
+\end{DoxyParamCaption}
+)}\label{gpio_8h_a5fe21e41312991852e491361bbcde00a}
+
+
+Set all Port Pins H\+I\+G\+H. 
+
+Sets all pins on selected port high
+
+
+\begin{DoxyParams}{Parameters}
+{\em Port} & G\+P\+I\+O Port to set high\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{gpio_8h_a2110287011c2c3d8cfd4603197491c8b}{}\index{gpio.\+h@{gpio.\+h}!G\+P\+I\+O\+\_\+\+Set\+All\+Port\+Output\+Pins\+Low@{G\+P\+I\+O\+\_\+\+Set\+All\+Port\+Output\+Pins\+Low}}
+\index{G\+P\+I\+O\+\_\+\+Set\+All\+Port\+Output\+Pins\+Low@{G\+P\+I\+O\+\_\+\+Set\+All\+Port\+Output\+Pins\+Low}!gpio.\+h@{gpio.\+h}}
+\subsubsection[{G\+P\+I\+O\+\_\+\+Set\+All\+Port\+Output\+Pins\+Low(uint8\+\_\+t Port)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t G\+P\+I\+O\+\_\+\+Set\+All\+Port\+Output\+Pins\+Low (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{Port}
+\end{DoxyParamCaption}
+)}\label{gpio_8h_a2110287011c2c3d8cfd4603197491c8b}
+
+
+Set all Port Pins L\+O\+W. 
+
+Sets all pins on selected port low
+
+
+\begin{DoxyParams}{Parameters}
+{\em Port} & G\+P\+I\+O Port to set low\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{gpio_8h_abe7a38058cc46a5b4ebf58da6278c525}{}\index{gpio.\+h@{gpio.\+h}!G\+P\+I\+O\+\_\+\+Set\+Pin@{G\+P\+I\+O\+\_\+\+Set\+Pin}}
+\index{G\+P\+I\+O\+\_\+\+Set\+Pin@{G\+P\+I\+O\+\_\+\+Set\+Pin}!gpio.\+h@{gpio.\+h}}
+\subsubsection[{G\+P\+I\+O\+\_\+\+Set\+Pin(uint8\+\_\+t Port, uint8\+\_\+t Pin)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t G\+P\+I\+O\+\_\+\+Set\+Pin (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{Port, }
+\item[{uint8\+\_\+t}]{Pin}
+\end{DoxyParamCaption}
+)}\label{gpio_8h_abe7a38058cc46a5b4ebf58da6278c525}
+
+
+Set Pin Output H\+I\+G\+H. 
+
+Sets the selected pin output to H\+I\+G\+H
+
+
+\begin{DoxyParams}{Parameters}
+{\em Port} & G\+P\+I\+O Port pin is located on \\
+\hline
+{\em Pin} & G\+P\+I\+O Pin to set high\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{gpio_8h_a7ba042d383a3a05f7221f9c1479a0094}{}\index{gpio.\+h@{gpio.\+h}!G\+P\+I\+O\+\_\+\+Set\+Pin\+As\+Input@{G\+P\+I\+O\+\_\+\+Set\+Pin\+As\+Input}}
+\index{G\+P\+I\+O\+\_\+\+Set\+Pin\+As\+Input@{G\+P\+I\+O\+\_\+\+Set\+Pin\+As\+Input}!gpio.\+h@{gpio.\+h}}
+\subsubsection[{G\+P\+I\+O\+\_\+\+Set\+Pin\+As\+Input(uint8\+\_\+t Port, uint16\+\_\+t Pin)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t G\+P\+I\+O\+\_\+\+Set\+Pin\+As\+Input (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{Port, }
+\item[{uint16\+\_\+t}]{Pin}
+\end{DoxyParamCaption}
+)}\label{gpio_8h_a7ba042d383a3a05f7221f9c1479a0094}
+
+
+Set Input Pin. 
+
+Sets the selected port/pin as input
+
+
+\begin{DoxyParams}{Parameters}
+{\em Port} & G\+P\+I\+O Port pin is located on \\
+\hline
+{\em Pin} & G\+P\+I\+O Pin to set as input\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{gpio_8h_a1be1e288c33a170f1232cb74d51e7217}{}\index{gpio.\+h@{gpio.\+h}!G\+P\+I\+O\+\_\+\+Set\+Pin\+As\+Output@{G\+P\+I\+O\+\_\+\+Set\+Pin\+As\+Output}}
+\index{G\+P\+I\+O\+\_\+\+Set\+Pin\+As\+Output@{G\+P\+I\+O\+\_\+\+Set\+Pin\+As\+Output}!gpio.\+h@{gpio.\+h}}
+\subsubsection[{G\+P\+I\+O\+\_\+\+Set\+Pin\+As\+Output(uint8\+\_\+t Port, uint8\+\_\+t Pin)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t G\+P\+I\+O\+\_\+\+Set\+Pin\+As\+Output (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{Port, }
+\item[{uint8\+\_\+t}]{Pin}
+\end{DoxyParamCaption}
+)}\label{gpio_8h_a1be1e288c33a170f1232cb74d51e7217}
+
+
+Set Output Pin. 
+
+Sets the selected port/pin to output
+
+
+\begin{DoxyParams}{Parameters}
+{\em Port} & G\+P\+I\+O port pin is located on \\
+\hline
+{\em Pin} & G\+P\+I\+O pin to set as output\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{gpio_8h_a4b435a618ea38f27484fa60c0757db66}{}\index{gpio.\+h@{gpio.\+h}!G\+P\+I\+O\+\_\+\+Toggle\+Pin@{G\+P\+I\+O\+\_\+\+Toggle\+Pin}}
+\index{G\+P\+I\+O\+\_\+\+Toggle\+Pin@{G\+P\+I\+O\+\_\+\+Toggle\+Pin}!gpio.\+h@{gpio.\+h}}
+\subsubsection[{G\+P\+I\+O\+\_\+\+Toggle\+Pin(uint8\+\_\+t Port, uint8\+\_\+t Pin)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t G\+P\+I\+O\+\_\+\+Toggle\+Pin (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{Port, }
+\item[{uint8\+\_\+t}]{Pin}
+\end{DoxyParamCaption}
+)}\label{gpio_8h_a4b435a618ea38f27484fa60c0757db66}
+
+
+Toggle Output Pin. 
+
+Toggle selected output pin
+
+
+\begin{DoxyParams}{Parameters}
+{\em Port} & G\+P\+I\+O Port pin is located on \\
+\hline
+{\em Pin} & G\+P\+I\+O Pin to toggle\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}

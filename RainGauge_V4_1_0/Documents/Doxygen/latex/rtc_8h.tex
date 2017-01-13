@@ -1,0 +1,111 @@
+\hypertarget{rtc_8h}{}\section{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/rtc/rtc.h File Reference}
+\label{rtc_8h}\index{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/rtc/rtc.\+h@{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/rtc/rtc.\+h}}
+{\ttfamily \#include \char`\"{}../../inc/includes.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../test/msp430fr5969.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct___r_t_c_struct__s}{\+\_\+\+R\+T\+C\+Struct\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Date\+Time Structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{rtc_8h_a147ba4bef9e90582186f7cd08d3b541c}{}\#define {\bfseries R\+T\+C\+\_\+\+O\+K}~(0)\label{rtc_8h_a147ba4bef9e90582186f7cd08d3b541c}
+
+\item 
+\hypertarget{rtc_8h_af109bce3ac7f3a9b2756fffe8d0691e6}{}\#define {\bfseries R\+T\+C\+\_\+\+F\+A\+I\+L}~(1)\label{rtc_8h_af109bce3ac7f3a9b2756fffe8d0691e6}
+
+\item 
+\hypertarget{rtc_8h_a318c3df52f2bd6df8c4b47b2939640c9}{}\#define {\bfseries R\+T\+C\+\_\+\+B\+A\+D\+\_\+\+O\+F\+F\+S\+E\+T}~(2)\label{rtc_8h_a318c3df52f2bd6df8c4b47b2939640c9}
+
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{struct___r_t_c_struct__s}{\+\_\+\+R\+T\+C\+Struct\+\_\+s} \hyperlink{rtc_8h_a1af48c6ac3aa494f9b9813673b303a90}{R\+T\+C\+Struct\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Date\+Time Structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{rtc_8h_a384f238fa0494e17f7814a4d505c20bf}{R\+T\+C\+\_\+\+Init} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the R\+T\+C. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{rtc_8h_ab0cee6b1edf630f72c9fba62ecab5a52}{R\+T\+C\+\_\+\+Set} (char $\ast$R\+T\+C\+String)
+\begin{DoxyCompactList}\small\item\em Set the R\+T\+C. \end{DoxyCompactList}\item 
+\hypertarget{rtc_8h_a67ee6ead07b27101348d6293755e743d}{}uint8\+\_\+t {\bfseries R\+T\+C\+\_\+\+Offset} (int32\+\_\+t offset)\label{rtc_8h_a67ee6ead07b27101348d6293755e743d}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Matt Casari, \href{mailto:matthew.casari@noaa.org}{\tt matthew.\+casari@noaa.\+org} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+March 23, 2016 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+0.\+1.\+0
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+National Oceanic and Atmospheric Administration 
+
+Pacific Marine Environmental Lab 
+
+Environmental Development Division
+\end{DoxyCopyright}
+\begin{DoxyNote}{Note}
+
+\end{DoxyNote}
+\begin{DoxyRefDesc}{Bug}
+\item[\hyperlink{bug__bug000018}{Bug}]No known bugs \end{DoxyRefDesc}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{rtc_8h_a1af48c6ac3aa494f9b9813673b303a90}{}\index{rtc.\+h@{rtc.\+h}!R\+T\+C\+Struct\+\_\+s@{R\+T\+C\+Struct\+\_\+s}}
+\index{R\+T\+C\+Struct\+\_\+s@{R\+T\+C\+Struct\+\_\+s}!rtc.\+h@{rtc.\+h}}
+\subsubsection[{R\+T\+C\+Struct\+\_\+s}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \+\_\+\+R\+T\+C\+Struct\+\_\+s} {\bf R\+T\+C\+Struct\+\_\+s}}\label{rtc_8h_a1af48c6ac3aa494f9b9813673b303a90}
+
+
+Date\+Time Structure. 
+
+Structure for sensor Data \& Time values 
+
+\subsection{Function Documentation}
+\hypertarget{rtc_8h_a384f238fa0494e17f7814a4d505c20bf}{}\index{rtc.\+h@{rtc.\+h}!R\+T\+C\+\_\+\+Init@{R\+T\+C\+\_\+\+Init}}
+\index{R\+T\+C\+\_\+\+Init@{R\+T\+C\+\_\+\+Init}!rtc.\+h@{rtc.\+h}}
+\subsubsection[{R\+T\+C\+\_\+\+Init(void)}]{\setlength{\rightskip}{0pt plus 5cm}void R\+T\+C\+\_\+\+Init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{rtc_8h_a384f238fa0494e17f7814a4d505c20bf}
+
+
+Initialize the R\+T\+C. 
+
+Sets the R\+T\+C up based on user provided time
+
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{rtc_8h_ab0cee6b1edf630f72c9fba62ecab5a52}{}\index{rtc.\+h@{rtc.\+h}!R\+T\+C\+\_\+\+Set@{R\+T\+C\+\_\+\+Set}}
+\index{R\+T\+C\+\_\+\+Set@{R\+T\+C\+\_\+\+Set}!rtc.\+h@{rtc.\+h}}
+\subsubsection[{R\+T\+C\+\_\+\+Set(char $\ast$\+R\+T\+C\+String)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t R\+T\+C\+\_\+\+Set (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{R\+T\+C\+String}
+\end{DoxyParamCaption}
+)}\label{rtc_8h_ab0cee6b1edf630f72c9fba62ecab5a52}
+
+
+Set the R\+T\+C. 
+
+Sets the R\+T\+C to the Date/\+Time in String String format should be Y\+Y\+Y\+Y\+M\+M\+D\+D\+H\+H\+M\+M\+S\+S
+
+
+\begin{DoxyParams}{Parameters}
+{\em Date\+Time} & String\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 
+\end{DoxyReturn}

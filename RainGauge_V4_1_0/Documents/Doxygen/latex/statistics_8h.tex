@@ -1,0 +1,173 @@
+\hypertarget{statistics_8h}{}\section{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/\+Stats/statistics.h File Reference}
+\label{statistics_8h}\index{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/\+Stats/statistics.\+h@{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/\+Stats/statistics.\+h}}
+
+
+Statistic functions.  
+
+
+{\ttfamily \#include \char`\"{}../../inc/includes.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../../test/msp430fr5969.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+{\ttfamily \#include $<$math.\+h$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{statistics_8h_a967ea4f9f57ca871052991a548695d24}{}\#define {\bfseries S\+T\+A\+T\+I\+S\+T\+I\+C\+S\+\_\+\+O\+K}~(0)\label{statistics_8h_a967ea4f9f57ca871052991a548695d24}
+
+\item 
+\hypertarget{statistics_8h_a2710e039c5da3b1bff66f3cfcf1267b1}{}\#define {\bfseries S\+T\+A\+T\+I\+S\+T\+I\+C\+S\+\_\+\+F\+A\+I\+L}~(1)\label{statistics_8h_a2710e039c5da3b1bff66f3cfcf1267b1}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \hyperlink{statistics_8h_aa5b6b9e8efc1cea0d03c6fd4a4e40ffd}{S\+T\+A\+T\+S\+\_\+\+Calculate\+Mean} (float $\ast$vals, uint16\+\_\+t length, float $\ast$mean)
+\begin{DoxyCompactList}\small\item\em Calculates Mean of float array. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{statistics_8h_aba5520736485d19fe00aa7da583df803}{S\+T\+A\+T\+S\+\_\+\+Find\+Max} (float $\ast$vals, uint16\+\_\+t length, float $\ast$max)
+\begin{DoxyCompactList}\small\item\em Find Max of Float array. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{statistics_8h_a76ac0b7dd0e19692e4b216ec4041d4ab}{S\+T\+A\+T\+S\+\_\+\+Find\+Min} (float $\ast$vals, uint16\+\_\+t length, float $\ast$min)
+\begin{DoxyCompactList}\small\item\em Find Min of Float array. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{statistics_8h_a547d5c7c9609158af39d82d49273c454}{S\+T\+A\+T\+S\+\_\+\+Compute\+S\+T\+D} (float $\ast$vals, uint16\+\_\+t length, float mean, float $\ast$std)
+\begin{DoxyCompactList}\small\item\em Compute Standard Deviation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Statistic functions. 
+
+\begin{DoxyAuthor}{Author}
+Matt Casari, \href{mailto:matthew.casari@noaa.org}{\tt matthew.\+casari@noaa.\+org} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+March 23, 2016 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+0.\+1.\+0
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+National Oceanic and Atmospheric Administration 
+
+Pacific Marine Environmental Lab 
+
+Environmental Development Division
+\end{DoxyCopyright}
+\begin{DoxyNote}{Note}
+
+
+
+\end{DoxyNote}
+\begin{DoxyRefDesc}{Bug}
+\item[\hyperlink{bug__bug000020}{Bug}]No known bugs \end{DoxyRefDesc}
+
+
+\subsection{Function Documentation}
+\hypertarget{statistics_8h_aa5b6b9e8efc1cea0d03c6fd4a4e40ffd}{}\index{statistics.\+h@{statistics.\+h}!S\+T\+A\+T\+S\+\_\+\+Calculate\+Mean@{S\+T\+A\+T\+S\+\_\+\+Calculate\+Mean}}
+\index{S\+T\+A\+T\+S\+\_\+\+Calculate\+Mean@{S\+T\+A\+T\+S\+\_\+\+Calculate\+Mean}!statistics.\+h@{statistics.\+h}}
+\subsubsection[{S\+T\+A\+T\+S\+\_\+\+Calculate\+Mean(float $\ast$vals, uint16\+\_\+t length, float $\ast$mean)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t S\+T\+A\+T\+S\+\_\+\+Calculate\+Mean (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{vals, }
+\item[{uint16\+\_\+t}]{length, }
+\item[{float $\ast$}]{mean}
+\end{DoxyParamCaption}
+)}\label{statistics_8h_aa5b6b9e8efc1cea0d03c6fd4a4e40ffd}
+
+
+Calculates Mean of float array. 
+
+Calculates the mean of an array of floats
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$vals} & Array of floats \\
+\hline
+{\em length} & Length of float Array \\
+\hline
+{\em $\ast$mean} & Calculated mean value\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+\hypertarget{statistics_8h_a547d5c7c9609158af39d82d49273c454}{}\index{statistics.\+h@{statistics.\+h}!S\+T\+A\+T\+S\+\_\+\+Compute\+S\+T\+D@{S\+T\+A\+T\+S\+\_\+\+Compute\+S\+T\+D}}
+\index{S\+T\+A\+T\+S\+\_\+\+Compute\+S\+T\+D@{S\+T\+A\+T\+S\+\_\+\+Compute\+S\+T\+D}!statistics.\+h@{statistics.\+h}}
+\subsubsection[{S\+T\+A\+T\+S\+\_\+\+Compute\+S\+T\+D(float $\ast$vals, uint16\+\_\+t length, float mean, float $\ast$std)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t S\+T\+A\+T\+S\+\_\+\+Compute\+S\+T\+D (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{vals, }
+\item[{uint16\+\_\+t}]{length, }
+\item[{float}]{mean, }
+\item[{float $\ast$}]{std}
+\end{DoxyParamCaption}
+)}\label{statistics_8h_a547d5c7c9609158af39d82d49273c454}
+
+
+Compute Standard Deviation. 
+
+Computes the standard deviation of the array provided
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$vals} & Array of floats \\
+\hline
+{\em length} & Length of float Array \\
+\hline
+{\em mean} & Mean of array values \\
+\hline
+{\em $\ast$std} & Standard Deviation register\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+\hypertarget{statistics_8h_aba5520736485d19fe00aa7da583df803}{}\index{statistics.\+h@{statistics.\+h}!S\+T\+A\+T\+S\+\_\+\+Find\+Max@{S\+T\+A\+T\+S\+\_\+\+Find\+Max}}
+\index{S\+T\+A\+T\+S\+\_\+\+Find\+Max@{S\+T\+A\+T\+S\+\_\+\+Find\+Max}!statistics.\+h@{statistics.\+h}}
+\subsubsection[{S\+T\+A\+T\+S\+\_\+\+Find\+Max(float $\ast$vals, uint16\+\_\+t length, float $\ast$max)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t S\+T\+A\+T\+S\+\_\+\+Find\+Max (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{vals, }
+\item[{uint16\+\_\+t}]{length, }
+\item[{float $\ast$}]{max}
+\end{DoxyParamCaption}
+)}\label{statistics_8h_aba5520736485d19fe00aa7da583df803}
+
+
+Find Max of Float array. 
+
+Finds the maximum value of an array of floats
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$vals} & Array of floats \\
+\hline
+{\em length} & Length of float Array \\
+\hline
+{\em $\ast$max} & Maximum value register\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}
+\hypertarget{statistics_8h_a76ac0b7dd0e19692e4b216ec4041d4ab}{}\index{statistics.\+h@{statistics.\+h}!S\+T\+A\+T\+S\+\_\+\+Find\+Min@{S\+T\+A\+T\+S\+\_\+\+Find\+Min}}
+\index{S\+T\+A\+T\+S\+\_\+\+Find\+Min@{S\+T\+A\+T\+S\+\_\+\+Find\+Min}!statistics.\+h@{statistics.\+h}}
+\subsubsection[{S\+T\+A\+T\+S\+\_\+\+Find\+Min(float $\ast$vals, uint16\+\_\+t length, float $\ast$min)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t S\+T\+A\+T\+S\+\_\+\+Find\+Min (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{vals, }
+\item[{uint16\+\_\+t}]{length, }
+\item[{float $\ast$}]{min}
+\end{DoxyParamCaption}
+)}\label{statistics_8h_a76ac0b7dd0e19692e4b216ec4041d4ab}
+
+
+Find Min of Float array. 
+
+Finds the minimum value of an array of floats
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$vals} & Array of floats \\
+\hline
+{\em length} & Length of float Array \\
+\hline
+{\em $\ast$min} & Minimum value register\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error code 
+\end{DoxyReturn}

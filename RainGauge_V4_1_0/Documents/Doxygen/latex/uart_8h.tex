@@ -1,0 +1,285 @@
+\hypertarget{uart_8h}{}\section{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/\+U\+A\+R\+T/uart.h File Reference}
+\label{uart_8h}\index{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/\+U\+A\+R\+T/uart.\+h@{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/\+U\+A\+R\+T/uart.\+h}}
+{\ttfamily \#include \char`\"{}../../inc/includes.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../test/msp430fr5969.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{uart_8h_a863b8337279a122c4c90dfcefeb4f6ed}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+O\+K}~(0)\label{uart_8h_a863b8337279a122c4c90dfcefeb4f6ed}
+
+\item 
+\hypertarget{uart_8h_a517a2ed8743d355536be944f1c2d42ee}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+F\+A\+I\+L}~(1)\label{uart_8h_a517a2ed8743d355536be944f1c2d42ee}
+
+\item 
+\hypertarget{uart_8h_af85c8c2cbfaa7b6e7033abaf044b09e5}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+A0}~(0)\label{uart_8h_af85c8c2cbfaa7b6e7033abaf044b09e5}
+
+\item 
+\hypertarget{uart_8h_accc58764049df25bb84f881d55621eeb}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+A1}~(1)\label{uart_8h_accc58764049df25bb84f881d55621eeb}
+
+\item 
+\hypertarget{uart_8h_a3988f54521ec5b4f2e3ce8e5260f72b1}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+A0\+\_\+\+T\+X}~(B\+I\+T0)\label{uart_8h_a3988f54521ec5b4f2e3ce8e5260f72b1}
+
+\item 
+\hypertarget{uart_8h_ad70f2ed3223d0adea61cd8bfb9f54c0b}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+A0\+\_\+\+R\+X}~(B\+I\+T1)\label{uart_8h_ad70f2ed3223d0adea61cd8bfb9f54c0b}
+
+\item 
+\hypertarget{uart_8h_a195478d1c32c2eaa44bd0472874d993c}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+A1\+\_\+\+T\+X}~(B\+I\+T5)\label{uart_8h_a195478d1c32c2eaa44bd0472874d993c}
+
+\item 
+\hypertarget{uart_8h_ad415ed0e3c1126b013618584c7de6eee}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+A1\+\_\+\+R\+X}~(B\+I\+T6)\label{uart_8h_ad415ed0e3c1126b013618584c7de6eee}
+
+\item 
+\hypertarget{uart_8h_afb0fc9795714c40d19dbfbb7d76fda7b}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+C\+L\+K\+\_\+\+U\+C\+L\+K}~(0)\label{uart_8h_afb0fc9795714c40d19dbfbb7d76fda7b}
+
+\item 
+\hypertarget{uart_8h_a3e0a672bafb8b66052767fa60272fafb}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+C\+L\+K\+\_\+\+A\+C\+L\+K}~(1)\label{uart_8h_a3e0a672bafb8b66052767fa60272fafb}
+
+\item 
+\hypertarget{uart_8h_a8fa69473f2c8a6a6748088be4de7aced}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+C\+L\+K\+\_\+\+S\+M\+C\+L\+K}~(2)\label{uart_8h_a8fa69473f2c8a6a6748088be4de7aced}
+
+\item 
+\hypertarget{uart_8h_afbe3dcaa4705fd8afcef1534e7ec9c10}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+B\+A\+U\+D\+\_\+1200}~(1200)\label{uart_8h_afbe3dcaa4705fd8afcef1534e7ec9c10}
+
+\item 
+\hypertarget{uart_8h_a99c1f96080e27bf269962bea5e662ad9}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+B\+A\+U\+D\+\_\+2400}~(2400)\label{uart_8h_a99c1f96080e27bf269962bea5e662ad9}
+
+\item 
+\hypertarget{uart_8h_a0931b9684c8eec2275366d819d90676d}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+B\+A\+U\+D\+\_\+4800}~(4800)\label{uart_8h_a0931b9684c8eec2275366d819d90676d}
+
+\item 
+\hypertarget{uart_8h_ae001c4ee4541bab328df3876e73808ab}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+B\+A\+U\+D\+\_\+9600}~(9600)\label{uart_8h_ae001c4ee4541bab328df3876e73808ab}
+
+\item 
+\hypertarget{uart_8h_a1679f7416027fdf54cd20f5a475dca2f}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+B\+A\+U\+D\+\_\+14400}~(14400)\label{uart_8h_a1679f7416027fdf54cd20f5a475dca2f}
+
+\item 
+\hypertarget{uart_8h_aa345b1810e9d3a6b56f74419a333efb5}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+B\+A\+U\+D\+\_\+19200}~(19200)\label{uart_8h_aa345b1810e9d3a6b56f74419a333efb5}
+
+\item 
+\hypertarget{uart_8h_ac3c9a9a7acb960884538f6bfba824889}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+B\+A\+U\+D\+\_\+28800}~(28800)\label{uart_8h_ac3c9a9a7acb960884538f6bfba824889}
+
+\item 
+\hypertarget{uart_8h_a476c5b04bd0f3da51be2d02a608802f5}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+B\+A\+U\+D\+\_\+38400}~(38400)\label{uart_8h_a476c5b04bd0f3da51be2d02a608802f5}
+
+\item 
+\hypertarget{uart_8h_ae1eb987f4f422d3d5a4116696cddbb7e}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+B\+A\+U\+D\+\_\+57600}~(57600)\label{uart_8h_ae1eb987f4f422d3d5a4116696cddbb7e}
+
+\item 
+\hypertarget{uart_8h_af523f4782c9768ba2e566b0f5fb61ec3}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+B\+A\+U\+D\+\_\+115200}~(115200)\label{uart_8h_af523f4782c9768ba2e566b0f5fb61ec3}
+
+\item 
+\hypertarget{uart_8h_a0ced0e01d4e8b980d191907529b42e82}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+B\+A\+U\+D\+\_\+230400}~(230400)\label{uart_8h_a0ced0e01d4e8b980d191907529b42e82}
+
+\item 
+\hypertarget{uart_8h_a8fce9f425e2e40ba99dca3e0f05abac7}{}\#define {\bfseries U\+A\+R\+T\+\_\+\+B\+A\+U\+D\+\_\+460800}~(460800)\label{uart_8h_a8fce9f425e2e40ba99dca3e0f05abac7}
+
+\item 
+\hypertarget{uart_8h_a6739a049dbad07cbaaa11be032d2e900}{}\#define {\bfseries B\+A\+U\+D\+R\+A\+T\+E\+\_\+\+O\+K}~(0)\label{uart_8h_a6739a049dbad07cbaaa11be032d2e900}
+
+\item 
+\hypertarget{uart_8h_ac24ffa3033b99e5be88b9b0737a4d03c}{}\#define {\bfseries B\+A\+U\+D\+R\+A\+T\+E\+\_\+\+F\+A\+I\+L}~(1)\label{uart_8h_ac24ffa3033b99e5be88b9b0737a4d03c}
+
+\item 
+\hypertarget{uart_8h_a5d3b618378a731e7d087d29c04293770}{}\#define {\bfseries C\+L\+K\+\_\+32768}~(32768)\label{uart_8h_a5d3b618378a731e7d087d29c04293770}
+
+\item 
+\hypertarget{uart_8h_aff0c96eca085a272d4b3039d5681c8bc}{}\#define {\bfseries C\+L\+K\+\_\+1000000}~(1000000)\label{uart_8h_aff0c96eca085a272d4b3039d5681c8bc}
+
+\item 
+\hypertarget{uart_8h_af15f605857e2df4222a5b694fc8edb12}{}\#define {\bfseries C\+L\+K\+\_\+1048576}~(1048576)\label{uart_8h_af15f605857e2df4222a5b694fc8edb12}
+
+\item 
+\hypertarget{uart_8h_aeec14e75a0c55a77f15eab420cf3ae11}{}\#define {\bfseries C\+L\+K\+\_\+4000000}~(4000000)\label{uart_8h_aeec14e75a0c55a77f15eab420cf3ae11}
+
+\item 
+\hypertarget{uart_8h_aa46da8e8946adba078d2fb169ac12ec0}{}\#define {\bfseries C\+L\+K\+\_\+4194304}~(4194304)\label{uart_8h_aa46da8e8946adba078d2fb169ac12ec0}
+
+\item 
+\hypertarget{uart_8h_a47fb6c0be5180996bc922b7a07af327d}{}\#define {\bfseries C\+L\+K\+\_\+8000000}~(8000000)\label{uart_8h_a47fb6c0be5180996bc922b7a07af327d}
+
+\item 
+\hypertarget{uart_8h_a7fda02a34c0c2a167066909957454f3e}{}\#define {\bfseries C\+L\+O\+C\+K\+\_\+\+O\+K}~(0)\label{uart_8h_a7fda02a34c0c2a167066909957454f3e}
+
+\item 
+\hypertarget{uart_8h_aa03d57cd6156d8487ee7a8c27d54c870}{}\#define {\bfseries C\+L\+O\+C\+K\+\_\+\+F\+A\+I\+L}~(1)\label{uart_8h_aa03d57cd6156d8487ee7a8c27d54c870}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \hyperlink{uart_8h_a271613d6992f60d5bcb43dd4856cd6d1}{U\+A\+R\+T\+\_\+\+Init} (uint8\+\_\+t Uart\+Port, uint32\+\_\+t Baudrate, uint32\+\_\+t Clk\+Freq, uint8\+\_\+t Clk)
+\begin{DoxyCompactList}\small\item\em Initialize the U\+A\+R\+T. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{uart_8h_a929daf332520f29028047ad3a8a07e13}{U\+A\+R\+T\+\_\+\+Read} (uint8\+\_\+t $\ast$value, uint8\+\_\+t Port)
+\begin{DoxyCompactList}\small\item\em Reads from U\+A\+R\+T. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{uart_8h_a219f56b0fa6ca73dfa8a8368eb23f2e2}{U\+A\+R\+T\+\_\+\+Write\+Char} (uint8\+\_\+t value, uint8\+\_\+t Port)
+\begin{DoxyCompactList}\small\item\em Write one char to port. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{uart_8h_a1735efcfa14fa7787db740db9d961bfd}{U\+A\+R\+T\+\_\+\+Write} (uint8\+\_\+t $\ast$value, uint8\+\_\+t length, uint8\+\_\+t Port)
+\begin{DoxyCompactList}\small\item\em Write string to U\+A\+R\+T. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{uart_8h_a7080d088ea82b6f7ce97e74c867e46a2}{U\+A\+R\+T\+\_\+\+Write\+Include\+Null} (uint8\+\_\+t $\ast$value, uint8\+\_\+t length, uint8\+\_\+t Port)
+\begin{DoxyCompactList}\small\item\em Write string to U\+A\+R\+T with terminating Null. \end{DoxyCompactList}\item 
+\hypertarget{uart_8h_ac35e9679553eb460ca85bb9af028a5af}{}uint8\+\_\+t {\bfseries U\+A\+R\+T\+\_\+\+Write\+A\+C\+K} (uint8\+\_\+t Port)\label{uart_8h_ac35e9679553eb460ca85bb9af028a5af}
+
+\item 
+\hypertarget{uart_8h_ab2dcc573bd587c24b85dffd31f4e6966}{}uint8\+\_\+t {\bfseries U\+A\+R\+T\+\_\+\+Write\+N\+A\+C\+K} (uint8\+\_\+t Port)\label{uart_8h_ab2dcc573bd587c24b85dffd31f4e6966}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Matt Casari, \href{mailto:matthew.casari@noaa.org}{\tt matthew.\+casari@noaa.\+org} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+March 23, 2016 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+0.\+1.\+1
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+National Oceanic and Atmospheric Administration 
+
+Pacific Marine Environmental Lab 
+
+Environmental Development Division
+\end{DoxyCopyright}
+\begin{DoxyNote}{Note}
+
+\end{DoxyNote}
+\begin{DoxyRefDesc}{Bug}
+\item[\hyperlink{bug__bug000024}{Bug}]No known bugs \end{DoxyRefDesc}
+
+
+\subsection{Function Documentation}
+\hypertarget{uart_8h_a271613d6992f60d5bcb43dd4856cd6d1}{}\index{uart.\+h@{uart.\+h}!U\+A\+R\+T\+\_\+\+Init@{U\+A\+R\+T\+\_\+\+Init}}
+\index{U\+A\+R\+T\+\_\+\+Init@{U\+A\+R\+T\+\_\+\+Init}!uart.\+h@{uart.\+h}}
+\subsubsection[{U\+A\+R\+T\+\_\+\+Init(uint8\+\_\+t Uart\+Port, uint32\+\_\+t Baudrate, uint32\+\_\+t Clk\+Freq, uint8\+\_\+t Clk)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t U\+A\+R\+T\+\_\+\+Init (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{Uart\+Port, }
+\item[{uint32\+\_\+t}]{Baudrate, }
+\item[{uint32\+\_\+t}]{Clk\+Freq, }
+\item[{uint8\+\_\+t}]{Clk}
+\end{DoxyParamCaption}
+)}\label{uart_8h_a271613d6992f60d5bcb43dd4856cd6d1}
+
+
+Initialize the U\+A\+R\+T. 
+
+Sets the U\+A\+R\+T up based on port, baudrate,clock frequency and clock source provided.
+
+
+\begin{DoxyParams}{Parameters}
+{\em Uart\+Port} & Uart Port \\
+\hline
+{\em Baudrate} & Common U\+A\+R\+T baudrate \\
+\hline
+{\em Clk\+Freq} & Frequency of peripheral clock \\
+\hline
+{\em Clk} & Clock Source (A\+Clock, S\+M\+Clock, etc.)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 
+\end{DoxyReturn}
+\hypertarget{uart_8h_a929daf332520f29028047ad3a8a07e13}{}\index{uart.\+h@{uart.\+h}!U\+A\+R\+T\+\_\+\+Read@{U\+A\+R\+T\+\_\+\+Read}}
+\index{U\+A\+R\+T\+\_\+\+Read@{U\+A\+R\+T\+\_\+\+Read}!uart.\+h@{uart.\+h}}
+\subsubsection[{U\+A\+R\+T\+\_\+\+Read(uint8\+\_\+t $\ast$value, uint8\+\_\+t Port)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t U\+A\+R\+T\+\_\+\+Read (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t $\ast$}]{value, }
+\item[{uint8\+\_\+t}]{Port}
+\end{DoxyParamCaption}
+)}\label{uart_8h_a929daf332520f29028047ad3a8a07e13}
+
+
+Reads from U\+A\+R\+T. 
+
+Reads one character from U\+A\+R\+T port
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$value} & Pointer to char variable \\
+\hline
+{\em Port} & U\+A\+R\+T Port reading from\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 
+\end{DoxyReturn}
+\hypertarget{uart_8h_a1735efcfa14fa7787db740db9d961bfd}{}\index{uart.\+h@{uart.\+h}!U\+A\+R\+T\+\_\+\+Write@{U\+A\+R\+T\+\_\+\+Write}}
+\index{U\+A\+R\+T\+\_\+\+Write@{U\+A\+R\+T\+\_\+\+Write}!uart.\+h@{uart.\+h}}
+\subsubsection[{U\+A\+R\+T\+\_\+\+Write(uint8\+\_\+t $\ast$value, uint8\+\_\+t length, uint8\+\_\+t Port)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t U\+A\+R\+T\+\_\+\+Write (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t $\ast$}]{value, }
+\item[{uint8\+\_\+t}]{length, }
+\item[{uint8\+\_\+t}]{Port}
+\end{DoxyParamCaption}
+)}\label{uart_8h_a1735efcfa14fa7787db740db9d961bfd}
+
+
+Write string to U\+A\+R\+T. 
+
+Write a char array to the selected U\+A\+R\+T port
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$value} & Pointer to the character array \\
+\hline
+{\em length} & length of string \\
+\hline
+{\em Port} & U\+A\+R\+T port selected\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{uart_8h_a219f56b0fa6ca73dfa8a8368eb23f2e2}{}\index{uart.\+h@{uart.\+h}!U\+A\+R\+T\+\_\+\+Write\+Char@{U\+A\+R\+T\+\_\+\+Write\+Char}}
+\index{U\+A\+R\+T\+\_\+\+Write\+Char@{U\+A\+R\+T\+\_\+\+Write\+Char}!uart.\+h@{uart.\+h}}
+\subsubsection[{U\+A\+R\+T\+\_\+\+Write\+Char(uint8\+\_\+t value, uint8\+\_\+t Port)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t U\+A\+R\+T\+\_\+\+Write\+Char (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{value, }
+\item[{uint8\+\_\+t}]{Port}
+\end{DoxyParamCaption}
+)}\label{uart_8h_a219f56b0fa6ca73dfa8a8368eb23f2e2}
+
+
+Write one char to port. 
+
+Writes only one char to port
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & char value to transmit \\
+\hline
+{\em Port} & U\+A\+R\+T Port writing to\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{uart_8h_a7080d088ea82b6f7ce97e74c867e46a2}{}\index{uart.\+h@{uart.\+h}!U\+A\+R\+T\+\_\+\+Write\+Include\+Null@{U\+A\+R\+T\+\_\+\+Write\+Include\+Null}}
+\index{U\+A\+R\+T\+\_\+\+Write\+Include\+Null@{U\+A\+R\+T\+\_\+\+Write\+Include\+Null}!uart.\+h@{uart.\+h}}
+\subsubsection[{U\+A\+R\+T\+\_\+\+Write\+Include\+Null(uint8\+\_\+t $\ast$value, uint8\+\_\+t length, uint8\+\_\+t Port)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t U\+A\+R\+T\+\_\+\+Write\+Include\+Null (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t $\ast$}]{value, }
+\item[{uint8\+\_\+t}]{length, }
+\item[{uint8\+\_\+t}]{Port}
+\end{DoxyParamCaption}
+)}\label{uart_8h_a7080d088ea82b6f7ce97e74c867e46a2}
+
+
+Write string to U\+A\+R\+T with terminating Null. 
+
+Write a char array to the selected U\+A\+R\+T port and follow with a N\+U\+L\+L value
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$value} & Pointer to the character array \\
+\hline
+{\em length} & length of string \\
+\hline
+{\em Port} & U\+A\+R\+T port selected\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}

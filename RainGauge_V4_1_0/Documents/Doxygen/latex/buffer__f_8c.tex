@@ -1,0 +1,207 @@
+\hypertarget{buffer__f_8c}{}\section{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/buffers/buffer\+\_\+f.c File Reference}
+\label{buffer__f_8c}\index{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/buffers/buffer\+\_\+f.\+c@{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/buffers/buffer\+\_\+f.\+c}}
+{\ttfamily \#include \char`\"{}buffer\+\_\+f.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int8\+\_\+t \hyperlink{buffer__f_8c_afb218fb5b2fc43a578416dfbf9e854d9}{Buffer\+F\+\_\+\+Put} (\hyperlink{buffer__f_8h_a5939339eb1c6b1bf1e542b86282347d6}{Circular\+Buffer\+F\+\_\+s} $\ast$buf, float value)
+\begin{DoxyCompactList}\small\item\em Add float to buffer. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer__f_8c_a5dcb51b018eb021e8dd3ec6168048683}{Buffer\+F\+\_\+\+Put\+\_\+\+Circular} (\hyperlink{buffer__f_8h_a5939339eb1c6b1bf1e542b86282347d6}{Circular\+Buffer\+F\+\_\+s} $\ast$buf, float value)
+\begin{DoxyCompactList}\small\item\em Add float to buffer and wrap. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer__f_8c_acb7fdda6cad3b456cab5a5911f9097f3}{Buffer\+F\+\_\+\+Get} (\hyperlink{buffer__f_8h_a5939339eb1c6b1bf1e542b86282347d6}{Circular\+Buffer\+F\+\_\+s} $\ast$buf, float $\ast$value)
+\begin{DoxyCompactList}\small\item\em Get float from buffer. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer__f_8c_a063d24554fa876145f50fb72a64c4869}{Buffer\+F\+\_\+\+Get\+Requested} (\hyperlink{buffer__f_8h_a5939339eb1c6b1bf1e542b86282347d6}{Circular\+Buffer\+F\+\_\+s} $\ast$buf, uint8\+\_\+t requested, float $\ast$value)
+\begin{DoxyCompactList}\small\item\em Get float from requested buffer location. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer__f_8c_ab5a4327bd31e054270316ad62445f04d}{Buffer\+F\+\_\+\+Clear} (\hyperlink{buffer__f_8h_a5939339eb1c6b1bf1e542b86282347d6}{Circular\+Buffer\+F\+\_\+s} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Clear the buffer. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer__f_8c_a1eed6a9952e83a2a99c55701834e49dd}{Buffer\+F\+\_\+\+Is\+Full} (\hyperlink{buffer__f_8h_a5939339eb1c6b1bf1e542b86282347d6}{Circular\+Buffer\+F\+\_\+s} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Tests for full buffer. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer__f_8c_a418ad40a5ba2142409e4cfdc55489c77}{Buffer\+F\+\_\+\+Is\+Empty} (\hyperlink{buffer__f_8h_a5939339eb1c6b1bf1e542b86282347d6}{Circular\+Buffer\+F\+\_\+s} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Test for empty buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Matt Casari, \href{mailto:matthew.casari@noaa.gov}{\tt matthew.\+casari@noaa.\+gov} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+March 23, 2016 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+0.\+1.\+0
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+National Oceanic and Atmospheric Administration 
+
+Pacific Marine Environmental Lab 
+
+Environmental Development Division
+\end{DoxyCopyright}
+\begin{DoxyNote}{Note}
+
+\end{DoxyNote}
+\begin{DoxyRefDesc}{Bug}
+\item[\hyperlink{bug__bug000007}{Bug}]No known bugs \end{DoxyRefDesc}
+
+
+\subsection{Function Documentation}
+\hypertarget{buffer__f_8c_ab5a4327bd31e054270316ad62445f04d}{}\index{buffer\+\_\+f.\+c@{buffer\+\_\+f.\+c}!Buffer\+F\+\_\+\+Clear@{Buffer\+F\+\_\+\+Clear}}
+\index{Buffer\+F\+\_\+\+Clear@{Buffer\+F\+\_\+\+Clear}!buffer\+\_\+f.\+c@{buffer\+\_\+f.\+c}}
+\subsubsection[{Buffer\+F\+\_\+\+Clear(\+Circular\+Buffer\+F\+\_\+s $\ast$buf)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer\+F\+\_\+\+Clear (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer\+F\+\_\+s} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}\label{buffer__f_8c_ab5a4327bd31e054270316ad62445f04d}
+
+
+Clear the buffer. 
+
+Clear the float buffer
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the float buffer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer__f_8c_acb7fdda6cad3b456cab5a5911f9097f3}{}\index{buffer\+\_\+f.\+c@{buffer\+\_\+f.\+c}!Buffer\+F\+\_\+\+Get@{Buffer\+F\+\_\+\+Get}}
+\index{Buffer\+F\+\_\+\+Get@{Buffer\+F\+\_\+\+Get}!buffer\+\_\+f.\+c@{buffer\+\_\+f.\+c}}
+\subsubsection[{Buffer\+F\+\_\+\+Get(\+Circular\+Buffer\+F\+\_\+s $\ast$buf, float $\ast$value)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer\+F\+\_\+\+Get (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer\+F\+\_\+s} $\ast$}]{buf, }
+\item[{float $\ast$}]{value}
+\end{DoxyParamCaption}
+)}\label{buffer__f_8c_acb7fdda6cad3b456cab5a5911f9097f3}
+
+
+Get float from buffer. 
+
+Retreives one float value from the buffer
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the float buffer \\
+\hline
+{\em $\ast$value} & pointer to the float variable\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer__f_8c_a063d24554fa876145f50fb72a64c4869}{}\index{buffer\+\_\+f.\+c@{buffer\+\_\+f.\+c}!Buffer\+F\+\_\+\+Get\+Requested@{Buffer\+F\+\_\+\+Get\+Requested}}
+\index{Buffer\+F\+\_\+\+Get\+Requested@{Buffer\+F\+\_\+\+Get\+Requested}!buffer\+\_\+f.\+c@{buffer\+\_\+f.\+c}}
+\subsubsection[{Buffer\+F\+\_\+\+Get\+Requested(\+Circular\+Buffer\+F\+\_\+s $\ast$buf, uint8\+\_\+t requested, float $\ast$value)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer\+F\+\_\+\+Get\+Requested (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer\+F\+\_\+s} $\ast$}]{buf, }
+\item[{uint8\+\_\+t}]{requested, }
+\item[{float $\ast$}]{value}
+\end{DoxyParamCaption}
+)}\label{buffer__f_8c_a063d24554fa876145f50fb72a64c4869}
+
+
+Get float from requested buffer location. 
+
+Retreives one float value from the buffer at the requested buffer location
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the float buffer \\
+\hline
+{\em $\ast$value} & index location of value to retreive\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer__f_8c_a418ad40a5ba2142409e4cfdc55489c77}{}\index{buffer\+\_\+f.\+c@{buffer\+\_\+f.\+c}!Buffer\+F\+\_\+\+Is\+Empty@{Buffer\+F\+\_\+\+Is\+Empty}}
+\index{Buffer\+F\+\_\+\+Is\+Empty@{Buffer\+F\+\_\+\+Is\+Empty}!buffer\+\_\+f.\+c@{buffer\+\_\+f.\+c}}
+\subsubsection[{Buffer\+F\+\_\+\+Is\+Empty(\+Circular\+Buffer\+F\+\_\+s $\ast$buf)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer\+F\+\_\+\+Is\+Empty (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer\+F\+\_\+s} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}\label{buffer__f_8c_a418ad40a5ba2142409e4cfdc55489c77}
+
+
+Test for empty buffer. 
+
+Checks the buffer to see if it is empty
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the float buffer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer__f_8c_a1eed6a9952e83a2a99c55701834e49dd}{}\index{buffer\+\_\+f.\+c@{buffer\+\_\+f.\+c}!Buffer\+F\+\_\+\+Is\+Full@{Buffer\+F\+\_\+\+Is\+Full}}
+\index{Buffer\+F\+\_\+\+Is\+Full@{Buffer\+F\+\_\+\+Is\+Full}!buffer\+\_\+f.\+c@{buffer\+\_\+f.\+c}}
+\subsubsection[{Buffer\+F\+\_\+\+Is\+Full(\+Circular\+Buffer\+F\+\_\+s $\ast$buf)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer\+F\+\_\+\+Is\+Full (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer\+F\+\_\+s} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}\label{buffer__f_8c_a1eed6a9952e83a2a99c55701834e49dd}
+
+
+Tests for full buffer. 
+
+Checks the buffer to see if it is full
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the float buffer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer__f_8c_afb218fb5b2fc43a578416dfbf9e854d9}{}\index{buffer\+\_\+f.\+c@{buffer\+\_\+f.\+c}!Buffer\+F\+\_\+\+Put@{Buffer\+F\+\_\+\+Put}}
+\index{Buffer\+F\+\_\+\+Put@{Buffer\+F\+\_\+\+Put}!buffer\+\_\+f.\+c@{buffer\+\_\+f.\+c}}
+\subsubsection[{Buffer\+F\+\_\+\+Put(\+Circular\+Buffer\+F\+\_\+s $\ast$buf, float value)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer\+F\+\_\+\+Put (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer\+F\+\_\+s} $\ast$}]{buf, }
+\item[{float}]{value}
+\end{DoxyParamCaption}
+)}\label{buffer__f_8c_afb218fb5b2fc43a578416dfbf9e854d9}
+
+
+Add float to buffer. 
+
+Adds a single float value to the buffer
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the float buffer \\
+\hline
+{\em value} & float value to add\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer__f_8c_a5dcb51b018eb021e8dd3ec6168048683}{}\index{buffer\+\_\+f.\+c@{buffer\+\_\+f.\+c}!Buffer\+F\+\_\+\+Put\+\_\+\+Circular@{Buffer\+F\+\_\+\+Put\+\_\+\+Circular}}
+\index{Buffer\+F\+\_\+\+Put\+\_\+\+Circular@{Buffer\+F\+\_\+\+Put\+\_\+\+Circular}!buffer\+\_\+f.\+c@{buffer\+\_\+f.\+c}}
+\subsubsection[{Buffer\+F\+\_\+\+Put\+\_\+\+Circular(\+Circular\+Buffer\+F\+\_\+s $\ast$buf, float value)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer\+F\+\_\+\+Put\+\_\+\+Circular (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer\+F\+\_\+s} $\ast$}]{buf, }
+\item[{float}]{value}
+\end{DoxyParamCaption}
+)}\label{buffer__f_8c_a5dcb51b018eb021e8dd3ec6168048683}
+
+
+Add float to buffer and wrap. 
+
+Adds a single float value to the buffer and overwrite if necessary.
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the float buffer \\
+\hline
+{\em value} & float value to add\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}

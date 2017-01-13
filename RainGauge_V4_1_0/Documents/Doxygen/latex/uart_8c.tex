@@ -1,0 +1,181 @@
+\hypertarget{uart_8c}{}\section{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/\+U\+A\+R\+T/uart.c File Reference}
+\label{uart_8c}\index{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/\+U\+A\+R\+T/uart.\+c@{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/\+U\+A\+R\+T/uart.\+c}}
+{\ttfamily \#include \char`\"{}uart.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \hyperlink{uart_8c_a271613d6992f60d5bcb43dd4856cd6d1}{U\+A\+R\+T\+\_\+\+Init} (uint8\+\_\+t Uart\+Port, uint32\+\_\+t Baudrate, uint32\+\_\+t Clk\+Freq, uint8\+\_\+t Clk)
+\begin{DoxyCompactList}\small\item\em Initialize the U\+A\+R\+T. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{uart_8c_a929daf332520f29028047ad3a8a07e13}{U\+A\+R\+T\+\_\+\+Read} (uint8\+\_\+t $\ast$value, uint8\+\_\+t Port)
+\begin{DoxyCompactList}\small\item\em Reads from U\+A\+R\+T. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{uart_8c_a219f56b0fa6ca73dfa8a8368eb23f2e2}{U\+A\+R\+T\+\_\+\+Write\+Char} (uint8\+\_\+t value, uint8\+\_\+t Port)
+\begin{DoxyCompactList}\small\item\em Write one char to port. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{uart_8c_a1735efcfa14fa7787db740db9d961bfd}{U\+A\+R\+T\+\_\+\+Write} (uint8\+\_\+t $\ast$value, uint8\+\_\+t length, uint8\+\_\+t Port)
+\begin{DoxyCompactList}\small\item\em Write string to U\+A\+R\+T. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{uart_8c_a7080d088ea82b6f7ce97e74c867e46a2}{U\+A\+R\+T\+\_\+\+Write\+Include\+Null} (uint8\+\_\+t $\ast$value, uint8\+\_\+t length, uint8\+\_\+t Port)
+\begin{DoxyCompactList}\small\item\em Write string to U\+A\+R\+T with terminating Null. \end{DoxyCompactList}\item 
+\hypertarget{uart_8c_ac35e9679553eb460ca85bb9af028a5af}{}uint8\+\_\+t {\bfseries U\+A\+R\+T\+\_\+\+Write\+A\+C\+K} (uint8\+\_\+t Port)\label{uart_8c_ac35e9679553eb460ca85bb9af028a5af}
+
+\item 
+\hypertarget{uart_8c_ab2dcc573bd587c24b85dffd31f4e6966}{}uint8\+\_\+t {\bfseries U\+A\+R\+T\+\_\+\+Write\+N\+A\+C\+K} (uint8\+\_\+t Port)\label{uart_8c_ab2dcc573bd587c24b85dffd31f4e6966}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Matt Casari, \href{mailto:matthew.casari@noaa.org}{\tt matthew.\+casari@noaa.\+org} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+March 23, 2016 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+0.\+1.\+1
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+National Oceanic and Atmospheric Administration 
+
+Pacific Marine Environmental Lab 
+
+Environmental Development Division
+\end{DoxyCopyright}
+\begin{DoxyNote}{Note}
+
+\end{DoxyNote}
+\begin{DoxyRefDesc}{Bug}
+\item[\hyperlink{bug__bug000023}{Bug}]No known bugs \end{DoxyRefDesc}
+
+
+\subsection{Function Documentation}
+\hypertarget{uart_8c_a271613d6992f60d5bcb43dd4856cd6d1}{}\index{uart.\+c@{uart.\+c}!U\+A\+R\+T\+\_\+\+Init@{U\+A\+R\+T\+\_\+\+Init}}
+\index{U\+A\+R\+T\+\_\+\+Init@{U\+A\+R\+T\+\_\+\+Init}!uart.\+c@{uart.\+c}}
+\subsubsection[{U\+A\+R\+T\+\_\+\+Init(uint8\+\_\+t Uart\+Port, uint32\+\_\+t Baudrate, uint32\+\_\+t Clk\+Freq, uint8\+\_\+t Clk)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t U\+A\+R\+T\+\_\+\+Init (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{Uart\+Port, }
+\item[{uint32\+\_\+t}]{Baudrate, }
+\item[{uint32\+\_\+t}]{Clk\+Freq, }
+\item[{uint8\+\_\+t}]{Clk}
+\end{DoxyParamCaption}
+)}\label{uart_8c_a271613d6992f60d5bcb43dd4856cd6d1}
+
+
+Initialize the U\+A\+R\+T. 
+
+Sets the U\+A\+R\+T up based on port, baudrate,clock frequency and clock source provided.
+
+
+\begin{DoxyParams}{Parameters}
+{\em Uart\+Port} & Uart Port \\
+\hline
+{\em Baudrate} & Common U\+A\+R\+T baudrate \\
+\hline
+{\em Clk\+Freq} & Frequency of peripheral clock \\
+\hline
+{\em Clk} & Clock Source (A\+Clock, S\+M\+Clock, etc.)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 
+\end{DoxyReturn}
+\hypertarget{uart_8c_a929daf332520f29028047ad3a8a07e13}{}\index{uart.\+c@{uart.\+c}!U\+A\+R\+T\+\_\+\+Read@{U\+A\+R\+T\+\_\+\+Read}}
+\index{U\+A\+R\+T\+\_\+\+Read@{U\+A\+R\+T\+\_\+\+Read}!uart.\+c@{uart.\+c}}
+\subsubsection[{U\+A\+R\+T\+\_\+\+Read(uint8\+\_\+t $\ast$value, uint8\+\_\+t Port)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t U\+A\+R\+T\+\_\+\+Read (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t $\ast$}]{value, }
+\item[{uint8\+\_\+t}]{Port}
+\end{DoxyParamCaption}
+)}\label{uart_8c_a929daf332520f29028047ad3a8a07e13}
+
+
+Reads from U\+A\+R\+T. 
+
+Reads one character from U\+A\+R\+T port
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$value} & Pointer to char variable \\
+\hline
+{\em Port} & U\+A\+R\+T Port reading from\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 
+\end{DoxyReturn}
+\hypertarget{uart_8c_a1735efcfa14fa7787db740db9d961bfd}{}\index{uart.\+c@{uart.\+c}!U\+A\+R\+T\+\_\+\+Write@{U\+A\+R\+T\+\_\+\+Write}}
+\index{U\+A\+R\+T\+\_\+\+Write@{U\+A\+R\+T\+\_\+\+Write}!uart.\+c@{uart.\+c}}
+\subsubsection[{U\+A\+R\+T\+\_\+\+Write(uint8\+\_\+t $\ast$value, uint8\+\_\+t length, uint8\+\_\+t Port)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t U\+A\+R\+T\+\_\+\+Write (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t $\ast$}]{value, }
+\item[{uint8\+\_\+t}]{length, }
+\item[{uint8\+\_\+t}]{Port}
+\end{DoxyParamCaption}
+)}\label{uart_8c_a1735efcfa14fa7787db740db9d961bfd}
+
+
+Write string to U\+A\+R\+T. 
+
+Write a char array to the selected U\+A\+R\+T port
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$value} & Pointer to the character array \\
+\hline
+{\em length} & length of string \\
+\hline
+{\em Port} & U\+A\+R\+T port selected\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{uart_8c_a219f56b0fa6ca73dfa8a8368eb23f2e2}{}\index{uart.\+c@{uart.\+c}!U\+A\+R\+T\+\_\+\+Write\+Char@{U\+A\+R\+T\+\_\+\+Write\+Char}}
+\index{U\+A\+R\+T\+\_\+\+Write\+Char@{U\+A\+R\+T\+\_\+\+Write\+Char}!uart.\+c@{uart.\+c}}
+\subsubsection[{U\+A\+R\+T\+\_\+\+Write\+Char(uint8\+\_\+t value, uint8\+\_\+t Port)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t U\+A\+R\+T\+\_\+\+Write\+Char (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{value, }
+\item[{uint8\+\_\+t}]{Port}
+\end{DoxyParamCaption}
+)}\label{uart_8c_a219f56b0fa6ca73dfa8a8368eb23f2e2}
+
+
+Write one char to port. 
+
+Writes only one char to port
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & char value to transmit \\
+\hline
+{\em Port} & U\+A\+R\+T Port writing to\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\hypertarget{uart_8c_a7080d088ea82b6f7ce97e74c867e46a2}{}\index{uart.\+c@{uart.\+c}!U\+A\+R\+T\+\_\+\+Write\+Include\+Null@{U\+A\+R\+T\+\_\+\+Write\+Include\+Null}}
+\index{U\+A\+R\+T\+\_\+\+Write\+Include\+Null@{U\+A\+R\+T\+\_\+\+Write\+Include\+Null}!uart.\+c@{uart.\+c}}
+\subsubsection[{U\+A\+R\+T\+\_\+\+Write\+Include\+Null(uint8\+\_\+t $\ast$value, uint8\+\_\+t length, uint8\+\_\+t Port)}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t U\+A\+R\+T\+\_\+\+Write\+Include\+Null (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t $\ast$}]{value, }
+\item[{uint8\+\_\+t}]{length, }
+\item[{uint8\+\_\+t}]{Port}
+\end{DoxyParamCaption}
+)}\label{uart_8c_a7080d088ea82b6f7ce97e74c867e46a2}
+
+
+Write string to U\+A\+R\+T with terminating Null. 
+
+Write a char array to the selected U\+A\+R\+T port and follow with a N\+U\+L\+L value
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$value} & Pointer to the character array \\
+\hline
+{\em length} & length of string \\
+\hline
+{\em Port} & U\+A\+R\+T port selected\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}

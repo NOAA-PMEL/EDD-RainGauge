@@ -1,0 +1,207 @@
+\hypertarget{buffer8_8c}{}\section{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/buffers/buffer8.c File Reference}
+\label{buffer8_8c}\index{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/buffers/buffer8.\+c@{C\+:/\+Users/\+Casari/version-\/control/\+P\+M\+E\+L/\+E\+D\+D-\/\+Rain\+Gauge/\+Rain\+Gauge\+\_\+\+V4\+\_\+1\+\_\+0/src/buffers/buffer8.\+c}}
+{\ttfamily \#include \char`\"{}buffer8.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int8\+\_\+t \hyperlink{buffer8_8c_a28f98db66e86b2aea258694a721d47a2}{Buffer8\+\_\+\+Put} (\hyperlink{struct___circular_buffer8__s}{Circular\+Buffer8\+\_\+s} $\ast$buf, uint8\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Add uint8\+\_\+t to buffer. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer8_8c_a323df58ef24d7cb32dc33eeb552fd99f}{Buffer8\+\_\+\+Put\+\_\+\+Circular} (\hyperlink{struct___circular_buffer8__s}{Circular\+Buffer8\+\_\+s} $\ast$buf, uint8\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Add uint8\+\_\+t to buffer and wrap. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer8_8c_a996cefd2ba000cae87543a43d5268971}{Buffer8\+\_\+\+Get} (\hyperlink{struct___circular_buffer8__s}{Circular\+Buffer8\+\_\+s} $\ast$buf, uint8\+\_\+t $\ast$value)
+\begin{DoxyCompactList}\small\item\em Get uint8\+\_\+t from buffer. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer8_8c_aa22321f3635d7431dbdc33dc578479c4}{Buffer8\+\_\+\+Get\+Requested} (\hyperlink{struct___circular_buffer8__s}{Circular\+Buffer8\+\_\+s} $\ast$buf, uint8\+\_\+t requested, uint8\+\_\+t $\ast$value)
+\begin{DoxyCompactList}\small\item\em Get uint8\+\_\+t from requested buffer location. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer8_8c_a048a2051e3c80f88c17d6f5310ce2d2b}{Buffer8\+\_\+\+Clear} (\hyperlink{struct___circular_buffer8__s}{Circular\+Buffer8\+\_\+s} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Clear the buffer. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer8_8c_a9a05b4895a8f8b8d9a3406afe35f4d50}{Buffer8\+\_\+\+Is\+Full} (\hyperlink{struct___circular_buffer8__s}{Circular\+Buffer8\+\_\+s} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Tests for full buffer. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{buffer8_8c_a3c3d6e8dbb53086ad4cd29021842006a}{Buffer8\+\_\+\+Is\+Empty} (\hyperlink{struct___circular_buffer8__s}{Circular\+Buffer8\+\_\+s} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Test for empty buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Matt Casari, \href{mailto:matthew.casari@noaa.gov}{\tt matthew.\+casari@noaa.\+gov} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+March 23, 2016 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+0.\+1.\+0
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+National Oceanic and Atmospheric Administration 
+
+Pacific Marine Environmental Lab 
+
+Environmental Development Division
+\end{DoxyCopyright}
+\begin{DoxyNote}{Note}
+
+\end{DoxyNote}
+\begin{DoxyRefDesc}{Bug}
+\item[\hyperlink{bug__bug000003}{Bug}]No known bugs \end{DoxyRefDesc}
+
+
+\subsection{Function Documentation}
+\hypertarget{buffer8_8c_a048a2051e3c80f88c17d6f5310ce2d2b}{}\index{buffer8.\+c@{buffer8.\+c}!Buffer8\+\_\+\+Clear@{Buffer8\+\_\+\+Clear}}
+\index{Buffer8\+\_\+\+Clear@{Buffer8\+\_\+\+Clear}!buffer8.\+c@{buffer8.\+c}}
+\subsubsection[{Buffer8\+\_\+\+Clear(\+Circular\+Buffer8\+\_\+s $\ast$buf)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer8\+\_\+\+Clear (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer8\+\_\+s} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}\label{buffer8_8c_a048a2051e3c80f88c17d6f5310ce2d2b}
+
+
+Clear the buffer. 
+
+Clear the uint8\+\_\+t buffer
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the uint8\+\_\+t buffer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer8_8c_a996cefd2ba000cae87543a43d5268971}{}\index{buffer8.\+c@{buffer8.\+c}!Buffer8\+\_\+\+Get@{Buffer8\+\_\+\+Get}}
+\index{Buffer8\+\_\+\+Get@{Buffer8\+\_\+\+Get}!buffer8.\+c@{buffer8.\+c}}
+\subsubsection[{Buffer8\+\_\+\+Get(\+Circular\+Buffer8\+\_\+s $\ast$buf, uint8\+\_\+t $\ast$value)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer8\+\_\+\+Get (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer8\+\_\+s} $\ast$}]{buf, }
+\item[{uint8\+\_\+t $\ast$}]{value}
+\end{DoxyParamCaption}
+)}\label{buffer8_8c_a996cefd2ba000cae87543a43d5268971}
+
+
+Get uint8\+\_\+t from buffer. 
+
+Retreives one uint8\+\_\+t value from the buffer
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the uint8\+\_\+t buffer \\
+\hline
+{\em $\ast$value} & pointer to the uint8\+\_\+t variable\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer8_8c_aa22321f3635d7431dbdc33dc578479c4}{}\index{buffer8.\+c@{buffer8.\+c}!Buffer8\+\_\+\+Get\+Requested@{Buffer8\+\_\+\+Get\+Requested}}
+\index{Buffer8\+\_\+\+Get\+Requested@{Buffer8\+\_\+\+Get\+Requested}!buffer8.\+c@{buffer8.\+c}}
+\subsubsection[{Buffer8\+\_\+\+Get\+Requested(\+Circular\+Buffer8\+\_\+s $\ast$buf, uint8\+\_\+t requested, uint8\+\_\+t $\ast$value)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer8\+\_\+\+Get\+Requested (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer8\+\_\+s} $\ast$}]{buf, }
+\item[{uint8\+\_\+t}]{requested, }
+\item[{uint8\+\_\+t $\ast$}]{value}
+\end{DoxyParamCaption}
+)}\label{buffer8_8c_aa22321f3635d7431dbdc33dc578479c4}
+
+
+Get uint8\+\_\+t from requested buffer location. 
+
+Retreives one uint8\+\_\+t value from the buffer at the requested buffer location
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the uint8\+\_\+t buffer \\
+\hline
+{\em $\ast$value} & index location of value to retreive\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer8_8c_a3c3d6e8dbb53086ad4cd29021842006a}{}\index{buffer8.\+c@{buffer8.\+c}!Buffer8\+\_\+\+Is\+Empty@{Buffer8\+\_\+\+Is\+Empty}}
+\index{Buffer8\+\_\+\+Is\+Empty@{Buffer8\+\_\+\+Is\+Empty}!buffer8.\+c@{buffer8.\+c}}
+\subsubsection[{Buffer8\+\_\+\+Is\+Empty(\+Circular\+Buffer8\+\_\+s $\ast$buf)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer8\+\_\+\+Is\+Empty (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer8\+\_\+s} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}\label{buffer8_8c_a3c3d6e8dbb53086ad4cd29021842006a}
+
+
+Test for empty buffer. 
+
+Checks the buffer to see if it is empty
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the uint8\+\_\+t buffer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer8_8c_a9a05b4895a8f8b8d9a3406afe35f4d50}{}\index{buffer8.\+c@{buffer8.\+c}!Buffer8\+\_\+\+Is\+Full@{Buffer8\+\_\+\+Is\+Full}}
+\index{Buffer8\+\_\+\+Is\+Full@{Buffer8\+\_\+\+Is\+Full}!buffer8.\+c@{buffer8.\+c}}
+\subsubsection[{Buffer8\+\_\+\+Is\+Full(\+Circular\+Buffer8\+\_\+s $\ast$buf)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer8\+\_\+\+Is\+Full (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer8\+\_\+s} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}\label{buffer8_8c_a9a05b4895a8f8b8d9a3406afe35f4d50}
+
+
+Tests for full buffer. 
+
+Checks the buffer to see if it is full
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the uint8\+\_\+t buffer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer8_8c_a28f98db66e86b2aea258694a721d47a2}{}\index{buffer8.\+c@{buffer8.\+c}!Buffer8\+\_\+\+Put@{Buffer8\+\_\+\+Put}}
+\index{Buffer8\+\_\+\+Put@{Buffer8\+\_\+\+Put}!buffer8.\+c@{buffer8.\+c}}
+\subsubsection[{Buffer8\+\_\+\+Put(\+Circular\+Buffer8\+\_\+s $\ast$buf, uint8\+\_\+t value)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer8\+\_\+\+Put (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer8\+\_\+s} $\ast$}]{buf, }
+\item[{uint8\+\_\+t}]{value}
+\end{DoxyParamCaption}
+)}\label{buffer8_8c_a28f98db66e86b2aea258694a721d47a2}
+
+
+Add uint8\+\_\+t to buffer. 
+
+Adds a single uint8\+\_\+t value to the buffer
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the uint8\+\_\+t buffer \\
+\hline
+{\em value} & uint8\+\_\+t value to add\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
+\hypertarget{buffer8_8c_a323df58ef24d7cb32dc33eeb552fd99f}{}\index{buffer8.\+c@{buffer8.\+c}!Buffer8\+\_\+\+Put\+\_\+\+Circular@{Buffer8\+\_\+\+Put\+\_\+\+Circular}}
+\index{Buffer8\+\_\+\+Put\+\_\+\+Circular@{Buffer8\+\_\+\+Put\+\_\+\+Circular}!buffer8.\+c@{buffer8.\+c}}
+\subsubsection[{Buffer8\+\_\+\+Put\+\_\+\+Circular(\+Circular\+Buffer8\+\_\+s $\ast$buf, uint8\+\_\+t value)}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t Buffer8\+\_\+\+Put\+\_\+\+Circular (
+\begin{DoxyParamCaption}
+\item[{{\bf Circular\+Buffer8\+\_\+s} $\ast$}]{buf, }
+\item[{uint8\+\_\+t}]{value}
+\end{DoxyParamCaption}
+)}\label{buffer8_8c_a323df58ef24d7cb32dc33eeb552fd99f}
+
+
+Add uint8\+\_\+t to buffer and wrap. 
+
+Adds a single uint8\+\_\+t value to the buffer and overwrite if necessary.
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$buf} & pointer to the uint8\+\_\+t buffer \\
+\hline
+{\em value} & uint8\+\_\+t value to add\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status 
+\end{DoxyReturn}
